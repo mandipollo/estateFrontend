@@ -1,8 +1,30 @@
 import React from "react";
-import Homepage from "../components/Homepage";
+import { Box } from "@mui/material";
+import Search from "../components/search/Search";
 
-const homepage = () => {
-	return <Homepage />;
+const Homepage = () => {
+	return (
+		<Box
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+			}}
+		>
+			<Box
+				sx={{
+					width: "100vw",
+					height: "250px",
+					backgroundImage: `url("https://media.rightmove.co.uk/hero_image.jpeg")`,
+					backgroundRepeat: "no-repeat",
+					backgroundSize: "cover",
+				}}
+			></Box>
+			<Box sx={{ display: "flex", justifyContent: "center", mt: -10 }}>
+				<Search />
+			</Box>
+		</Box>
+	);
 };
 
-export default homepage;
+export default Homepage;
