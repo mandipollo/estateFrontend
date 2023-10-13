@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ThemeProvider, Theme } from "@emotion/react";
+import { ThemeProvider } from "@emotion/react";
 import theme from "./theme";
 import Homepage from "./pages/homepage";
 import Root from "./pages/Root";

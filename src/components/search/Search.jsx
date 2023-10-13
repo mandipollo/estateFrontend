@@ -1,27 +1,68 @@
 import React from "react";
-import { Card, CardContent, Typography } from "@mui/material";
+import {
+	Card,
+	CardContent,
+	TextField,
+	Typography,
+	Box,
+	Button,
+	CardActions,
+} from "@mui/material";
 
 const Search = () => {
 	return (
 		<Card
 			sx={{
-				display: "flex",
-				maxWidth: 400,
+				display: {
+					sm: "none",
+					md: "flex",
+				},
+				width: 600,
 				zIndex: 1000,
 				display: "flex",
 				textAlign: "center",
 				justifyContent: "center",
-				backgroundColor: "#4D4C7D",
+				backgroundColor: "#232D3F",
 			}}
 			variant="outlined"
 		>
 			<CardContent>
-				<Typography variant="h4" color="green">
-					Find your forever home.
+				<Typography sx={{ margin: 1 }} variant="h5" color="lightgreen">
+					Find your forever home
 				</Typography>
-				<Typography variant="h6" color="white">
-					Search for properties to buy or rent.
+				<Typography sx={{ margin: 1 }} variant="h6" color="white">
+					Search properties for sale and to rent in the UK
 				</Typography>
+				<TextField
+					size="small"
+					placeholder="e.g.'Waterloo', 'GU14 8TJ' "
+					variant="filled"
+					InputProps={{ disableUnderline: true }}
+					sx={{
+						backgroundColor: "white",
+						width: 550,
+						borderRadius: 2,
+						margin: 1,
+					}}
+				></TextField>
+				<CardActions sx={{ display: "flex", justifyContent: "center" }}>
+					<Button
+						sx={{ margin: 1, textTransform: "none" }}
+						size="large"
+						variant="contained"
+						color="success"
+					>
+						<Typography>To sale</Typography>
+					</Button>
+					<Button
+						sx={{ margin: 1, textTransform: "none" }}
+						size="large"
+						variant="contained"
+						color="success"
+					>
+						<Typography>To rent</Typography>
+					</Button>
+				</CardActions>
 			</CardContent>
 		</Card>
 	);

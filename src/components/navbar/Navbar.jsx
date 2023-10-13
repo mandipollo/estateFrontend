@@ -18,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import StyledButton from "../styledComponents/StyledButton";
 import StyledTypographyNav from "../styledComponents/StyledTypographyNav";
 
-const pages = ["Buy", "Rent", "House prcies", "Find agents", "Commercial"];
+const pages = ["Buy", "Rent", "House prices", "Find agents", "Commercial"];
 const Navbar = () => {
 	const [anchorNavEl, setAnchorNavEl] = useState(null);
 
@@ -105,8 +105,8 @@ const Navbar = () => {
 							open={Boolean(anchorNavEl)}
 							onClose={handleCloseNavMenu}
 						>
-							{pages.map(page => (
-								<MenuItem>
+							{pages.map((page, index) => (
+								<MenuItem key={index}>
 									<StyledTypographyNav>{page}</StyledTypographyNav>
 								</MenuItem>
 							))}
@@ -152,8 +152,8 @@ const Navbar = () => {
 							alignItems: "center",
 						}}
 					>
-						{pages.map(page => (
-							<StyledButton>
+						{pages.map((page, index) => (
+							<StyledButton key={index}>
 								<StyledTypographyNav>{page}</StyledTypographyNav>
 							</StyledButton>
 						))}
