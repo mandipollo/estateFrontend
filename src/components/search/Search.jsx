@@ -26,7 +26,7 @@ const Search = () => {
 			variant="outlined"
 		>
 			<CardContent>
-				<Typography sx={{ margin: 1 }} variant="h5" color="lightgreen">
+				<Typography sx={{ margin: 1, color: "#35A29F" }} variant="h5">
 					Find your forever home
 				</Typography>
 				<Typography sx={{ margin: 1 }} variant="h6" color="white">
@@ -48,18 +48,26 @@ const Search = () => {
 				></TextField>
 				<CardActions sx={{ display: "flex", justifyContent: "center" }}>
 					<Button
-						sx={{ margin: 1, textTransform: "none" }}
+						sx={{
+							margin: 1,
+							textTransform: "none",
+							color: "black",
+							backgroundColor: "#35A29F",
+						}}
 						size="large"
 						variant="contained"
-						color="success"
 					>
 						<Typography>For Sale</Typography>
 					</Button>
 					<Button
-						sx={{ margin: 1, textTransform: "none" }}
+						sx={{
+							margin: 1,
+							textTransform: "none",
+							color: "black",
+							backgroundColor: "#35A29F",
+						}}
 						size="large"
 						variant="contained"
-						color="success"
 					>
 						<Typography>To Rent</Typography>
 					</Button>

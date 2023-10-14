@@ -46,7 +46,12 @@ const CardHome = ({ image, title, description, buttonText }) => {
 					alignItems: "flex-end",
 				}}
 			>
-				<Button disableRipple variant="contained" endIcon={<SendIcon />}>
+				<Button
+					sx={{ color: "#35A29F" }}
+					disableRipple
+					variant="contained"
+					endIcon={<SendIcon />}
+				>
 					{buttonText}
 				</Button>
 			</CardActions>

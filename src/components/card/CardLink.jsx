@@ -1,6 +1,5 @@
 import {
 	Card,
-	CardMedia,
 	CardContent,
 	Avatar,
 	Typography,
