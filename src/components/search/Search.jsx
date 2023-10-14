@@ -34,7 +34,7 @@ const Search = () => {
 				</Typography>
 				<TextField
 					size="small"
-					placeholder="e.g.'Waterloo', 'GU14 8TJ' "
+					placeholder="e.g.'Waterloo','NW15', 'GU14 8TJ' or 'Farnborough' "
 					variant="filled"
 					InputProps={{
 						disableUnderline: true,

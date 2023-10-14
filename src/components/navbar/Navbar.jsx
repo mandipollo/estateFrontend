@@ -13,6 +13,7 @@ import {
 //icons
 import VillaIcon from "@mui/icons-material/Villa";
 import MenuIcon from "@mui/icons-material/Menu";
+import PersonIcon from "@mui/icons-material/Person";
 
 // styled components
 import StyledButton from "../styledComponents/StyledButton";
@@ -160,7 +161,10 @@ const Navbar = () => {
 					</Box>
 					<Box
 						sx={{
-							display: "flex",
+							display: {
+								xs: "none",
+								md: "flex",
+							},
 							flex: {
 								md: 2,
 							},
@@ -170,6 +174,21 @@ const Navbar = () => {
 							<Typography variant="body1" color="black">
 								Sign in
 							</Typography>
+						</StyledButton>
+					</Box>
+					<Box
+						sx={{
+							display: {
+								sm: "flex",
+								md: "none",
+							},
+							flex: {
+								md: 2,
+							},
+						}}
+					>
+						<StyledButton variant="outlined" color="success">
+							<PersonIcon />
 						</StyledButton>
 					</Box>
 				</Toolbar>
