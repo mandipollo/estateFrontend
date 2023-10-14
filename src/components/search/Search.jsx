@@ -4,7 +4,6 @@ import {
 	CardContent,
 	TextField,
 	Typography,
-	Box,
 	Button,
 	CardActions,
 } from "@mui/material";
@@ -19,7 +18,7 @@ const Search = () => {
 				},
 				width: 600,
 				zIndex: 1000,
-				display: "flex",
+
 				textAlign: "center",
 				justifyContent: "center",
 				backgroundColor: "#232D3F",
@@ -37,7 +36,9 @@ const Search = () => {
 					size="small"
 					placeholder="e.g.'Waterloo', 'GU14 8TJ' "
 					variant="filled"
-					InputProps={{ disableUnderline: true }}
+					InputProps={{
+						disableUnderline: true,
+					}}
 					sx={{
 						backgroundColor: "white",
 						width: 550,
@@ -52,7 +53,7 @@ const Search = () => {
 						variant="contained"
 						color="success"
 					>
-						<Typography>To sale</Typography>
+						<Typography>For Sale</Typography>
 					</Button>
 					<Button
 						sx={{ margin: 1, textTransform: "none" }}
@@ -60,7 +61,7 @@ const Search = () => {
 						variant="contained"
 						color="success"
 					>
-						<Typography>To rent</Typography>
+						<Typography>To Rent</Typography>
 					</Button>
 				</CardActions>
 			</CardContent>
