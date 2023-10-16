@@ -25,7 +25,7 @@ const route = createBrowserRouter([
 				index: true,
 				element: <Homepage />,
 			},
-			{ path: "/forSale", element: <ForSale /> },
+			{ path: "forSale", element: <ForSale /> },
 		],
 	},
 ]);

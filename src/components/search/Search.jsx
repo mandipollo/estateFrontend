@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import {
 	Card,
 	CardContent,
@@ -8,14 +9,14 @@ import {
 	CardActions,
 } from "@mui/material";
 
-const Search = ({ title, description }) => {
+const Search = ({ propXs, propSm, title, description }) => {
+	// destructure pathname to conditionally render elements
+	const { pathname } = useLocation();
+
 	return (
 		<Card
 			sx={{
-				display: {
-					sm: "none",
-					md: "flex",
-				},
+				display: { xs: propXs, sm: propSm, md: "flex" },
 				width: 600,
 				zIndex: 1000,
 
@@ -59,18 +60,21 @@ const Search = ({ title, description }) => {
 					>
 						<Typography>For Sale</Typography>
 					</Button>
-					<Button
-						sx={{
-							margin: 1,
-							textTransform: "none",
-							color: "black",
-							backgroundColor: "#35A29F",
-						}}
-						size="large"
-						variant="contained"
-					>
-						<Typography>To Rent</Typography>
-					</Button>
+
+					{pathname === "forSale" && (
+						<Button
+							sx={{
+								margin: 1,
+								textTransform: "none",
+								color: "black",
+								backgroundColor: "#35A29F",
+							}}
+							size="large"
+							variant="contained"
+						>
+							<Typography>To Rent</Typography>
+						</Button>
+					)}
 				</CardActions>
 			</CardContent>
 		</Card>

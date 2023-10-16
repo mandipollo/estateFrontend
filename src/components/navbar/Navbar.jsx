@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
 	AppBar,
 	Container,
@@ -18,6 +19,7 @@ import PersonIcon from "@mui/icons-material/Person";
 // styled components
 import StyledButton from "../styledComponents/StyledButton";
 import StyledTypographyNav from "../styledComponents/StyledTypographyNav";
+import StyledBox from "../styledComponents/StyledBox";
 
 const pages = ["Buy", "Rent", "House prices", "Find agents", "Commercial"];
 const Navbar = () => {
@@ -42,16 +44,7 @@ const Navbar = () => {
 				<Container maxWidth="xl">
 					<Toolbar disableGutters>
 						{/* medium screen */}
-						<Box
-							sx={{
-								display: {
-									xs: "none",
-									md: "flex",
-								},
-								flex: 2,
-								justifyContent: "center",
-							}}
-						>
+						<StyledBox propSm="none" propMd="flex" propFlex="2">
 							<Typography
 								variant="h6"
 								component="a"
@@ -65,18 +58,9 @@ const Navbar = () => {
 								Estate
 							</Typography>
 							<VillaIcon sx={{ ml: 1, color: "#35A29F" }} />
-						</Box>
+						</StyledBox>
 						{/* /*small screen */}
-						<Box
-							sx={{
-								display: {
-									xs: "flex",
-									md: "none",
-								},
-								flex: 1,
-								justifyContent: "center",
-							}}
-						>
+						<StyledBox propSm="flex" propMd="none" propFlex="1">
 							<IconButton
 								aria-label="account of current user"
 								aria-controls="menu-appbar"
@@ -114,15 +98,11 @@ const Navbar = () => {
 								))}
 							</Menu>
 
-							<Box
+							<StyledBox
+								propFlex="1"
+								propSm="flex"
+								propMd="none"
 								sx={{
-									display: {
-										xs: "flex",
-										md: "none",
-									},
-									flex: 1,
-
-									justifyContent: "center",
 									alignItems: "center",
 								}}
 							>
@@ -139,18 +119,15 @@ const Navbar = () => {
 									Estate
 								</Typography>
 								<VillaIcon color="success" sx={{ ml: 1 }} />
-							</Box>
-						</Box>
+							</StyledBox>
+						</StyledBox>
 
 						{/*medium screen navitems */}
-						<Box
+						<StyledBox
+							propFlex="8"
+							propSm="none"
+							propMd="flex"
 							sx={{
-								display: {
-									xs: "none",
-									md: "flex",
-								},
-								flex: 8,
-								justifyContent: "center",
 								alignItems: "center",
 							}}
 						>
@@ -159,13 +136,11 @@ const Navbar = () => {
 									<StyledTypographyNav>{page}</StyledTypographyNav>
 								</StyledButton>
 							))}
-						</Box>
-						<Box
+						</StyledBox>
+						<StyledBox
+							propSm="none"
+							propMd="flex"
 							sx={{
-								display: {
-									xs: "none",
-									md: "flex",
-								},
 								flex: {
 									md: 2,
 								},
@@ -176,13 +151,11 @@ const Navbar = () => {
 									Sign in
 								</Typography>
 							</StyledButton>
-						</Box>
-						<Box
+						</StyledBox>
+						<StyledBox
+							propSm="flex"
+							propMd="none"
 							sx={{
-								display: {
-									sm: "flex",
-									md: "none",
-								},
 								flex: {
 									md: 2,
 								},
@@ -191,7 +164,7 @@ const Navbar = () => {
 							<StyledButton variant="outlined" color="success">
 								<PersonIcon />
 							</StyledButton>
-						</Box>
+						</StyledBox>
 					</Toolbar>
 				</Container>
 			</AppBar>

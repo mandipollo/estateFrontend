@@ -27,6 +27,8 @@ const Homepage = () => {
 				<section>
 					<Box sx={{ display: "flex", justifyContent: "center", mt: -15 }}>
 						<Search
+							propXs="none"
+							propSm="none"
 							title="	Find your forever home"
 							description="Search properties for sale and to rent in the UK"
 						/>
