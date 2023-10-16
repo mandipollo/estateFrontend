@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import {
 	AppBar,
 	Container,
 	Toolbar,
 	Typography,
-	Box,
 	IconButton,
 	Menu,
 	MenuItem,
@@ -21,7 +21,22 @@ import StyledButton from "../styledComponents/StyledButton";
 import StyledTypographyNav from "../styledComponents/StyledTypographyNav";
 import StyledBox from "../styledComponents/StyledBox";
 
-const pages = ["Buy", "Rent", "House prices", "Find agents", "Commercial"];
+const pages = [
+	{ label: "Buy", link: "forSale" },
+	{
+		label: "Rent",
+		link: "forRent",
+	},
+	{ label: "House prices", link: "housePrices" },
+	{
+		label: "Find agents",
+		link: "findAgents",
+	},
+	{
+		label: "Commercial",
+		link: "commercial",
+	},
+];
 const Navbar = () => {
 	const [anchorNavEl, setAnchorNavEl] = useState(null);
 
@@ -44,7 +59,7 @@ const Navbar = () => {
 				<Container maxWidth="xl">
 					<Toolbar disableGutters>
 						{/* medium screen */}
-						<StyledBox propSm="none" propMd="flex" propFlex="2">
+						<StyledBox propsm="none" propmd="flex" propflex="2">
 							<Typography
 								variant="h6"
 								component="a"
@@ -60,7 +75,7 @@ const Navbar = () => {
 							<VillaIcon sx={{ ml: 1, color: "#35A29F" }} />
 						</StyledBox>
 						{/* /*small screen */}
-						<StyledBox propSm="flex" propMd="none" propFlex="1">
+						<StyledBox propsm="flex" propmd="none" propflex="1">
 							<IconButton
 								aria-label="account of current user"
 								aria-controls="menu-appbar"
@@ -91,17 +106,23 @@ const Navbar = () => {
 								open={Boolean(anchorNavEl)}
 								onClose={handleCloseNavMenu}
 							>
-								{pages.map((page, index) => (
+								{pages.map((item, index) => (
 									<MenuItem key={index}>
-										<StyledTypographyNav>{page}</StyledTypographyNav>
+										<Link
+											style={{ textDecoration: "none", color: "inherit" }}
+											to={item.link}
+											key={index}
+										>
+											<StyledTypographyNav>{item.label}</StyledTypographyNav>
+										</Link>
 									</MenuItem>
 								))}
 							</Menu>
 
 							<StyledBox
-								propFlex="1"
-								propSm="flex"
-								propMd="none"
+								propflex="1"
+								propsm="flex"
+								propmd="none"
 								sx={{
 									alignItems: "center",
 								}}
@@ -124,22 +145,33 @@ const Navbar = () => {
 
 						{/*medium screen navitems */}
 						<StyledBox
-							propFlex="8"
-							propSm="none"
-							propMd="flex"
+							propflex="8"
+							propsm="none"
+							propmd="flex"
 							sx={{
 								alignItems: "center",
 							}}
 						>
-							{pages.map((page, index) => (
+							{/* {pages.map((page, index) => (
 								<StyledButton key={index}>
 									<StyledTypographyNav>{page}</StyledTypographyNav>
 								</StyledButton>
+							))} */}
+							{pages.map((item, index) => (
+								<Link
+									style={{ textDecoration: "none", color: "inherit" }}
+									to={item.link}
+									key={index}
+								>
+									<StyledButton key={index}>
+										<StyledTypographyNav>{item.label}</StyledTypographyNav>
+									</StyledButton>
+								</Link>
 							))}
 						</StyledBox>
 						<StyledBox
-							propSm="none"
-							propMd="flex"
+							propsm="none"
+							propmd="flex"
 							sx={{
 								flex: {
 									md: 2,
@@ -153,8 +185,8 @@ const Navbar = () => {
 							</StyledButton>
 						</StyledBox>
 						<StyledBox
-							propSm="flex"
-							propMd="none"
+							propsm="flex"
+							propmd="none"
 							sx={{
 								flex: {
 									md: 2,

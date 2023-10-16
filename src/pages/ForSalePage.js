@@ -8,7 +8,7 @@ import StyledButton from "../components/styledComponents/StyledButton";
 
 const ForSale = () => {
 	const location = useLocation();
-	console.log(location.pathname);
+
 	return (
 		<main>
 			<Box

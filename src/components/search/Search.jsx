@@ -9,6 +9,10 @@ import {
 	CardActions,
 } from "@mui/material";
 
+// components
+
+import StyledTextfield from "../styledComponents/StyledTextfield";
+
 const Search = ({ propXs, propSm, title, description }) => {
 	// destructure pathname to conditionally render elements
 	const { pathname } = useLocation();
@@ -17,7 +21,10 @@ const Search = ({ propXs, propSm, title, description }) => {
 		<Card
 			sx={{
 				display: { xs: propXs, sm: propSm, md: "flex" },
-				width: 600,
+				width: {
+					xs: "100vw",
+					sm: 600,
+				},
 				zIndex: 1000,
 
 				textAlign: "center",
@@ -33,20 +40,27 @@ const Search = ({ propXs, propSm, title, description }) => {
 				<Typography sx={{ margin: 1 }} variant="h6" color="white">
 					{description}
 				</Typography>
-				<TextField
+				<StyledTextfield
 					size="small"
 					placeholder="e.g.'Waterloo','NW15', 'GU14 8TJ' or 'Farnborough' "
 					variant="filled"
 					InputProps={{
 						disableUnderline: true,
+						style: {
+							textAlign: "center",
+							paddingBottom: 10,
+						},
 					}}
-					sx={{
-						backgroundColor: "white",
-						width: 550,
-						borderRadius: 2,
-						margin: 1,
-					}}
-				></TextField>
+					// sx={{
+					// 	backgroundColor: "white",
+					// 	width: {
+					// 		xs: "90%",
+					// 		sm: 550,
+					// 	},
+					// 	borderRadius: 2,
+					// 	margin: 1,
+					// }}
+				></StyledTextfield>
 				<CardActions sx={{ display: "flex", justifyContent: "center" }}>
 					<Button
 						sx={{
@@ -61,7 +75,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 						<Typography>For Sale</Typography>
 					</Button>
 
-					{pathname === "forSale" && (
+					{pathname !== "/forSale" && (
 						<Button
 							sx={{
 								margin: 1,

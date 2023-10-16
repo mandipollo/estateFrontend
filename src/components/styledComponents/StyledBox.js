@@ -1,14 +1,14 @@
 import { Box } from "@mui/material";
 import styled from "@emotion/styled";
 
-const StyledBox = styled(Box)(({ theme, propSm, propMd, propFlex }) => ({
+const StyledBox = styled(Box)(({ theme, propsm, propmd, propflex }) => ({
 	[theme.breakpoints.up("md")]: {
-		display: propMd,
+		display: propmd,
 	},
 	[theme.breakpoints.down("md")]: {
-		display: propSm,
+		display: propsm,
 	},
-	flex: propFlex,
+	flex: propflex,
 	justifyContent: "center",
 }));
 
