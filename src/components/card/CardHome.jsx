@@ -34,7 +34,10 @@ const CardHome = ({ image, title, description, buttonText }) => {
 				<Typography sx={{ margin: "8px 5px" }} variant="h6">
 					{title}
 				</Typography>
-				<Typography sx={{ margin: "8px 5px", color: "grey" }} variant="body1">
+				<Typography
+					sx={{ margin: "8px 5px", color: "#6B728E" }}
+					variant="body1"
+				>
 					{description}
 				</Typography>
 			</CardContent>

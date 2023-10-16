@@ -64,7 +64,7 @@ const Navbar = () => {
 							>
 								Estate
 							</Typography>
-							<VillaIcon color="success" sx={{ ml: 1 }} />
+							<VillaIcon sx={{ ml: 1, color: "#35A29F" }} />
 						</Box>
 						{/* /*small screen */}
 						<Box

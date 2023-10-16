@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, ListItem, List, Divider, ListItemButton } from "@mui/material";
-import StyledListFooter from "../../styledComponents/StyledListFooter";
+import { Box, ListItem, List } from "@mui/material";
+
 import FooterList, { listData } from "./FooterList";
 
 const Footer = () => {
@@ -8,21 +8,25 @@ const Footer = () => {
 		<Box
 			sx={{
 				backgroundColor: "#EAEAEA",
-				width: "100%",
+				width: "100vw",
 				padding: "30px 0",
+				display: "flex",
+				justifyContent: "center",
 			}}
 		>
 			<List
 				sx={{
-					color: "grey",
+					color: "#6B728E",
 					fontSize: 14,
+					flex: 1,
+					maxWidth: 1400,
 				}}
 			>
 				<ListItem
 					sx={{
 						display: "flex",
-						justifyContent: "space-around",
 						alignItems: "flex-start",
+						justifyContent: "space-evenly",
 					}}
 				>
 					{listData.map((items, index) => {

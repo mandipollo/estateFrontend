@@ -7,38 +7,39 @@ import CardHomeLink from "../components/sections/home/CardHomeLink";
 
 const Homepage = () => {
 	return (
-		<Box>
-			<main>
+		<main>
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+				}}
+			>
 				<Box
 					sx={{
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "center",
+						width: "100vw",
+						height: "250px",
+						backgroundImage: `url("https://media.rightmove.co.uk/hero_image.jpeg")`,
+						backgroundRepeat: "no-repeat",
+						backgroundSize: "cover",
 					}}
-				>
-					<Box
-						sx={{
-							width: "100vw",
-							height: "250px",
-							backgroundImage: `url("https://media.rightmove.co.uk/hero_image.jpeg")`,
-							backgroundRepeat: "no-repeat",
-							backgroundSize: "cover",
-						}}
-					></Box>
-					<section>
-						<Box sx={{ display: "flex", justifyContent: "center", mt: -15 }}>
-							<Search />
-						</Box>
-					</section>
-					<section>
-						<CardHomeSection />
-					</section>
-					<section>
-						<CardHomeLink />
-					</section>
-				</Box>
-			</main>
-		</Box>
+				></Box>
+				<section>
+					<Box sx={{ display: "flex", justifyContent: "center", mt: -15 }}>
+						<Search
+							title="	Find your forever home"
+							description="Search properties for sale and to rent in the UK"
+						/>
+					</Box>
+				</section>
+				<section>
+					<CardHomeSection />
+				</section>
+				<section>
+					<CardHomeLink />
+				</section>
+			</Box>
+		</main>
 	);
 };
 

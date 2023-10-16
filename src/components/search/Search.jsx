@@ -8,7 +8,7 @@ import {
 	CardActions,
 } from "@mui/material";
 
-const Search = () => {
+const Search = ({ title, description }) => {
 	return (
 		<Card
 			sx={{
@@ -27,10 +27,10 @@ const Search = () => {
 		>
 			<CardContent>
 				<Typography sx={{ margin: 1, color: "#35A29F" }} variant="h5">
-					Find your forever home
+					{title}
 				</Typography>
 				<Typography sx={{ margin: 1 }} variant="h6" color="white">
-					Search properties for sale and to rent in the UK
+					{description}
 				</Typography>
 				<TextField
 					size="small"
