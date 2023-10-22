@@ -14,7 +14,7 @@ import theme from "./theme";
 
 // state
 import { Provider } from "react-redux";
-import store from "./components/store/store";
+import store from "./store/store";
 
 const route = createBrowserRouter([
 	{

@@ -7,8 +7,12 @@ const searchInputSlice = createSlice({
 		setSearchInputHandler: (state, action) => {
 			return (state = action.payload);
 		},
+		resetSearchInputHandler: state => {
+			return (state = null);
+		},
 	},
 });
 
-export const { setSearchInputHandler } = searchInputSlice.actions;
+export const { setSearchInputHandler, resetSearchInputHandler } =
+	searchInputSlice.actions;
 export default searchInputSlice.reducer;

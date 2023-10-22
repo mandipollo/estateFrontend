@@ -1,19 +1,68 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import {
 	Card,
 	CardContent,
-	TextField,
 	Typography,
 	Button,
 	CardActions,
 } from "@mui/material";
 
+// state
+import { setSearchInputHandler } from "../../store/searchInput";
+import { setIdentifierHandler } from "../../store/identifier";
+
 // components
 
-import StyledTextfield from "../styledComponents/StyledTextfield";
+import AutocompleteSearch from "./AutocompleteSearch";
 
 const Search = ({ propXs, propSm, title, description }) => {
+	const navigate = useNavigate();
+	const [searchInput, setSearchInput] = useState("");
+	const [anchorEl, setAnchorEl] = useState(null);
+
+	const searchInputHandler = e => {
+		setSearchInput(e.target.value);
+	};
+
+	const anchorElHandler = e => {
+		setAnchorEl(e.currentTarget);
+	};
+	const anchorCloseHandler = () => {
+		setAnchorEl(null);
+	};
+
+	// autocomplete
+
+	useEffect(() => {
+		const timeout = setTimeout(async () => {
+			if (searchInput) {
+				try {
+					setSearchInputHandler(searchInput);
+					// setIdentifierHandler(searchInput);
+
+					const data = await axios.get("http://localhost:5002/identifier", {
+						params: {
+							location: searchInput,
+						},
+					});
+					setIdentifierHandler(data);
+					console.log(data);
+				} catch (error) {
+					console.log(error);
+				}
+			}
+		}, 500);
+
+		return () => {
+			clearTimeout(timeout);
+		};
+	}, [searchInput]);
+	// submit and navigate user to the filter page
+
+	const submitHandlerSale = () => {};
 	// destructure pathname to conditionally render elements
 	const { pathname } = useLocation();
 
@@ -40,7 +89,16 @@ const Search = ({ propXs, propSm, title, description }) => {
 				<Typography sx={{ margin: 1 }} variant="h6" color="white">
 					{description}
 				</Typography>
+
+				<AutocompleteSearch
+					searchInput={searchInput}
+					searchInputHandler={searchInputHandler}
+				/>
+				{/* 
 				<StyledTextfield
+					{...params}
+					onChange={searchInputHandler}
+					value={searchInput}
 					size="small"
 					placeholder="e.g.'Waterloo','NW15', 'GU14 8TJ' or 'Farnborough' "
 					variant="filled"
@@ -51,18 +109,11 @@ const Search = ({ propXs, propSm, title, description }) => {
 							paddingBottom: 10,
 						},
 					}}
-					// sx={{
-					// 	backgroundColor: "white",
-					// 	width: {
-					// 		xs: "90%",
-					// 		sm: 550,
-					// 	},
-					// 	borderRadius: 2,
-					// 	margin: 1,
-					// }}
-				></StyledTextfield>
+				></StyledTextfield> */}
+
 				<CardActions sx={{ display: "flex", justifyContent: "center" }}>
 					<Button
+						onClick={submitHandlerSale}
 						sx={{
 							margin: 1,
 							textTransform: "none",
