@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import {
 	Card,
@@ -8,48 +8,48 @@ import {
 	Typography,
 	Button,
 	CardActions,
+	Autocomplete,
 } from "@mui/material";
 
 // state
-import { setSearchInputHandler } from "../../store/searchInput";
+
+import { useDispatch } from "react-redux";
 import { setIdentifierHandler } from "../../store/identifier";
 
 // components
 
-import AutocompleteSearch from "./AutocompleteSearch";
+import StyledTextfield from "../styledComponents/StyledTextfield";
 
 const Search = ({ propXs, propSm, title, description }) => {
-	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const [searchInput, setSearchInput] = useState("");
-	const [anchorEl, setAnchorEl] = useState(null);
+	const [options, setOptions] = useState([]);
 
 	const searchInputHandler = e => {
+		console.log("searchInputHandler");
 		setSearchInput(e.target.value);
-	};
-
-	const anchorElHandler = e => {
-		setAnchorEl(e.currentTarget);
-	};
-	const anchorCloseHandler = () => {
-		setAnchorEl(null);
 	};
 
 	// autocomplete
 
 	useEffect(() => {
 		const timeout = setTimeout(async () => {
+			console.log("search");
 			if (searchInput) {
 				try {
-					setSearchInputHandler(searchInput);
 					// setIdentifierHandler(searchInput);
 
-					const data = await axios.get("http://localhost:5002/identifier", {
+					const response = await axios.get("http://localhost:5002/identifier", {
 						params: {
 							location: searchInput,
 						},
 					});
-					setIdentifierHandler(data);
-					console.log(data);
+
+					const data = response.data.data;
+					setOptions(data);
+					dispatch(setIdentifierHandler(data));
+					console.log("data fetched");
 				} catch (error) {
 					console.log(error);
 				}
@@ -65,7 +65,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 	const submitHandlerSale = () => {};
 	// destructure pathname to conditionally render elements
 	const { pathname } = useLocation();
-
+	console.log(searchInput);
 	return (
 		<Card
 			sx={{
@@ -75,7 +75,6 @@ const Search = ({ propXs, propSm, title, description }) => {
 					sm: 600,
 				},
 				zIndex: 1000,
-
 				textAlign: "center",
 				justifyContent: "center",
 				backgroundColor: "#232D3F",
@@ -90,26 +89,21 @@ const Search = ({ propXs, propSm, title, description }) => {
 					{description}
 				</Typography>
 
-				<AutocompleteSearch
-					searchInput={searchInput}
-					searchInputHandler={searchInputHandler}
-				/>
-				{/* 
-				<StyledTextfield
-					{...params}
-					onChange={searchInputHandler}
-					value={searchInput}
-					size="small"
-					placeholder="e.g.'Waterloo','NW15', 'GU14 8TJ' or 'Farnborough' "
-					variant="filled"
-					InputProps={{
-						disableUnderline: true,
-						style: {
-							textAlign: "center",
-							paddingBottom: 10,
-						},
-					}}
-				></StyledTextfield> */}
+				<Autocomplete
+					// filterOptions={x => x}
+					options={options}
+					getOptionLabel={option => option.displayName || ""}
+					renderInput={params => (
+						<StyledTextfield
+							onChange={searchInputHandler}
+							value={searchInput}
+							{...params}
+							size="small"
+							placeholder="e.g.'Waterloo','NW15', 'GU14 8TJ' or 'Farnborough' "
+							variant="filled"
+						/>
+					)}
+				></Autocomplete>
 
 				<CardActions sx={{ display: "flex", justifyContent: "center" }}>
 					<Button

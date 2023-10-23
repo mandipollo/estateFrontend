@@ -3,8 +3,8 @@ import searchInputReducer from "./searchInput";
 import identifierReducer from "./identifier";
 
 const rootReducer = combineReducers({
-	searchInputReducer,
-	identifierReducer,
+	searchInput: searchInputReducer,
+	identifier: identifierReducer,
 });
 
 const store = configureStore({

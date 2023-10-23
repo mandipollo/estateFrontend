@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const identifier = createSlice({
 	name: "identifier",
-	initialState: null,
+	initialState: [],
 	reducers: {
 		setIdentifierHandler: (state, action) => {
-			return (state = action.payload);
+			return action.payload;
 		},
 		resetIdentifierHandler: state => {
-			return (state = null);
+			return [];
 		},
 	},
 });
