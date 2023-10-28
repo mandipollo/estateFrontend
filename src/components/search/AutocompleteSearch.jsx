@@ -1,11 +1,16 @@
-import { Autocomplete } from "@mui/material";
 import React from "react";
 import StyledTextfield from "../styledComponents/StyledTextfield";
+import StyledAutocomplete from "../styledComponents/StyledAutocomplete";
 
-const AutocompleteSearch = ({ searchInput, searchInputHandler, options }) => {
-	console.log(options);
+const AutocompleteSearch = ({
+	searchInput,
+	searchInputHandler,
+	options,
+	autoCompleteHandler,
+}) => {
 	return (
-		<Autocomplete
+		<StyledAutocomplete
+			onChange={autoCompleteHandler}
 			options={options}
 			getOptionLabel={options => options.displayName}
 			renderInput={params => (
@@ -14,18 +19,11 @@ const AutocompleteSearch = ({ searchInput, searchInputHandler, options }) => {
 					onChange={searchInputHandler}
 					value={searchInput}
 					size="small"
-					placeholder="e.g.'Waterloo','NW15', 'GU14 8TJ' or 'Farnborough' "
+					placeholder="Location "
 					variant="filled"
-					InputProps={{
-						disableUnderline: true,
-						style: {
-							textAlign: "center",
-							paddingBottom: 10,
-						},
-					}}
 				/>
 			)}
-		></Autocomplete>
+		></StyledAutocomplete>
 	);
 };
 

@@ -11,7 +11,7 @@ const Root = () => {
 				<Navbar />
 			</header>
 			<main>
-				<Box flex="1" justifyContent="center">
+				<Box display="flex" flex="1" justifyContent="center">
 					<Outlet />
 				</Box>
 			</main>

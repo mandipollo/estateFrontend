@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
 	Card,
@@ -18,9 +18,10 @@ import { setIdentifierHandler } from "../../store/identifier";
 
 // components
 
-import StyledTextfield from "../styledComponents/StyledTextfield";
+import AutocompleteSearch from "./AutocompleteSearch";
 
 const Search = ({ propXs, propSm, title, description }) => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [searchInput, setSearchInput] = useState("");
@@ -35,7 +36,6 @@ const Search = ({ propXs, propSm, title, description }) => {
 
 	useEffect(() => {
 		const timeout = setTimeout(async () => {
-			console.log("search");
 			if (searchInput) {
 				try {
 					// setIdentifierHandler(searchInput);
@@ -48,7 +48,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 
 					const data = response.data.data;
 					setOptions(data);
-					dispatch(setIdentifierHandler(data));
+
 					console.log("data fetched");
 				} catch (error) {
 					console.log(error);
@@ -60,12 +60,28 @@ const Search = ({ propXs, propSm, title, description }) => {
 			clearTimeout(timeout);
 		};
 	}, [searchInput]);
+
+	// select value from the list
+
+	const autoCompleteHandler = (event, value) => {
+		dispatch(setIdentifierHandler(value));
+		console.log(value);
+	};
 	// submit and navigate user to the filter page
 
-	const submitHandlerSale = () => {};
+	const submitHandlerSale = e => {
+		e.preventDefault();
+		console.log(searchInput);
+
+		if (searchInput) {
+			navigate("filter");
+		} else {
+			console.log("search input empty");
+		}
+	};
 	// destructure pathname to conditionally render elements
 	const { pathname } = useLocation();
-	console.log(searchInput);
+
 	return (
 		<Card
 			sx={{
@@ -85,25 +101,16 @@ const Search = ({ propXs, propSm, title, description }) => {
 				<Typography sx={{ margin: 1, color: "#35A29F" }} variant="h5">
 					{title}
 				</Typography>
-				<Typography sx={{ margin: 1 }} variant="h6" color="white">
+				<Typography sx={{ margin: 1 }} variant="body1" color="white">
 					{description}
 				</Typography>
 
-				<Autocomplete
-					// filterOptions={x => x}
+				<AutocompleteSearch
+					searchInput={searchInput}
+					searchInputHandler={searchInputHandler}
 					options={options}
-					getOptionLabel={option => option.displayName || ""}
-					renderInput={params => (
-						<StyledTextfield
-							onChange={searchInputHandler}
-							value={searchInput}
-							{...params}
-							size="small"
-							placeholder="e.g.'Waterloo','NW15', 'GU14 8TJ' or 'Farnborough' "
-							variant="filled"
-						/>
-					)}
-				></Autocomplete>
+					autoCompleteHandler={autoCompleteHandler}
+				/>
 
 				<CardActions sx={{ display: "flex", justifyContent: "center" }}>
 					<Button
