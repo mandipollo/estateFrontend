@@ -8,7 +8,6 @@ import {
 	Typography,
 	Button,
 	CardActions,
-	Autocomplete,
 } from "@mui/material";
 
 // state
@@ -28,7 +27,6 @@ const Search = ({ propXs, propSm, title, description }) => {
 	const [options, setOptions] = useState([]);
 
 	const searchInputHandler = e => {
-		console.log("searchInputHandler");
 		setSearchInput(e.target.value);
 	};
 
@@ -40,7 +38,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 				try {
 					// setIdentifierHandler(searchInput);
 
-					const response = await axios.get("http://localhost:5002/identifier", {
+					const response = await axios.get("http://localhost:5003/identifier", {
 						params: {
 							location: searchInput,
 						},
@@ -74,7 +72,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 		console.log(searchInput);
 
 		if (searchInput) {
-			navigate("filter");
+			navigate("/filter");
 		} else {
 			console.log("search input empty");
 		}
