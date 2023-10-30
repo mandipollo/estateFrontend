@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import {
 	Grid,
@@ -12,13 +13,16 @@ import {
 } from "@mui/material";
 
 // state
-
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { setForSale } from "../../store/forSale";
+import { useDispatch, useSelector } from "react-redux";
 const Filter = () => {
+	const dispatch = useDispatch();
+	// retrieve location identifier from the redux store
 	const locationIdentifier = useSelector(
 		state => state.identifier.locationIdentifier
 	);
-	console.log(locationIdentifier);
+
+	// view and store params for filter
 	const [allValues, setAllValues] = useState({
 		radius: 0,
 		minPrice: 0,
@@ -28,12 +32,30 @@ const Filter = () => {
 		type: "",
 		time: 0,
 	});
+
+	// a object is used to store for local state
 	const handleChange = e => {
 		setAllValues(prev => {
 			return { ...prev, [e.target.name]: e.target.value };
 		});
 	};
 
+	// fetch property sale data from backend , can pass params for filtering
+	const handleForSale = async () => {
+		try {
+			const response = await axios.get("http://localhost:5003/forSale", {
+				params: {
+					regionIdentifier: locationIdentifier,
+				},
+			});
+
+			const data = response.data.data;
+			dispatch(setForSale(data));
+			console.log(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	return (
 		<Grid container spacing={2} padding="20px 0 20px 0">
 			<Grid container item xs={6} spacing={2}>
@@ -192,6 +214,7 @@ const Filter = () => {
 					<Grid item xs>
 						<Link to="/propertyForSale">
 							<Button
+								onClick={handleForSale}
 								fullWidth
 								sx={{
 									textTransform: "none",

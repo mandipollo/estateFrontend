@@ -4,6 +4,7 @@ import { Box, Typography } from "@mui/material";
 // state
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
+// components
 import Filter from "../components/filter/Filter";
 
 const FilterPage = () => {

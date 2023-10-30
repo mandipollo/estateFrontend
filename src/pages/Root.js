@@ -2,6 +2,8 @@ import React from "react";
 import Navbar from "../components/navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import { Box } from "@mui/material";
+
+// components
 import Footer from "../components/sections/footer/Footer";
 
 const Root = () => {

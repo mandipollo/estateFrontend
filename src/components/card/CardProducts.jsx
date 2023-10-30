@@ -4,8 +4,19 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import { Box } from "@mui/material";
+import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
+import BathroomOutlinedIcon from "@mui/icons-material/BathroomOutlined";
 
-const CardProduct = () => {
+const CardProduct = ({
+	image,
+	displayAddress,
+	propertySubType,
+	bedrooms,
+	bathrooms,
+	summary,
+	displayPrice,
+}) => {
 	return (
 		<Card sx={{ width: "90%" }}>
 			<CardActionArea
@@ -15,17 +26,28 @@ const CardProduct = () => {
 				<CardMedia
 					component="img"
 					height="200"
-					image="https://plus.unsplash.com/premium_photo-1669261232192-6c625a80375e?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmVwdGlsZXxlbnwwfHwwfHx8MA%3D%3D"
-					alt="green iguana"
+					image={image}
+					alt="property image"
 				/>
-				<CardContent>
-					<Typography gutterBottom variant="h5" component="div">
-						Lizard
-					</Typography>
+				<CardContent
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+					}}
+				>
+					<Typography variant="h6">{displayAddress}</Typography>
+					<Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
+						<Typography variant="body2">{propertySubType}</Typography>
+						<BedOutlinedIcon fontSize="small" />
+						<Typography variant="body2">{bedrooms}</Typography>
+						<BathroomOutlinedIcon fontSize="small" />
+						<Typography variant="body2">{bathrooms}</Typography>
+					</Box>
+
 					<Typography variant="body2" color="text.secondary">
-						Lizards are a widespread group of squamate reptiles, with over 6,000
-						species, ranging across all continents except Antarctica
+						{summary}
 					</Typography>
+					<Typography color="green">{displayPrice}</Typography>
 				</CardContent>
 			</CardActionArea>
 		</Card>

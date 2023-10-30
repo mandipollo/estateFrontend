@@ -4,10 +4,12 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import searchInputReducer from "./searchInput";
 import identifierReducer from "./identifier";
+import forSaleReducer from "./forSale";
 
 const rootReducer = combineReducers({
 	searchInput: searchInputReducer,
 	identifier: identifierReducer,
+	forSale: forSaleReducer,
 });
 const config = {
 	key: "root",

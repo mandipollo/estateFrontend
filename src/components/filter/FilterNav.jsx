@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
 	Grid,
-	FormLabel,
 	MenuItem,
-	Button,
-	Typography,
 	FormControl,
 	Select,
 	OutlinedInput,
 } from "@mui/material";
 
+// filter nav for easy access in various pages
 const FilterNav = () => {
 	const [allValues, setAllValues] = useState({
 		radius: 0,
@@ -26,7 +24,7 @@ const FilterNav = () => {
 			return { ...prev, [e.target.name]: e.target.value };
 		});
 	};
-	console.log(allValues);
+
 	return (
 		<Grid container spacing={2} padding="10px 0 10px 0" width="100vw">
 			<Grid item xs>

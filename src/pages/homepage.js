@@ -1,9 +1,9 @@
-import React from "react";
 import { Box } from "@mui/material";
-import Search from "../components/search/Search";
 
+// components
 import CardHomeSection from "../components/sections/home/CardHomeSection";
 import CardHomeLink from "../components/sections/home/CardHomeLink";
+import Search from "../components/search/Search";
 
 const Homepage = () => {
 	return (
