@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+
 import { Box, Typography } from "@mui/material";
 
 // componenets
@@ -7,8 +7,6 @@ import Search from "../components/search/Search";
 import StyledButton from "../components/styledComponents/StyledButton";
 
 const ForSale = () => {
-	const location = useLocation();
-
 	return (
 		<main>
 			<Box

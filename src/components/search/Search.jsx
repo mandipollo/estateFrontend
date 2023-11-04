@@ -46,8 +46,6 @@ const Search = ({ propXs, propSm, title, description }) => {
 
 					const data = response.data.data;
 					setOptions(data);
-
-					console.log("data fetched");
 				} catch (error) {
 					console.log(error);
 				}
@@ -63,13 +61,11 @@ const Search = ({ propXs, propSm, title, description }) => {
 
 	const autoCompleteHandler = (event, value) => {
 		dispatch(setIdentifierHandler(value));
-		console.log(value);
 	};
 	// submit and navigate user to the filter page
 
 	const submitHandlerSale = e => {
 		e.preventDefault();
-		console.log(searchInput);
 
 		if (searchInput) {
 			navigate("/filter");

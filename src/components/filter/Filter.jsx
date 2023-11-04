@@ -51,7 +51,6 @@ const Filter = () => {
 
 			const data = response.data.data;
 			dispatch(setForSale(data));
-			console.log(data);
 		} catch (error) {
 			console.log(error);
 		}

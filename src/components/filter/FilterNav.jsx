@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+
 import {
 	Grid,
 	MenuItem,
@@ -26,7 +26,7 @@ const FilterNav = () => {
 	};
 
 	return (
-		<Grid container spacing={2} padding="10px 0 10px 0" width="100vw">
+		<Grid container spacing={1} sx={{ margin: 0 }}>
 			<Grid item xs>
 				<FormControl fullWidth>
 					<Select
@@ -97,7 +97,7 @@ const FilterNav = () => {
 					</Select>
 				</FormControl>
 			</Grid>
-			<Grid item>
+			<Grid item xs>
 				<FormControl fullWidth>
 					<Select
 						name="maxRooms"
@@ -133,7 +133,7 @@ const FilterNav = () => {
 				</FormControl>
 			</Grid>
 
-			<Grid item xs>
+			<Grid item xs paddingRight={2}>
 				<FormControl fullWidth>
 					<Select
 						name="time"
