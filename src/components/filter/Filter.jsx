@@ -49,7 +49,8 @@ const Filter = () => {
 				},
 			});
 
-			const data = response.data.data;
+			const data = response.data;
+
 			dispatch(setForSale(data));
 		} catch (error) {
 			console.log(error);

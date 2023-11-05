@@ -1,15 +1,14 @@
-import React from "react";
-import { Box, Typography, Grid, Input, Button, Paper } from "@mui/material";
+import { Box, Typography, Grid, Input, Button } from "@mui/material";
+
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import CardProduct from "../components/card/CardProducts";
-import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
+
 // components
 import FilterNav from "../components/filter/FilterNav";
-
+import PaginationMui from "../components/pagination/Pagination";
 const PropertyForSale = () => {
-	const forSaleData = useSelector(state => state.forSale);
+	const forSaleData = useSelector(state => state.forSale.data);
 	const idendifierState = useSelector(state => state.identifier);
-	console.log(idendifierState);
 	console.log(forSaleData);
 	return (
 		<Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -34,21 +33,24 @@ const PropertyForSale = () => {
 				</Typography>
 			</Box>
 
-			<Grid container flex="1" gap={2} sx={{ backgroundColor: "#E9E9EB" }}>
+			<Grid
+				container
+				sx={{ backgroundColor: "#E9E9EB", alignItems: "flex-start" }}
+			>
 				<Grid
 					container
 					item
 					gap={3}
 					sx={{
 						justifyContent: "center",
-						padding: "3rem 0 3rem 0",
+						padding: "2rem 0 2rem 0",
 					}}
-					xs
+					flex={1}
 				>
 					{forSaleData.map(item => (
 						<CardProduct
 							key={item.id}
-							image={item.propertyImages.images}
+							images={item.propertyImages.images}
 							displayAddress={item.displayAddress}
 							summary={item.summary}
 							propertySubType={item.propertySubType}
@@ -59,42 +61,32 @@ const PropertyForSale = () => {
 							contactNo={item.customer.contactTelephone}
 						/>
 					))}
+					<PaginationMui />
 				</Grid>
 				<Grid
 					container
 					item
+					gap={2}
 					sx={{
-						backgroundColor: "white",
-						width: 400,
+						width: 300,
 						display: {
 							md: "none",
 							lg: "flex",
 						},
+						justifyContent: "center",
+						alignItems: "center",
+						padding: "2rem 1rem",
 					}}
 				>
 					<Grid item>
 						<Button
-							startIcon={<ArrowRightAltOutlinedIcon />}
-							size="medium"
+							size="small"
 							sx={{ textTransform: "none" }}
 							variant="outlined"
 							color="success"
+							disableRipple
 						>
-							<Typography variant="body2">
-								See properties to rent in {idendifierState.displayName}
-							</Typography>
-						</Button>
-					</Grid>
-					<Grid item>
-						<Button
-							size="large"
-							sx={{ textTransform: "none" }}
-							variant="outlined"
-							color="success"
-						>
-							<Typography variant="body2">
-								See properties to rent in {idendifierState.displayName}
-							</Typography>
+							Properties to rent in {idendifierState.displayName}
 						</Button>
 					</Grid>
 				</Grid>
