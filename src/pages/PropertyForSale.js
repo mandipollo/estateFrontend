@@ -1,15 +1,49 @@
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 import { Box, Typography, Grid, Input, Button } from "@mui/material";
 
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import CardProduct from "../components/card/CardProducts";
 
+// redux
+
+import { setForSale } from "../store/forSale";
 // components
 import FilterNav from "../components/filter/FilterNav";
 import PaginationMui from "../components/pagination/Pagination";
+
 const PropertyForSale = () => {
+	const dispatch = useDispatch();
+	const [page, setPage] = useState(1);
+
+	const handlePageChange = (event, value) => {
+		setPage(value);
+	};
 	const forSaleData = useSelector(state => state.forSale.data);
-	const idendifierState = useSelector(state => state.identifier);
+	const identifierState = useSelector(state => state.identifier);
 	console.log(forSaleData);
+
+	useEffect(() => {
+		const handleForSale = async () => {
+			try {
+				const response = await axios.get("http://localhost:5003/forSale", {
+					params: {
+						regionIdentifier: identifierState.locationIdentifier,
+						page: page,
+					},
+				});
+
+				const data = response.data;
+
+				dispatch(setForSale(data));
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		handleForSale();
+	}, [page]);
 	return (
 		<Box sx={{ display: "flex", flexDirection: "column" }}>
 			<Box
@@ -29,7 +63,7 @@ const PropertyForSale = () => {
 			</Box>
 			<Box sx={{ backgroundColor: "#E9E9EB", padding: "1rem  0 0 4rem" }}>
 				<Typography variant="h6" color="text.secondary">
-					Properties For Sale in {idendifierState.displayName}
+					Properties For Sale in {identifierState.displayName}
 				</Typography>
 			</Box>
 
@@ -61,7 +95,7 @@ const PropertyForSale = () => {
 							contactNo={item.customer.contactTelephone}
 						/>
 					))}
-					<PaginationMui />
+					<PaginationMui page={page} handlePageChange={handlePageChange} />
 				</Grid>
 				<Grid
 					container
@@ -86,7 +120,7 @@ const PropertyForSale = () => {
 							color="success"
 							disableRipple
 						>
-							Properties to rent in {idendifierState.displayName}
+							Properties to rent in {identifierState.displayName}
 						</Button>
 					</Grid>
 				</Grid>
