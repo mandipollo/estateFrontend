@@ -54,6 +54,7 @@ const CardProduct = ({
 									key={index}
 									component="img"
 									height={220}
+									loading="lazy"
 									image={item.srcUrl}
 									alt="property image"
 									sx={{ objectFit: "cover" }}

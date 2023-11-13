@@ -7,7 +7,12 @@ import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutl
 // redux
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
-const PaginationMui = ({ handlePageChange, page }) => {
+const PaginationMui = ({
+	handlePageChange,
+	page,
+	prevPageHandler,
+	nextPageHandler,
+}) => {
 	const results = useSelector(state => state.forSale);
 	const numberOfPages = Math.ceil(
 		results.totalResultCount / results.resultsPerPage
@@ -20,6 +25,7 @@ const PaginationMui = ({ handlePageChange, page }) => {
 				size="medium"
 				startIcon={<ArrowBackIosNewOutlinedIcon />}
 				variant="text"
+				onClick={prevPageHandler}
 			>
 				Previous
 			</Button>
@@ -33,6 +39,7 @@ const PaginationMui = ({ handlePageChange, page }) => {
 				endIcon={<ArrowForwardIosOutlinedIcon />}
 				variant="text"
 				disabled={numberOfPages === page}
+				onClick={nextPageHandler}
 			>
 				Next
 			</Button>
