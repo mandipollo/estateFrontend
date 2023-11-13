@@ -15,6 +15,18 @@ import {
 // redux
 import { setForSale } from "../../store/forSale";
 import { useDispatch, useSelector } from "react-redux";
+
+// radius values
+
+import {
+	filterRadius,
+	filterMinPrice,
+	filterMaxPrice,
+	filterMinBed,
+	filterMaxBed,
+	filterPropertyType,
+	filterAddedToSite,
+} from "./filterValues/FilterValues";
 const Filter = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -82,10 +94,11 @@ const Filter = () => {
 								displayEmpty
 								size="small"
 							>
-								<MenuItem value={"0.0"}>This area only</MenuItem>
-								<MenuItem value={"0.25"}>Within 1/4 mile</MenuItem>
-								<MenuItem value={"1.0"}>Within 1 mile</MenuItem>
-								<MenuItem value={"5.0"}>Within 5 miles</MenuItem>
+								{filterRadius.map((options, index) => (
+									<MenuItem key={index} value={options.radiusValue}>
+										{options.radius}
+									</MenuItem>
+								))}
 							</Select>
 						</FormControl>
 					</Grid>
@@ -105,10 +118,11 @@ const Filter = () => {
 									displayEmpty
 									size="small"
 								>
-									<MenuItem value={""}>No min</MenuItem>
-									<MenuItem value={"50000"}>50000</MenuItem>
-									<MenuItem value={"100000"}>100000</MenuItem>
-									<MenuItem value={"200000"}>200000</MenuItem>
+									{filterMinPrice.map((options, index) => (
+										<MenuItem key={index} value={options.priceValue}>
+											{options.price}
+										</MenuItem>
+									))}
 								</Select>
 							</FormControl>
 						</Grid>
@@ -122,10 +136,11 @@ const Filter = () => {
 									displayEmpty
 									size="small"
 								>
-									<MenuItem value={""}>No max</MenuItem>
-									<MenuItem value={"50000"}>50000</MenuItem>
-									<MenuItem value={"100000"}>100000</MenuItem>
-									<MenuItem value={"500000"}>500000</MenuItem>
+									{filterMaxPrice.map((options, index) => (
+										<MenuItem key={index} value={options.priceValue}>
+											{options.price}
+										</MenuItem>
+									))}
 								</Select>
 							</FormControl>
 						</Grid>
@@ -146,10 +161,11 @@ const Filter = () => {
 									displayEmpty
 									size="small"
 								>
-									<MenuItem value={""}>No min</MenuItem>
-									<MenuItem value={"1"}>1</MenuItem>
-									<MenuItem value={"2"}>2</MenuItem>
-									<MenuItem value={"3"}>3</MenuItem>
+									{filterMinBed.map((options, index) => (
+										<MenuItem key={index} value={options.bedroomValue}>
+											{options.bedroom}
+										</MenuItem>
+									))}
 								</Select>
 							</FormControl>
 						</Grid>
@@ -163,10 +179,11 @@ const Filter = () => {
 									displayEmpty
 									size="small"
 								>
-									<MenuItem value={""}>No max</MenuItem>
-									<MenuItem value={"2"}>2</MenuItem>
-									<MenuItem value={"3"}>3</MenuItem>
-									<MenuItem value={"5"}>5</MenuItem>
+									{filterMaxBed.map((options, index) => (
+										<MenuItem key={index} value={options.bedroomValue}>
+											{options.bedroom}
+										</MenuItem>
+									))}
 								</Select>
 							</FormControl>
 						</Grid>
@@ -188,10 +205,11 @@ const Filter = () => {
 								displayEmpty
 								size="small"
 							>
-								<MenuItem value={"any"}>Any</MenuItem>
-								<MenuItem value={"houses"}>Houses</MenuItem>
-								<MenuItem value={"flat"}>Flat/Apartment</MenuItem>
-								<MenuItem value={"bungalows"}>Bungalows</MenuItem>
+								{filterPropertyType.map((options, index) => (
+									<MenuItem key={index} value={options.propertyValue}>
+										{options.propertyName}
+									</MenuItem>
+								))}
 							</Select>
 						</FormControl>
 					</Grid>
@@ -210,10 +228,11 @@ const Filter = () => {
 								displayEmpty
 								size="small"
 							>
-								<MenuItem value={""}>Anytime</MenuItem>
-								<MenuItem value={"1"}>Last 24 hours</MenuItem>
-								<MenuItem value={"3"}>Last 3 days</MenuItem>
-								<MenuItem value={"7"}>Last 7 days</MenuItem>
+								{filterAddedToSite.map((options, index) => (
+									<MenuItem key={index} value={options.addedToSiteValue}>
+										{options.addedToSiteName}
+									</MenuItem>
+								))}
 							</Select>
 						</FormControl>
 					</Grid>
