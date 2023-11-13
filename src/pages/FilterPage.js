@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 
-// state
+// redux
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 // components

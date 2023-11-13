@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, ListItem, List } from "@mui/material";
 
+import { Box, ListItem, List } from "@mui/material";
+// components
 import FooterList, { listData } from "./FooterList";
 
 const Footer = () => {

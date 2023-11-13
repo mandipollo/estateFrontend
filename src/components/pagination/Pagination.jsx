@@ -1,9 +1,12 @@
 import React from "react";
-import { Stack, Pagination, Button } from "@mui/material";
 
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { Stack, Pagination, Button } from "@mui/material";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+
+// redux
+import { useSelector } from "react-redux/es/hooks/useSelector";
+
 const PaginationMui = ({ handlePageChange, page }) => {
 	const results = useSelector(state => state.forSale);
 	const numberOfPages = Math.ceil(
@@ -29,6 +32,7 @@ const PaginationMui = ({ handlePageChange, page }) => {
 				size="medium"
 				endIcon={<ArrowForwardIosOutlinedIcon />}
 				variant="text"
+				disabled={numberOfPages === page}
 			>
 				Next
 			</Button>

@@ -25,7 +25,7 @@ const CardProduct = ({
 	bathrooms,
 	summary,
 	displayPrice,
-	customer,
+	customerImage,
 	contactNo,
 }) => {
 	return (
@@ -74,7 +74,7 @@ const CardProduct = ({
 				</Box>
 			</Box>
 			<Box sx={{ display: "flex", flex: 6, flexDirection: "column", gap: 1 }}>
-				<CardActionArea disableRipple>
+				<CardActionArea disableRipple sx={{ flex: 9 }}>
 					<CardContent
 						sx={{
 							display: "flex",
@@ -109,15 +109,25 @@ const CardProduct = ({
 						flexDirection: "row",
 						paddingLeft: 2,
 						alignItems: "center",
+						flex: 3,
 					}}
 				>
-					<Typography variant="body2" color="green">
-						{customer}
-					</Typography>
-					<Typography variant="body2" color="text.secondary">
-						{contactNo}
-					</Typography>
-					<CardActions>
+					<Box>
+						<CardMedia
+							sx={{ maxHeight: 30 }}
+							component="img"
+							image={customerImage}
+						/>
+					</Box>
+					<Box>
+						<Typography variant="body2" color="text.secondary">
+							{contactNo}
+						</Typography>
+					</Box>
+
+					<CardActions
+						sx={{ display: "flex", flex: 1, justifyContent: "flex-end" }}
+					>
 						<Button
 							startIcon={<FavoriteBorderOutlinedIcon />}
 							size="small"

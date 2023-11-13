@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
-
 import {
 	Card,
 	CardContent,
@@ -9,6 +7,8 @@ import {
 	Button,
 	CardActions,
 } from "@mui/material";
+
+import { useLocation, useNavigate } from "react-router-dom";
 
 // state
 
@@ -50,7 +50,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 					console.log(error);
 				}
 			}
-		}, 500);
+		}, 100);
 
 		return () => {
 			clearTimeout(timeout);

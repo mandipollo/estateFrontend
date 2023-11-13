@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
 	Grid,
 	FormLabel,
@@ -12,25 +12,26 @@ import {
 	OutlinedInput,
 } from "@mui/material";
 
-// state
+// redux
 import { setForSale } from "../../store/forSale";
 import { useDispatch, useSelector } from "react-redux";
 const Filter = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	// retrieve location identifier from the redux store
 	const locationIdentifier = useSelector(
 		state => state.identifier.locationIdentifier
 	);
 
-	// view and store params for filter
+	// params for filter
 	const [allValues, setAllValues] = useState({
-		radius: 0,
-		minPrice: 0,
-		maxPrice: 0,
-		minRooms: 0,
-		maxRooms: 0,
-		type: "",
-		time: 0,
+		radius: "0.0",
+		minPrice: "",
+		maxPrice: "",
+		minBedrooms: "",
+		maxBedrooms: "",
+		propertyType: "any",
+		addedToSite: "",
 	});
 
 	// a object is used to store for local state
@@ -46,12 +47,20 @@ const Filter = () => {
 			const response = await axios.get("http://localhost:5003/forSale", {
 				params: {
 					regionIdentifier: locationIdentifier,
+					searchRadius: allValues.radius,
+					minPrice: allValues.minPrice,
+					maxPrice: allValues.maxPrice,
+					minBedrooms: allValues.minBedrooms,
+					maxBedrooms: allValues.maxBedrooms,
+					propertyType: allValues.propertyType,
+					addedToSite: allValues.addedToSite,
 				},
 			});
 
 			const data = response.data;
 
 			dispatch(setForSale(data));
+			navigate("/propertyForSale");
 		} catch (error) {
 			console.log(error);
 		}
@@ -73,10 +82,10 @@ const Filter = () => {
 								displayEmpty
 								size="small"
 							>
-								<MenuItem value={0}>This area only</MenuItem>
-								<MenuItem value={0.25}>Within 1/4 mile</MenuItem>
-								<MenuItem value={1}>Within 1 mile</MenuItem>
-								<MenuItem value={5}>Within 5 miles</MenuItem>
+								<MenuItem value={"0.0"}>This area only</MenuItem>
+								<MenuItem value={"0.25"}>Within 1/4 mile</MenuItem>
+								<MenuItem value={"1.0"}>Within 1 mile</MenuItem>
+								<MenuItem value={"5.0"}>Within 5 miles</MenuItem>
 							</Select>
 						</FormControl>
 					</Grid>
@@ -96,10 +105,10 @@ const Filter = () => {
 									displayEmpty
 									size="small"
 								>
-									<MenuItem value={0}>No min</MenuItem>
-									<MenuItem value={50000}>50000</MenuItem>
-									<MenuItem value={100000}>100000</MenuItem>
-									<MenuItem value={200000}>200000</MenuItem>
+									<MenuItem value={""}>No min</MenuItem>
+									<MenuItem value={"50000"}>50000</MenuItem>
+									<MenuItem value={"100000"}>100000</MenuItem>
+									<MenuItem value={"200000"}>200000</MenuItem>
 								</Select>
 							</FormControl>
 						</Grid>
@@ -113,10 +122,10 @@ const Filter = () => {
 									displayEmpty
 									size="small"
 								>
-									<MenuItem value={0}>No max</MenuItem>
-									<MenuItem value={50000}>50000</MenuItem>
-									<MenuItem value={100000}>100000</MenuItem>
-									<MenuItem value={500000}>500000</MenuItem>
+									<MenuItem value={""}>No max</MenuItem>
+									<MenuItem value={"50000"}>50000</MenuItem>
+									<MenuItem value={"100000"}>100000</MenuItem>
+									<MenuItem value={"500000"}>500000</MenuItem>
 								</Select>
 							</FormControl>
 						</Grid>
@@ -130,34 +139,34 @@ const Filter = () => {
 						<Grid item xs={6}>
 							<FormControl fullWidth>
 								<Select
-									name="minRooms"
+									name="minBedrooms"
 									input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-									value={allValues.minRooms}
+									value={allValues.minBedrooms}
 									onChange={handleChange}
 									displayEmpty
 									size="small"
 								>
-									<MenuItem value={0}>No min</MenuItem>
-									<MenuItem value={1}>1</MenuItem>
-									<MenuItem value={2}>2</MenuItem>
-									<MenuItem value={3}>3</MenuItem>
+									<MenuItem value={""}>No min</MenuItem>
+									<MenuItem value={"1"}>1</MenuItem>
+									<MenuItem value={"2"}>2</MenuItem>
+									<MenuItem value={"3"}>3</MenuItem>
 								</Select>
 							</FormControl>
 						</Grid>
 						<Grid item xs={6}>
 							<FormControl fullWidth>
 								<Select
-									name="maxRooms"
+									name="maxBedrooms"
 									input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-									value={allValues.maxRooms}
+									value={allValues.maxBedrooms}
 									onChange={handleChange}
 									displayEmpty
 									size="small"
 								>
-									<MenuItem value={0}>No max</MenuItem>
-									<MenuItem value={2}>2</MenuItem>
-									<MenuItem value={3}>3</MenuItem>
-									<MenuItem value={5}>5</MenuItem>
+									<MenuItem value={""}>No max</MenuItem>
+									<MenuItem value={"2"}>2</MenuItem>
+									<MenuItem value={"3"}>3</MenuItem>
+									<MenuItem value={"5"}>5</MenuItem>
 								</Select>
 							</FormControl>
 						</Grid>
@@ -174,12 +183,12 @@ const Filter = () => {
 							<Select
 								name="type"
 								input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-								value={allValues.type}
+								value={allValues.propertyType}
 								onChange={handleChange}
 								displayEmpty
 								size="small"
 							>
-								<MenuItem value={""}>Any</MenuItem>
+								<MenuItem value={"any"}>Any</MenuItem>
 								<MenuItem value={"houses"}>Houses</MenuItem>
 								<MenuItem value={"flat"}>Flat/Apartment</MenuItem>
 								<MenuItem value={"bungalows"}>Bungalows</MenuItem>
@@ -194,17 +203,17 @@ const Filter = () => {
 					<Grid item xs>
 						<FormControl fullWidth>
 							<Select
-								name="time"
+								name="addedToSite"
 								input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-								value={allValues.time}
+								value={allValues.addedToSite}
 								onChange={handleChange}
 								displayEmpty
 								size="small"
 							>
-								<MenuItem value={0}>Anytime</MenuItem>
-								<MenuItem value={24}>Last 24 hours</MenuItem>
-								<MenuItem value={3}>Last 3 days</MenuItem>
-								<MenuItem value={5}>Last 5 days</MenuItem>
+								<MenuItem value={""}>Anytime</MenuItem>
+								<MenuItem value={"1"}>Last 24 hours</MenuItem>
+								<MenuItem value={"3"}>Last 3 days</MenuItem>
+								<MenuItem value={"7"}>Last 7 days</MenuItem>
 							</Select>
 						</FormControl>
 					</Grid>
@@ -212,21 +221,19 @@ const Filter = () => {
 				<Grid container item spacing={2}>
 					<Grid item xs={4}></Grid>
 					<Grid item xs>
-						<Link to="/propertyForSale">
-							<Button
-								onClick={handleForSale}
-								fullWidth
-								sx={{
-									textTransform: "none",
-									color: "black",
-									backgroundColor: "#00DFB6",
-								}}
-								size="large"
-								variant="contained"
-							>
-								<Typography>Find properties</Typography>
-							</Button>
-						</Link>
+						<Button
+							onClick={handleForSale}
+							fullWidth
+							sx={{
+								textTransform: "none",
+								color: "black",
+								backgroundColor: "#00DFB6",
+							}}
+							size="large"
+							variant="contained"
+						>
+							<Typography>Find properties</Typography>
+						</Button>
 					</Grid>
 				</Grid>
 			</Grid>

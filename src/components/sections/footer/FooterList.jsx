@@ -1,6 +1,8 @@
 import React from "react";
-import StyledListFooter from "../../styledComponents/StyledListFooter";
+
 import { ListItem, ListItemButton } from "@mui/material";
+// components
+import StyledListFooter from "../../styledComponents/StyledListFooter";
 
 export const listData = [
 	{
