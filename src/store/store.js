@@ -5,11 +5,13 @@ import { persistReducer } from "redux-persist";
 import searchInputReducer from "./searchInput";
 import identifierReducer from "./identifier";
 import forSaleReducer from "./forSale";
+import filterReducer from "./filterParams";
 
 const rootReducer = combineReducers({
 	searchInput: searchInputReducer,
 	identifier: identifierReducer,
 	forSale: forSaleReducer,
+	filter: filterReducer,
 });
 const config = {
 	key: "root",

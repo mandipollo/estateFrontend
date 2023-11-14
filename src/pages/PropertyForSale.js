@@ -7,6 +7,7 @@ import { Box, Typography, Grid, Input, Button } from "@mui/material";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { setForSale } from "../store/forSale";
+import { setFilterParams } from "../store/filterParams";
 // components
 import FilterNav from "../components/filter/FilterNav";
 import PaginationMui from "../components/pagination/Pagination";
@@ -26,6 +27,8 @@ const PropertyForSale = () => {
 	};
 	const forSaleData = useSelector(state => state.forSale.data);
 	const identifierState = useSelector(state => state.identifier);
+	const filterParamsState = useSelector(state => state.filter);
+	console.log(filterParamsState);
 	// save page on localStorage
 
 	useEffect(() => {
@@ -45,6 +48,13 @@ const PropertyForSale = () => {
 						params: {
 							regionIdentifier: identifierState.locationIdentifier,
 							page: page,
+							searchRadius: filterParamsState.radius,
+							minPrice: filterParamsState.minPrice,
+							maxPrice: filterParamsState.maxPrice,
+							minBedrooms: filterParamsState.minBedrooms,
+							maxBedrooms: filterParamsState.maxBedrooms,
+							propertyType: filterParamsState.propertyType,
+							addedToSite: filterParamsState.addedToSite,
 						},
 					});
 					const data = response.data;
@@ -57,7 +67,7 @@ const PropertyForSale = () => {
 			};
 			handleForSale();
 		}
-	}, [page]);
+	}, [page, filterParamsState]);
 
 	const prevPageHandler = () => {
 		setPage(prev => prev - 1);
@@ -80,7 +90,7 @@ const PropertyForSale = () => {
 					<Input />
 				</Box>
 				<Box flex={9}>
-					<FilterNav />
+					<FilterNav filterParamsState={filterParamsState} />
 				</Box>
 			</Box>
 

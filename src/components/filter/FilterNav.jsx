@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
 	Grid,
@@ -8,23 +8,48 @@ import {
 	OutlinedInput,
 } from "@mui/material";
 
+import {
+	filterRadius,
+	filterAddedToSite,
+	filterMaxBed,
+	filterMaxPrice,
+	filterMinBed,
+	filterMinPrice,
+	filterPropertyType,
+} from "./filterValues/FilterValues";
+
+// redux
+
+import { useDispatch } from "react-redux";
+import { setFilterParams } from "../../store/filterParams";
+import useIsMount from "../utilities/useIsMount";
 // filter nav for easy access in various pages
-const FilterNav = () => {
+const FilterNav = ({ filterParamsState }) => {
+	const isMount = useIsMount();
+	const dispatch = useDispatch();
 	const [allValues, setAllValues] = useState({
-		radius: 0,
-		minPrice: 0,
-		maxPrice: 0,
-		minRooms: 0,
-		maxRooms: 0,
-		type: "",
-		time: 0,
+		radius: filterParamsState.radius || "0.0",
+		minPrice: filterParamsState.minPrice || "",
+		maxPrice: filterParamsState.maxPrice || "",
+		minBedrooms: filterParamsState.minBedrooms || "",
+		maxBedrooms: filterParamsState.maxBedrooms || "",
+		propertyType: filterParamsState.propertyType || "any",
+		addedToSite: filterParamsState.addedToSite || "",
 	});
+	console.log(allValues);
 	const handleChange = e => {
 		setAllValues(prev => {
 			return { ...prev, [e.target.name]: e.target.value };
 		});
 	};
 
+	useEffect(() => {
+		if (isMount) {
+			console.log("initial render filter");
+		} else {
+			dispatch(setFilterParams(allValues));
+		}
+	}, [allValues]);
 	return (
 		<Grid container spacing={1} sx={{ margin: 0 }}>
 			<Grid item xs>
@@ -37,10 +62,11 @@ const FilterNav = () => {
 						displayEmpty
 						size="small"
 					>
-						<MenuItem value={0}>This area only</MenuItem>
-						<MenuItem value={0.25}>Within 1/4 mile</MenuItem>
-						<MenuItem value={1}>Within 1 mile</MenuItem>
-						<MenuItem value={5}>Within 5 miles</MenuItem>
+						{filterRadius.map((options, index) => (
+							<MenuItem key={index} value={options.radiusValue}>
+								{options.radius}
+							</MenuItem>
+						))}
 					</Select>
 				</FormControl>
 			</Grid>
@@ -55,10 +81,11 @@ const FilterNav = () => {
 						displayEmpty
 						size="small"
 					>
-						<MenuItem value={0}>Min Price</MenuItem>
-						<MenuItem value={50000}>50000</MenuItem>
-						<MenuItem value={100000}>100000</MenuItem>
-						<MenuItem value={200000}>200000</MenuItem>
+						{filterMinPrice.map((options, index) => (
+							<MenuItem key={index} value={options.priceValue}>
+								{options.price}
+							</MenuItem>
+						))}
 					</Select>
 				</FormControl>
 			</Grid>
@@ -72,10 +99,11 @@ const FilterNav = () => {
 						displayEmpty
 						size="small"
 					>
-						<MenuItem value={0}>Max Price</MenuItem>
-						<MenuItem value={50000}>50000</MenuItem>
-						<MenuItem value={100000}>100000</MenuItem>
-						<MenuItem value={500000}>500000</MenuItem>
+						{filterMaxPrice.map((options, index) => (
+							<MenuItem key={index} value={options.priceValue}>
+								{options.price}
+							</MenuItem>
+						))}
 					</Select>
 				</FormControl>
 			</Grid>
@@ -85,15 +113,16 @@ const FilterNav = () => {
 					<Select
 						name="minRooms"
 						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.minRooms}
+						value={allValues.minBedrooms}
 						onChange={handleChange}
 						displayEmpty
 						size="small"
 					>
-						<MenuItem value={0}>Min Beds</MenuItem>
-						<MenuItem value={1}>1</MenuItem>
-						<MenuItem value={2}>2</MenuItem>
-						<MenuItem value={3}>3</MenuItem>
+						{filterMinBed.map((options, index) => (
+							<MenuItem key={index} value={options.bedroomValue}>
+								{options.bedroom}
+							</MenuItem>
+						))}
 					</Select>
 				</FormControl>
 			</Grid>
@@ -102,15 +131,16 @@ const FilterNav = () => {
 					<Select
 						name="maxRooms"
 						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.maxRooms}
+						value={allValues.maxBedrooms}
 						onChange={handleChange}
 						displayEmpty
 						size="small"
 					>
-						<MenuItem value={0}>Max Beds</MenuItem>
-						<MenuItem value={2}>2</MenuItem>
-						<MenuItem value={3}>3</MenuItem>
-						<MenuItem value={5}>5</MenuItem>
+						{filterMaxBed.map((options, index) => (
+							<MenuItem key={index} value={options.bedroomValue}>
+								{options.bedroom}
+							</MenuItem>
+						))}
 					</Select>
 				</FormControl>
 			</Grid>
@@ -120,15 +150,16 @@ const FilterNav = () => {
 					<Select
 						name="type"
 						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.type}
+						value={allValues.propertyType}
 						onChange={handleChange}
 						displayEmpty
 						size="small"
 					>
-						<MenuItem value={""}>Any</MenuItem>
-						<MenuItem value={"houses"}>Houses</MenuItem>
-						<MenuItem value={"flat"}>Flat/Apartment</MenuItem>
-						<MenuItem value={"bungalows"}>Bungalows</MenuItem>
+						{filterPropertyType.map((options, index) => (
+							<MenuItem key={index} value={options.propertyValue}>
+								{options.propertyName}
+							</MenuItem>
+						))}
 					</Select>
 				</FormControl>
 			</Grid>
@@ -138,15 +169,16 @@ const FilterNav = () => {
 					<Select
 						name="time"
 						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.time}
+						value={allValues.addedToSite}
 						onChange={handleChange}
 						displayEmpty
 						size="small"
 					>
-						<MenuItem value={0}>Anytime</MenuItem>
-						<MenuItem value={24}>Last 24 hours</MenuItem>
-						<MenuItem value={3}>Last 3 days</MenuItem>
-						<MenuItem value={5}>Last 5 days</MenuItem>
+						{filterAddedToSite.map((options, index) => (
+							<MenuItem key={index} value={options.addedToSiteValue}>
+								{options.addedToSiteName}
+							</MenuItem>
+						))}
 					</Select>
 				</FormControl>
 			</Grid>

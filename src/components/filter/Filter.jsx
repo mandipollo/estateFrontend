@@ -14,6 +14,7 @@ import {
 
 // redux
 import { setForSale } from "../../store/forSale";
+import { setFilterParams } from "../../store/filterParams";
 import { useDispatch, useSelector } from "react-redux";
 
 // radius values
@@ -72,6 +73,7 @@ const Filter = () => {
 			const data = response.data;
 
 			dispatch(setForSale(data));
+			dispatch(setFilterParams(allValues));
 			navigate("/propertyForSale");
 		} catch (error) {
 			console.log(error);
