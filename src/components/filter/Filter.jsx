@@ -200,7 +200,7 @@ const Filter = () => {
 					<Grid item xs>
 						<FormControl fullWidth>
 							<Select
-								name="type"
+								name="propertyType"
 								input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
 								value={allValues.propertyType}
 								onChange={handleChange}

@@ -19,6 +19,8 @@ import { setIdentifierHandler } from "../../store/identifier";
 
 import AutocompleteSearch from "./AutocompleteSearch";
 
+// hooks
+
 const Search = ({ propXs, propSm, title, description }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -30,11 +32,17 @@ const Search = ({ propXs, propSm, title, description }) => {
 		setSearchInput(e.target.value);
 	};
 
+	const checkOnlySpace = input => {
+		return /^\s*$/.test(input);
+	};
+
 	// autocomplete
 
 	useEffect(() => {
 		const timeout = setTimeout(async () => {
-			if (searchInput) {
+			if (checkOnlySpace(searchInput)) {
+				return;
+			} else if (searchInput) {
 				try {
 					// setIdentifierHandler(searchInput);
 

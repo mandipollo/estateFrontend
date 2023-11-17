@@ -6,7 +6,7 @@ import { Box, Typography, Grid, Input, Button } from "@mui/material";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { setForSale } from "../store/forSale";
+import { setForSale, fetchForSale, resetStatus } from "../store/forSale";
 import { setFilterParams } from "../store/filterParams";
 // components
 import FilterNav from "../components/filter/FilterNav";
@@ -25,7 +25,9 @@ const PropertyForSale = () => {
 	const handlePageChange = (event, value) => {
 		setPage(value);
 	};
-	const forSaleData = useSelector(state => state.forSale.data);
+	const forSaleData = useSelector(state => state.forSale.data.data);
+	const forSaleStatus = useSelector(state => state.forSale.status);
+	const forSaleError = useSelector(state => state.forSale.error);
 	const identifierState = useSelector(state => state.identifier);
 	const filterParamsState = useSelector(state => state.filter);
 	console.log(filterParamsState);
@@ -41,33 +43,27 @@ const PropertyForSale = () => {
 			console.log("initial render");
 		} else {
 			// effect when page changes
-			const handleForSale = async () => {
-				try {
-					console.log("fetch started");
-					const response = await axios.get("http://localhost:5003/forSale", {
-						params: {
-							regionIdentifier: identifierState.locationIdentifier,
-							page: page,
-							searchRadius: filterParamsState.radius,
-							minPrice: filterParamsState.minPrice,
-							maxPrice: filterParamsState.maxPrice,
-							minBedrooms: filterParamsState.minBedrooms,
-							maxBedrooms: filterParamsState.maxBedrooms,
-							propertyType: filterParamsState.propertyType,
-							addedToSite: filterParamsState.addedToSite,
-						},
-					});
-					const data = response.data;
-					dispatch(setForSale(data));
-					console.log("subsequent render");
-					window.scrollTo({ top: 0, behavior: "smooth" });
-				} catch (error) {
-					console.log(error);
-				}
+
+			dispatch(
+				fetchForSale({
+					regionIdentifier: identifierState.locationIdentifier,
+					page: page,
+					searchRadius: filterParamsState.radius,
+					minPrice: filterParamsState.minPrice,
+					maxPrice: filterParamsState.maxPrice,
+					minBedrooms: filterParamsState.minBedrooms,
+					maxBedrooms: filterParamsState.maxBedrooms,
+					propertyType: filterParamsState.propertyType,
+					addedToSite: filterParamsState.addedToSite,
+				})
+			);
+			window.scrollTo({ top: 0, behavior: "smooth" });
+			return () => {
+				dispatch(setForSale([]));
+				dispatch(resetStatus());
 			};
-			handleForSale();
 		}
-	}, [page, filterParamsState]);
+	}, [page, filterParamsState, dispatch]);
 
 	const prevPageHandler = () => {
 		setPage(prev => prev - 1);
@@ -78,94 +74,98 @@ const PropertyForSale = () => {
 	};
 	return (
 		<Box sx={{ display: "flex", flexDirection: "column" }}>
-			<Box
-				sx={{
-					display: "flex",
-					backgroundColor: "#E9E9EB",
-					width: "100%",
-					flexDirection: "row",
-				}}
-			>
-				<Box flex={3}>
-					<Input />
-				</Box>
-				<Box flex={9}>
-					<FilterNav filterParamsState={filterParamsState} />
-				</Box>
-			</Box>
+			{forSaleStatus === "loading" && <p>Loading....</p>}
+			{forSaleStatus === "failed" && <p>Error:{forSaleError}</p>}
+			{forSaleStatus === "succeeded" && (
+				<>
+					<Box
+						sx={{
+							display: "flex",
+							backgroundColor: "#E9E9EB",
+							width: "100%",
+							flexDirection: "row",
+						}}
+					>
+						<Box flex={3}>
+							<Input />
+						</Box>
+						<Box flex={9}>
+							<FilterNav filterParamsState={filterParamsState} />
+						</Box>
+					</Box>
 
-			<Box sx={{ backgroundColor: "#E9E9EB", padding: "1rem  0 0 4rem" }}>
-				<Typography variant="h6" color="text.secondary">
-					Properties For Sale in {identifierState.displayName}
-				</Typography>
-			</Box>
+					<Box sx={{ backgroundColor: "#E9E9EB", padding: "1rem  0 0 4rem" }}>
+						<Typography variant="h6" color="text.secondary">
+							Properties For Sale in {identifierState.displayName}
+						</Typography>
+					</Box>
 
-			<Grid
-				container
-				sx={{ backgroundColor: "#E9E9EB", alignItems: "flex-start" }}
-			>
-				{forSaleData && (
 					<Grid
 						container
-						item
-						gap={3}
-						sx={{
-							justifyContent: "center",
-							padding: "2rem 0 2rem 0",
-						}}
-						flex={1}
+						sx={{ backgroundColor: "#E9E9EB", alignItems: "flex-start" }}
 					>
-						{forSaleData.map(item => (
-							<CardProduct
-								key={item.id}
-								images={item.propertyImages.images}
-								displayAddress={item.displayAddress}
-								summary={item.summary}
-								propertySubType={item.propertySubType}
-								bedrooms={item.bedrooms}
-								bathrooms={item.bathrooms}
-								displayPrice={item.price.displayPrices[0].displayPrice}
-								customerImage={item.customer.brandPlusLogoUrl}
-								contactNo={item.customer.contactTelephone}
-							/>
-						))}
-						<PaginationMui
-							prevPageHandler={prevPageHandler}
-							nextPageHandler={nextPageHandler}
-							page={page}
-							handlePageChange={handlePageChange}
-						/>
-					</Grid>
-				)}
-
-				<Grid
-					container
-					item
-					gap={2}
-					sx={{
-						width: 300,
-						display: {
-							md: "none",
-							lg: "flex",
-						},
-						justifyContent: "center",
-						alignItems: "center",
-						padding: "2rem 1rem",
-					}}
-				>
-					<Grid item>
-						<Button
-							size="small"
-							sx={{ textTransform: "none" }}
-							variant="outlined"
-							color="success"
-							disableRipple
+						<Grid
+							container
+							item
+							gap={3}
+							sx={{
+								justifyContent: "center",
+								padding: "2rem 0 2rem 0",
+							}}
+							flex={1}
 						>
-							Properties to rent in {identifierState.displayName}
-						</Button>
+							{forSaleData.map(item => (
+								<CardProduct
+									key={item.id}
+									images={item.propertyImages.images}
+									displayAddress={item.displayAddress}
+									summary={item.summary}
+									propertySubType={item.propertySubType}
+									bedrooms={item.bedrooms}
+									bathrooms={item.bathrooms}
+									displayPrice={item.price.displayPrices[0].displayPrice}
+									customerImage={item.customer.brandPlusLogoUrl}
+									contactNo={item.customer.contactTelephone}
+								/>
+							))}
+							<PaginationMui
+								prevPageHandler={prevPageHandler}
+								nextPageHandler={nextPageHandler}
+								page={page}
+								handlePageChange={handlePageChange}
+							/>
+						</Grid>
+
+						<Grid
+							container
+							item
+							gap={2}
+							sx={{
+								width: 300,
+								display: {
+									md: "none",
+									lg: "flex",
+								},
+								justifyContent: "center",
+								alignItems: "center",
+								padding: "2rem 1rem",
+							}}
+						>
+							<Grid item>
+								<Button
+									size="small"
+									sx={{ textTransform: "none" }}
+									variant="outlined"
+									color="success"
+									disableRipple
+								>
+									Properties to rent in {identifierState.displayName}
+								</Button>
+							</Grid>
+						</Grid>
 					</Grid>
-				</Grid>
-			</Grid>
+				</>
+			)}
 		</Box>
 	);
 };

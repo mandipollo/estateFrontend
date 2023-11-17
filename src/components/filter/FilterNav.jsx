@@ -36,7 +36,7 @@ const FilterNav = ({ filterParamsState }) => {
 		propertyType: filterParamsState.propertyType || "any",
 		addedToSite: filterParamsState.addedToSite || "",
 	});
-	console.log(allValues);
+
 	const handleChange = e => {
 		setAllValues(prev => {
 			return { ...prev, [e.target.name]: e.target.value };
@@ -45,7 +45,7 @@ const FilterNav = ({ filterParamsState }) => {
 
 	useEffect(() => {
 		if (isMount) {
-			console.log("initial render filter");
+			return;
 		} else {
 			dispatch(setFilterParams(allValues));
 		}
@@ -111,7 +111,7 @@ const FilterNav = ({ filterParamsState }) => {
 			<Grid item xs>
 				<FormControl fullWidth>
 					<Select
-						name="minRooms"
+						name="minBedrooms"
 						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
 						value={allValues.minBedrooms}
 						onChange={handleChange}
@@ -129,7 +129,7 @@ const FilterNav = ({ filterParamsState }) => {
 			<Grid item xs>
 				<FormControl fullWidth>
 					<Select
-						name="maxRooms"
+						name="maxBedrooms"
 						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
 						value={allValues.maxBedrooms}
 						onChange={handleChange}
@@ -148,7 +148,7 @@ const FilterNav = ({ filterParamsState }) => {
 			<Grid item xs>
 				<FormControl fullWidth>
 					<Select
-						name="type"
+						name="propertyType"
 						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
 						value={allValues.propertyType}
 						onChange={handleChange}
@@ -167,7 +167,7 @@ const FilterNav = ({ filterParamsState }) => {
 			<Grid item xs paddingRight={2}>
 				<FormControl fullWidth>
 					<Select
-						name="time"
+						name="addedToSite"
 						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
 						value={allValues.addedToSite}
 						onChange={handleChange}

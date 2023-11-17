@@ -7,11 +7,6 @@ const StyledTextfield = styled(TextField)(({ theme }) => ({
 	[theme.breakpoints.up("sm")]: {
 		width: 550,
 	},
-	borderRadius: 2,
-	margin: 1,
-	"& .MuiInputBase-input": {
-		padding: "14px 3px 6px 20px",
-	},
 }));
 
 export default StyledTextfield;

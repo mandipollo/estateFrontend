@@ -200,16 +200,35 @@ export const filterPropertyType = [
 		propertyValue: "any",
 	},
 	{
-		propertyName: "Houses",
-		propertyValue: "houses",
+		propertyName: "Detached",
+		propertyValue: "Detached",
 	},
 	{
-		propertyName: "Flat/partment",
-		propertyValue: "flat",
+		propertyName: "SemiDetached",
+		propertyValue: "SemiDetached",
+	},
+	{
+		propertyName: "Flat/apartment",
+		propertyValue: "Flat",
 	},
 	{
 		propertyName: "Bungalows",
-		propertyValue: "bungalows",
+		propertyValue: "Bungalows",
+	},
+
+	{
+		propertyName: "Land",
+		propertyValue: "Land",
+	},
+
+	{
+		propertyName: "Terraced",
+		propertyValue: "Terraced",
+	},
+
+	{
+		propertyName: "Parkhome",
+		propertyValue: "Parkhome",
 	},
 ];
 
