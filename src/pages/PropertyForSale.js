@@ -21,7 +21,7 @@ const PropertyForSale = () => {
 
 	const initialPage = parseInt(localStorage.getItem("page")) || 1;
 	const [page, setPage] = useState(initialPage);
-
+	console.log(page);
 	const handlePageChange = (event, value) => {
 		setPage(value);
 	};
@@ -30,12 +30,15 @@ const PropertyForSale = () => {
 	const forSaleError = useSelector(state => state.forSale.error);
 	const identifierState = useSelector(state => state.identifier);
 	const filterParamsState = useSelector(state => state.filter);
-	console.log(filterParamsState);
+
+	console.log(forSaleData);
 	// save page on localStorage
 
 	useEffect(() => {
+		if (isMount) return;
 		localStorage.setItem("page", page.toString());
 	}, [page]);
+
 	// useEffect for page change
 	useEffect(() => {
 		// skip initial effect
@@ -59,11 +62,12 @@ const PropertyForSale = () => {
 			);
 			window.scrollTo({ top: 0, behavior: "smooth" });
 			return () => {
+				console.log("component unmounts");
 				dispatch(setForSale([]));
 				dispatch(resetStatus());
 			};
 		}
-	}, [page, filterParamsState, dispatch]);
+	}, [page, filterParamsState]);
 
 	const prevPageHandler = () => {
 		setPage(prev => prev - 1);

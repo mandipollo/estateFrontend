@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
@@ -31,6 +31,10 @@ import {
 const Filter = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		localStorage.setItem("page", "1");
+	}, []);
 	// retrieve location identifier from the redux store
 	const locationIdentifier = useSelector(
 		state => state.identifier.locationIdentifier
