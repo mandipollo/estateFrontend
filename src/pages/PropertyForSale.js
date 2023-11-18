@@ -7,7 +7,7 @@ import { Box, Typography, Grid, Input, Button } from "@mui/material";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { setForSale, fetchForSale, resetStatus } from "../store/forSale";
-import { setFilterParams } from "../store/filterParams";
+
 // components
 import FilterNav from "../components/filter/FilterNav";
 import PaginationMui from "../components/pagination/Pagination";
@@ -32,10 +32,18 @@ const PropertyForSale = () => {
 	const filterParamsState = useSelector(state => state.filter);
 
 	console.log(forSaleData);
+
+	// reset page when params change
+
+	useEffect(() => {
+		if (isMount) return;
+		setPage(1);
+	}, [filterParamsState]);
 	// save page on localStorage
 
 	useEffect(() => {
 		if (isMount) return;
+
 		localStorage.setItem("page", page.toString());
 	}, [page]);
 

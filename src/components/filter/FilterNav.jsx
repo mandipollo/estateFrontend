@@ -50,6 +50,7 @@ const FilterNav = ({ filterParamsState }) => {
 			dispatch(setFilterParams(allValues));
 		}
 	}, [allValues]);
+
 	return (
 		<Grid container spacing={1} sx={{ margin: 0 }}>
 			<Grid item xs>
