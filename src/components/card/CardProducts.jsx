@@ -8,6 +8,7 @@ import {
 	CardActions,
 	Button,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
 
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -18,6 +19,7 @@ import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutl
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 
 const CardProduct = ({
+	propertyId,
 	images,
 	displayAddress,
 	propertySubType,
@@ -33,6 +35,7 @@ const CardProduct = ({
 			<Box sx={{ flex: 6 }}>
 				<Box height={220}>
 					<Carousel
+						animation="slide"
 						IndicatorIcon={false}
 						navButtonsAlwaysVisible={true}
 						fullHeightHover={true}
@@ -54,7 +57,6 @@ const CardProduct = ({
 									key={index}
 									component="img"
 									height={220}
-									loading="lazy"
 									image={item.srcUrl}
 									alt="property image"
 									sx={{ objectFit: "cover" }}
@@ -75,34 +77,39 @@ const CardProduct = ({
 				</Box>
 			</Box>
 			<Box sx={{ display: "flex", flex: 6, flexDirection: "column", gap: 1 }}>
-				<CardActionArea disableRipple sx={{ flex: 9 }}>
-					<CardContent
-						sx={{
-							display: "flex",
-							flexDirection: "column",
-							flex: 6,
-						}}
-					>
-						<Typography variant="body1">{displayAddress}</Typography>
-						<Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
-							<Typography variant="body2" color="text.secondary">
-								{propertySubType}
-							</Typography>
-							<BedOutlinedIcon fontSize="small" />
-							<Typography variant="body2" color="text.secondary">
-								{bedrooms}
-							</Typography>
-							<BathroomOutlinedIcon fontSize="small" />
-							<Typography variant="body2" color="text.secondary">
-								{bathrooms}
-							</Typography>
-						</Box>
+				<Link
+					style={{ textDecoration: "none", color: "black" }}
+					to={`/propertyDetail/${propertyId}`}
+				>
+					<CardActionArea disableRipple sx={{ flex: 9 }}>
+						<CardContent
+							sx={{
+								display: "flex",
+								flexDirection: "column",
+								flex: 6,
+							}}
+						>
+							<Typography variant="body1">{displayAddress}</Typography>
+							<Box sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
+								<Typography variant="body2" color="text.secondary">
+									{propertySubType}
+								</Typography>
+								<BedOutlinedIcon fontSize="small" />
+								<Typography variant="body2" color="text.secondary">
+									{bedrooms}
+								</Typography>
+								<BathroomOutlinedIcon fontSize="small" />
+								<Typography variant="body2" color="text.secondary">
+									{bathrooms}
+								</Typography>
+							</Box>
 
-						<Typography gutterBottom variant="body2" color="text.secondary">
-							{summary}
-						</Typography>
-					</CardContent>
-				</CardActionArea>
+							<Typography gutterBottom variant="body2" color="text.secondary">
+								{summary}
+							</Typography>
+						</CardContent>
+					</CardActionArea>
+				</Link>
 				<Box
 					sx={{
 						display: "flex",

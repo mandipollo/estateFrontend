@@ -14,7 +14,6 @@ const PaginationMui = ({
 	nextPageHandler,
 }) => {
 	const results = useSelector(state => state.forSale);
-	console.log(results);
 	const numberOfPages = Math.ceil(
 		results.data.totalResultCount / results.data.resultsPerPage
 	);

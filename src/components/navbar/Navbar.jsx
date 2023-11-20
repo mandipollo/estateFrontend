@@ -52,11 +52,10 @@ const Navbar = () => {
 			<AppBar
 				position="sticky"
 				sx={{
-					display: "flex",
 					height: "4rem",
 				}}
 			>
-				<Container maxWidth="xl">
+				<Container sx={{ maxWidth: "80em" }}>
 					<Toolbar disableGutters>
 						{/* medium screen */}
 						<StyledBox propsm="none" propmd="flex" propflex="2">

@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 // redux
-import { setForSale } from "../../store/forSale";
+import { setForSale, fetchForSale } from "../../store/forSale";
 import { setFilterParams } from "../../store/filterParams";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -60,28 +60,37 @@ const Filter = () => {
 
 	// fetch property sale data from backend , can pass params for filtering
 	const handleForSale = async () => {
-		try {
-			const response = await axios.get("http://localhost:5003/forSale", {
-				params: {
-					regionIdentifier: locationIdentifier,
-					searchRadius: allValues.radius,
-					minPrice: allValues.minPrice,
-					maxPrice: allValues.maxPrice,
-					minBedrooms: allValues.minBedrooms,
-					maxBedrooms: allValues.maxBedrooms,
-					propertyType: allValues.propertyType,
-					addedToSite: allValues.addedToSite,
-				},
-			});
+		// try {
+		// 	const response = await axios.get("http://localhost:5003/forSale", {
+		// 		params: {
+		// 			regionIdentifier: locationIdentifier,
+		// 			searchRadius: allValues.radius,
+		// 			minPrice: allValues.minPrice,
+		// 			maxPrice: allValues.maxPrice,
+		// 			minBedrooms: allValues.minBedrooms,
+		// 			maxBedrooms: allValues.maxBedrooms,
+		// 			propertyType: allValues.propertyType,
+		// 			addedToSite: allValues.addedToSite,
+		// 		},
+		// 	});
 
-			const data = response.data;
+		// 	const data = response.data;
 
-			dispatch(setForSale(data));
-			dispatch(setFilterParams(allValues));
-			navigate("/propertyForSale");
-		} catch (error) {
-			console.log(error);
-		}
+		dispatch(
+			fetchForSale({
+				regionIdentifier: locationIdentifier,
+				searchRadius: allValues.radius,
+				minPrice: allValues.minPrice,
+				maxPrice: allValues.maxPrice,
+				minBedrooms: allValues.minBedrooms,
+				maxBedrooms: allValues.maxBedrooms,
+				propertyType: allValues.propertyType,
+				addedToSite: allValues.addedToSite,
+			})
+		);
+
+		dispatch(setFilterParams(allValues));
+		navigate("/propertyForSale");
 	};
 	return (
 		<Grid container spacing={2} padding="20px 0 20px 0">

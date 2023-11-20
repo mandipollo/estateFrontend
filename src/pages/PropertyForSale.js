@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { Box, Typography, Grid, Input, Button } from "@mui/material";
@@ -27,6 +27,7 @@ const PropertyForSale = () => {
 	};
 	const forSaleData = useSelector(state => state.forSale.data.data);
 	const forSaleStatus = useSelector(state => state.forSale.status);
+	console.log(forSaleStatus);
 	const forSaleError = useSelector(state => state.forSale.error);
 	const identifierState = useSelector(state => state.identifier);
 	const filterParamsState = useSelector(state => state.filter);
@@ -71,7 +72,7 @@ const PropertyForSale = () => {
 			window.scrollTo({ top: 0, behavior: "smooth" });
 			return () => {
 				console.log("component unmounts");
-				dispatch(setForSale([]));
+
 				dispatch(resetStatus());
 			};
 		}
@@ -84,51 +85,51 @@ const PropertyForSale = () => {
 	const nextPageHandler = () => {
 		setPage(prev => prev + 1);
 	};
+
 	return (
 		<Box sx={{ display: "flex", flexDirection: "column" }}>
-			{forSaleStatus === "loading" && <p>Loading....</p>}
-			{forSaleStatus === "failed" && <p>Error:{forSaleError}</p>}
-			{forSaleStatus === "succeeded" && (
-				<>
-					<Box
-						sx={{
-							display: "flex",
-							backgroundColor: "#E9E9EB",
-							width: "100%",
-							flexDirection: "row",
-						}}
-					>
-						<Box flex={3}>
-							<Input />
-						</Box>
-						<Box flex={9}>
-							<FilterNav filterParamsState={filterParamsState} />
-						</Box>
-					</Box>
-
-					<Box sx={{ backgroundColor: "#E9E9EB", padding: "1rem  0 0 4rem" }}>
-						<Typography variant="h6" color="text.secondary">
-							Properties For Sale in {identifierState.displayName}
-						</Typography>
-					</Box>
-
-					<Grid
-						container
-						sx={{ backgroundColor: "#E9E9EB", alignItems: "flex-start" }}
-					>
-						<Grid
-							container
-							item
-							gap={3}
-							sx={{
-								justifyContent: "center",
-								padding: "2rem 0 2rem 0",
-							}}
-							flex={1}
-						>
+			<Box
+				sx={{
+					display: "flex",
+					backgroundColor: "#E9E9EB",
+					width: "100%",
+					flexDirection: "row",
+				}}
+			>
+				<Box flex={3}>
+					<Input />
+				</Box>
+				<Box flex={9}>
+					<FilterNav filterParamsState={filterParamsState} />
+				</Box>
+			</Box>
+			<Box sx={{ backgroundColor: "#E9E9EB", padding: "1rem  0 0 4rem" }}>
+				<Typography variant="h6" color="text.secondary">
+					Properties For Sale in {identifierState.displayName}
+				</Typography>
+			</Box>
+			<Grid
+				container
+				sx={{ backgroundColor: "#E9E9EB", alignItems: "flex-start" }}
+			>
+				<Grid
+					container
+					item
+					gap={3}
+					sx={{
+						justifyContent: "center",
+						padding: "2rem 0 2rem 0",
+					}}
+					flex={1}
+				>
+					{forSaleStatus === "loading" && <p>Loading....</p>}
+					{forSaleStatus === "failed" && <p>Error:{forSaleError}</p>}
+					{forSaleStatus === "succeeded" && (
+						<>
 							{forSaleData.map(item => (
 								<CardProduct
 									key={item.id}
+									propertyId={item.id}
 									images={item.propertyImages.images}
 									displayAddress={item.displayAddress}
 									summary={item.summary}
@@ -146,38 +147,38 @@ const PropertyForSale = () => {
 								page={page}
 								handlePageChange={handlePageChange}
 							/>
-						</Grid>
+						</>
+					)}
+				</Grid>
 
-						<Grid
-							container
-							item
-							gap={2}
-							sx={{
-								width: 300,
-								display: {
-									md: "none",
-									lg: "flex",
-								},
-								justifyContent: "center",
-								alignItems: "center",
-								padding: "2rem 1rem",
-							}}
+				<Grid
+					container
+					item
+					gap={2}
+					sx={{
+						width: 300,
+						display: {
+							md: "none",
+							lg: "flex",
+						},
+						justifyContent: "center",
+						alignItems: "center",
+						padding: "2rem 1rem",
+					}}
+				>
+					<Grid item>
+						<Button
+							size="small"
+							sx={{ textTransform: "none" }}
+							variant="outlined"
+							color="success"
+							disableRipple
 						>
-							<Grid item>
-								<Button
-									size="small"
-									sx={{ textTransform: "none" }}
-									variant="outlined"
-									color="success"
-									disableRipple
-								>
-									Properties to rent in {identifierState.displayName}
-								</Button>
-							</Grid>
-						</Grid>
+							Properties to rent in {identifierState.displayName}
+						</Button>
 					</Grid>
-				</>
-			)}
+				</Grid>
+			</Grid>
 		</Box>
 	);
 };
