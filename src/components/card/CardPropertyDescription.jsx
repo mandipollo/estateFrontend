@@ -47,7 +47,6 @@ const CardPropertyDescription = ({ data }) => {
 					</Grid>
 				</Grid>
 			</StyledBox>
-			<Grid container></Grid>
 		</>
 	);
 };

@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import StyledBox from "../components/styledComponents/StyledBox";
 import CarousalImage from "../components/carousal/CarousalImage";
 import CardPropertyDescription from "../components/card/CardPropertyDescription";
+import CardMortgageCalculator from "../components/card/CardMortgageCalculator";
 
 const PropertyDetail = () => {
 	const { propertyId } = useParams();
@@ -46,7 +47,7 @@ const PropertyDetail = () => {
 				>
 					{data && (
 						<>
-							<Box sx={{ width: "80%" }}>
+							<StyledBox width="80%" flexDirection="column" gap={2}>
 								<Box width="100%" alignItems="flex-start" padding="1em 0">
 									<Button
 										disableRipple
@@ -67,10 +68,21 @@ const PropertyDetail = () => {
 								</StyledBox>
 								<CardPropertyDescription data={data} />
 
-								<StyledBox width="100%">
+								<StyledBox
+									width="100%"
+									borderBottom="1px solid rgba(0, 0, 0, 0.2)"
+									borderTop="1px solid rgba(0, 0, 0, 0.2)"
+									padding="1em 0"
+								>
 									<Grid container flexDirection="row">
 										{data.data.infoReelItems.map((item, index) => (
-											<Grid container flexDirection="column" item xs={3}>
+											<Grid
+												key={index}
+												container
+												flexDirection="column"
+												item
+												xs={3}
+											>
 												<Grid item>
 													<Typography variant="body1" fontWeight={100}>
 														{item.title}
@@ -89,11 +101,48 @@ const PropertyDetail = () => {
 										))}
 									</Grid>
 								</StyledBox>
-							</Box>
+
+								<StyledBox flexDirection="column">
+									<Typography variant="h6">Key features</Typography>
+									<Grid container gap={1}>
+										{data.data.keyFeatures.map((item, index) => (
+											<Grid key={index} xs={5} item>
+												<Typography variant="body2" fontWeight={100}>
+													{item}
+												</Typography>
+											</Grid>
+										))}
+									</Grid>
+								</StyledBox>
+								<StyledBox flexDirection="column">
+									<Typography variant="h6">Property description</Typography>
+									<Typography
+										variant="body2"
+										fontWeight={400}
+										style={{ whiteSpace: "pre-line" }}
+										dangerouslySetInnerHTML={{
+											__html: data.data.text.description,
+										}}
+									/>
+								</StyledBox>
+								<StyledBox flexDirection="column" gap={1}>
+									<Typography variant="h6">
+										{data.data.address.displayAddress}
+									</Typography>
+									<Box>
+										<img
+											src={
+												data.data.staticMapImgUrls.staticMapImgUrlDesktopLarge
+											}
+										></img>
+									</Box>
+								</StyledBox>
+								<CardMortgageCalculator />
+							</StyledBox>
 						</>
 					)}
 				</Grid>
-				<Grid container xs={2}>
+				<Grid container item xs={2}>
 					<Grid item>
 						<Typography>side bar</Typography>
 					</Grid>
