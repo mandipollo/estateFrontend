@@ -2,10 +2,11 @@ import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 
-const CircularPercentage = ({ percentage }) => {
+const CircularPercentage = ({ percentage, percentageHandler }) => {
 	return (
 		<div style={{ position: "relative", display: "inline-block" }}>
 			<CircularProgress
+				onChange={percentageHandler}
 				variant="determinate"
 				value={percentage}
 				color="success"

@@ -1,10 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import { Grid, Typography, TextField, CircularProgress } from "@mui/material";
+import { Grid, Typography, TextField, InputAdornment } from "@mui/material";
 import CircularPercentage from "../CircularWithLabel";
 
-const CardMortgageCalculator = () => {
+const CardMortgageCalculator = ({ propertyPrice }) => {
+	const [deposit, setDeposit] = useState(propertyPrice * 0.1);
+	const [annualInterest, setAnnualInterest] = useState(6.1);
+	const [repaymentYears, setRepaymentYears] = useState(25);
+
 	const [depositPercentage, setDepositPercentage] = useState(10);
+
+	const [monthlyRepayments, setMonthlyrepayments] = useState(null);
+
+	const percentageHandler = () => {
+		setDepositPercentage(Math.round((deposit / propertyPrice) * 100));
+	};
+
+	const monthlyRepaymentsHandler = () => {
+		const principal = propertyPrice - deposit;
+		const totalPayments = 12 * repaymentYears;
+		const monthlyInterestRate = annualInterest / 100 / 12;
+		const monthlyRepayments = Math.round(
+			(principal *
+				(monthlyInterestRate *
+					Math.pow(1 + monthlyInterestRate, totalPayments))) /
+				(Math.pow(1 + monthlyInterestRate, totalPayments) - 1)
+		);
+
+		setMonthlyrepayments(monthlyRepayments);
+	};
+
+	useEffect(() => {
+		monthlyRepaymentsHandler();
+	}, [deposit, repaymentYears, annualInterest]);
+
+	useEffect(() => {
+		percentageHandler();
+	}, [deposit]);
 	return (
 		<Grid
 			container
@@ -29,7 +61,15 @@ const CardMortgageCalculator = () => {
 				</Typography>
 			</Grid>
 			<Grid xs={12} item margin="0 2rem">
-				<TextField variant="outlined" color="success" fullWidth></TextField>
+				<TextField
+					value={propertyPrice}
+					variant="outlined"
+					color="success"
+					fullWidth
+					InputProps={{
+						startAdornment: <InputAdornment position="start">£</InputAdornment>,
+					}}
+				></TextField>
 			</Grid>
 			<Grid item xs={12} margin="0 2rem">
 				<Typography variant="body1" fontWeight={100}>
@@ -44,10 +84,26 @@ const CardMortgageCalculator = () => {
 				justifyContent="space-between"
 			>
 				<Grid item xs={5.5}>
-					<TextField variant="outlined" color="success" fullWidth></TextField>
+					<TextField
+						value={deposit}
+						onChange={e => {
+							setDeposit(e.target.value);
+						}}
+						variant="outlined"
+						color="success"
+						fullWidth
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">£</InputAdornment>
+							),
+						}}
+					></TextField>
 				</Grid>
 				<Grid container item xs={5.5} alignItems="center" gap={2}>
-					<CircularPercentage percentage={20} />
+					<CircularPercentage
+						percentage={depositPercentage}
+						percentageHandler={percentageHandler}
+					/>
 					<Typography variant="body2" fontWeight={100} color="green">
 						Lenders may expect more than a 10% deposit
 					</Typography>
@@ -79,10 +135,46 @@ const CardMortgageCalculator = () => {
 				justifyContent="space-between"
 			>
 				<Grid item xs={5.5}>
-					<TextField variant="outlined" color="success" fullWidth></TextField>
+					<TextField
+						value={annualInterest}
+						onChange={e => {
+							setAnnualInterest(e.target.value);
+						}}
+						variant="outlined"
+						color="success"
+						fullWidth
+						InputProps={{
+							endAdornment: (
+								<InputAdornment
+									sx={{ position: "absolute", left: 35 }}
+									position="end"
+								>
+									%
+								</InputAdornment>
+							),
+						}}
+					></TextField>
 				</Grid>
 				<Grid container item xs={5.5} alignItems="center" gap={2}>
-					<TextField variant="outlined" color="success" fullWidth></TextField>
+					<TextField
+						value={repaymentYears}
+						onChange={e => {
+							setRepaymentYears(e.target.value);
+						}}
+						variant="outlined"
+						color="success"
+						fullWidth
+						InputProps={{
+							endAdornment: (
+								<InputAdornment
+									sx={{ position: "absolute", left: 35 }}
+									position="end"
+								>
+									Years
+								</InputAdornment>
+							),
+						}}
+					></TextField>
 				</Grid>
 			</Grid>
 			<Grid
@@ -99,7 +191,7 @@ const CardMortgageCalculator = () => {
 					Monthly repayments:
 				</Typography>
 				<Typography variant="h4" fontWeight={100}>
-					£32,000
+					£{monthlyRepayments}
 				</Typography>
 			</Grid>
 		</Grid>

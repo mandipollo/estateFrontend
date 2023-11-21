@@ -137,7 +137,9 @@ const PropertyDetail = () => {
 										></img>
 									</Box>
 								</StyledBox>
-								<CardMortgageCalculator />
+								<CardMortgageCalculator
+									propertyPrice={data.data.mortgageCalculator.price}
+								/>
 							</StyledBox>
 						</>
 					)}
