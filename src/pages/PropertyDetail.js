@@ -15,11 +15,13 @@ import StyledBox from "../components/styledComponents/StyledBox";
 import CarousalImage from "../components/carousal/CarousalImage";
 import CardPropertyDescription from "../components/card/CardPropertyDescription";
 import CardMortgageCalculator from "../components/card/CardMortgageCalculator";
+import CardSimiliarProp from "../components/card/CardSimiliarProp";
 
 const PropertyDetail = () => {
 	const { propertyId } = useParams();
 
 	const [data, setData] = useState("");
+
 	console.log(data);
 	useEffect(() => {
 		const fetchData = async () => {
@@ -32,10 +34,10 @@ const PropertyDetail = () => {
 			setData(data);
 		};
 		fetchData();
-	}, []);
+	}, [propertyId]);
 
 	return (
-		<StyledBox flexdirection="column" width="100%" alignItems="center" gap={2}>
+		<StyledBox display="flex" flexDirection="column" width="100%" gap={2}>
 			<Grid container>
 				<Grid
 					flex={1}
@@ -150,6 +152,16 @@ const PropertyDetail = () => {
 					</Grid>
 				</Grid>
 			</Grid>
+
+			<StyledBox
+				flexDirection="column"
+				marginLeft={15}
+				gap={2}
+				borderTop="1px solid rgba(0,0,0,0.2)"
+			>
+				<Typography variant="h6">Similiar to this property</Typography>
+				<CardSimiliarProp propertyId={propertyId} />
+			</StyledBox>
 		</StyledBox>
 	);
 };

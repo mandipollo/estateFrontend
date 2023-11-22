@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Grid, Typography, TextField, InputAdornment } from "@mui/material";
 import CircularPercentage from "../CircularWithLabel";
+import NumberAnimation from "../utilities/NumberAnimation";
 
 const CardMortgageCalculator = ({ propertyPrice }) => {
 	const [deposit, setDeposit] = useState(propertyPrice * 0.1);
@@ -53,7 +54,9 @@ const CardMortgageCalculator = ({ propertyPrice }) => {
 				margin="0 2rem"
 				padding="1rem 0"
 			>
-				<Typography variant="body1">Estate mortgage calculator</Typography>
+				<Typography variant="body1">
+					Estate mortgage repayment calculator
+				</Typography>
 			</Grid>
 			<Grid item xs={12} margin="0 2rem">
 				<Typography variant="body1" fontWeight={100}>
@@ -186,12 +189,32 @@ const CardMortgageCalculator = ({ propertyPrice }) => {
 				display="flex"
 				padding="1rem 0"
 				gap={1}
+				sx={{ backgroundColor: "#F4F4F5" }}
 			>
 				<Typography variant="body1" fontWeight={100}>
 					Monthly repayments:
 				</Typography>
-				<Typography variant="h4" fontWeight={100}>
-					£{monthlyRepayments}
+				<Typography variant="h4" fontWeight={100} display="flex">
+					£<NumberAnimation initN={0} n={monthlyRepayments} />
+				</Typography>
+			</Grid>
+			<Grid
+				item
+				xs={12}
+				margin="0 2rem"
+				display="flex"
+				padding="1rem 0"
+				gap={1}
+				sx={{ backgroundColor: "#F4F4F5" }}
+			>
+				<Typography variant="body2" fontWeight={100}>
+					These results are for a repayment mortgage and are only intended as a
+					guide. Make sure you obtain accurate figures from your lender before
+					committing to any mortgage.Your home may be repossessed if you do not
+					keep up repayments on a mortgage.
+					<br />
+					It's up to you if you choose a lender, to suit your mortgage needs and
+					circumstances.
 				</Typography>
 			</Grid>
 		</Grid>
