@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import CardHomeSection from "../components/sections/home/CardHomeSection";
 import CardHomeLink from "../components/sections/home/CardHomeLink";
 import Search from "../components/search/Search";
+import CardUser from "../components/card/CardUser";
 
 const Homepage = () => {
 	return (
@@ -110,6 +111,7 @@ const Homepage = () => {
 					</Box>
 				</section>
 				<section>
+					<CardUser />
 					<CardHomeSection />
 				</section>
 				<section>

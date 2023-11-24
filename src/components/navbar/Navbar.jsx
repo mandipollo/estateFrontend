@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import DrawerNavbar from "./DrawerNavbar";
+import DrawerNavbar from "../carousal/DrawerNavbar";
 
 import {
 	AppBar,
@@ -8,8 +8,6 @@ import {
 	Toolbar,
 	Typography,
 	IconButton,
-	Menu,
-	MenuItem,
 } from "@mui/material";
 
 //icons
@@ -39,15 +37,6 @@ const pages = [
 	},
 ];
 const Navbar = () => {
-	const [anchorNavEl, setAnchorNavEl] = useState(null);
-
-	const handleOpenNavMenu = event => {
-		setAnchorNavEl(event.currentTarget);
-	};
-
-	const handleCloseNavMenu = () => {
-		setAnchorNavEl(null);
-	};
 	return (
 		<header>
 			<AppBar
