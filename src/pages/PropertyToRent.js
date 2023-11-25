@@ -6,16 +6,17 @@ import { Box, Typography, Grid, Input, Button } from "@mui/material";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { fetchForSale, resetStatus } from "../store/forSale";
 
+import { fetchForRent, resetStatus } from "../store/forRent";
 // components
 import FilterNav from "../components/filter/FilterNav";
 import PaginationMui from "../components/pagination/Pagination";
 import CardProduct from "../components/card/CardProducts";
 // hooks
 import useIsMount from "../components/utilities/useIsMount";
+import CardProductRent from "../components/card/CardProducsRent";
 
-const PropertyForSale = () => {
+const PropertyToRent = () => {
 	const dispatch = useDispatch();
 	const isMount = useIsMount();
 
@@ -25,10 +26,11 @@ const PropertyForSale = () => {
 	const handlePageChange = (event, value) => {
 		setPage(value);
 	};
-	const forSaleData = useSelector(state => state.forSale.data.data);
-	const forSaleStatus = useSelector(state => state.forSale.status);
-	console.log(forSaleStatus);
-	const forSaleError = useSelector(state => state.forSale.error);
+	const forRentData = useSelector(state => state.forRent.data.data);
+	console.log(forRentData);
+	const forRentStatus = useSelector(state => state.forRent.status);
+	console.log(forRentStatus);
+	const forRentError = useSelector(state => state.forRent.error);
 	const identifierState = useSelector(state => state.identifier);
 	const filterParamsState = useSelector(state => state.filter);
 
@@ -55,7 +57,7 @@ const PropertyForSale = () => {
 			// effect when page changes
 
 			dispatch(
-				fetchForSale({
+				fetchForRent({
 					regionIdentifier: identifierState.locationIdentifier,
 					page: page,
 					searchRadius: filterParamsState.radius,
@@ -103,7 +105,7 @@ const PropertyForSale = () => {
 			</Box>
 			<Box sx={{ padding: "1rem  0 0 4rem" }}>
 				<Typography variant="h6" color="text.secondary">
-					Properties For Sale in {identifierState.displayName}
+					Properties to Rent in {identifierState.displayName}
 				</Typography>
 			</Box>
 			<Grid container sx={{ alignItems: "flex-start" }}>
@@ -117,12 +119,12 @@ const PropertyForSale = () => {
 					}}
 					flex={1}
 				>
-					{forSaleStatus === "loading" && <p>Loading....</p>}
-					{forSaleStatus === "failed" && <p>Error:{forSaleError}</p>}
-					{forSaleStatus === "succeeded" && (
+					{forRentStatus === "loading" && <p>Loading....</p>}
+					{forRentStatus === "failed" && <p>Error:{forRentError}</p>}
+					{forRentStatus === "succeeded" && (
 						<>
-							{forSaleData.map(item => (
-								<CardProduct
+							{forRentData.map(item => (
+								<CardProductRent
 									key={item.id}
 									propertyId={item.id}
 									images={item.propertyImages.images}
@@ -169,7 +171,7 @@ const PropertyForSale = () => {
 							color="success"
 							disableRipple
 						>
-							Properties to rent in {identifierState.displayName}
+							Properties for Sale in {identifierState.displayName}
 						</Button>
 					</Grid>
 				</Grid>
@@ -178,4 +180,4 @@ const PropertyForSale = () => {
 	);
 };
 
-export default PropertyForSale;
+export default PropertyToRent;

@@ -6,12 +6,14 @@ import searchInputReducer from "./searchInput";
 import identifierReducer from "./identifier";
 import forSaleReducer from "./forSale";
 import filterReducer from "./filterParams";
+import rentReducer from "./forRent";
 
 const rootReducer = combineReducers({
 	searchInput: searchInputReducer,
 	identifier: identifierReducer,
 	forSale: forSaleReducer,
 	filter: filterReducer,
+	forRent: rentReducer,
 });
 const config = {
 	key: "root",

@@ -16,21 +16,23 @@ import CarousalImage from "../components/carousal/CarousalImage";
 import CardPropertyDescription from "../components/card/CardPropertyDescription";
 import CardMortgageCalculator from "../components/card/CardMortgageCalculator";
 import CardSimiliarProp from "../components/card/CardSimiliarProp";
+import CardPropertyDescriptionRent from "../components/card/CardPropertyDescriptionRent";
 
-const PropertyDetail = () => {
+const PropertyDetailRent = () => {
 	const { propertyId } = useParams();
 
 	const [data, setData] = useState("");
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get("http://localhost:5003/forSaleDetail", {
+			const response = await axios.get("http://localhost:5003/toRentDetail", {
 				params: {
 					id: propertyId,
 				},
 			});
 			const data = response.data;
 			setData(data);
+			console.log(data);
 		};
 		fetchData();
 	}, [propertyId]);
@@ -67,7 +69,41 @@ const PropertyDetail = () => {
 								<StyledBox width="100%" alignItems="flex-start">
 									<CarousalImage data={data} />
 								</StyledBox>
-								<CardPropertyDescription data={data} />
+								<CardPropertyDescriptionRent data={data} />
+
+								<StyledBox
+									padding="1em 0"
+									borderTop="1px solid rgba(0, 0, 0, 0.2)"
+									flexDirection="column"
+								>
+									<Typography variant="h6">Letting details</Typography>
+									<Grid container gap={1}>
+										<Grid xs={3} item>
+											<Typography variant="body2" fontWeight={100}>
+												Deposit:
+											</Typography>
+											<Typography variant="body2" fontWeight={100}>
+												{data.data.lettings.deposit}
+											</Typography>
+										</Grid>
+										<Grid xs={3} item>
+											<Typography variant="body2" fontWeight={100}>
+												Furnish type:
+											</Typography>
+											<Typography variant="body2" fontWeight={100}>
+												{data.data.lettings.furnishType}
+											</Typography>
+										</Grid>
+										<Grid xs={3} item>
+											<Typography variant="body2" fontWeight={100}>
+												Let available date:
+											</Typography>
+											<Typography variant="body2" fontWeight={100}>
+												{data.data.lettings.letAvailableDate}
+											</Typography>
+										</Grid>
+									</Grid>
+								</StyledBox>
 
 								<StyledBox
 									width="100%"
@@ -138,9 +174,6 @@ const PropertyDetail = () => {
 										></img>
 									</Box>
 								</StyledBox>
-								<CardMortgageCalculator
-									propertyPrice={data.data.mortgageCalculator.price}
-								/>
 							</StyledBox>
 						</>
 					)}
@@ -151,20 +184,8 @@ const PropertyDetail = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-
-			<StyledBox
-				flexDirection="column"
-				marginLeft={15}
-				gap={2}
-				borderTop="1px solid rgba(0,0,0,0.2)"
-				borderBottom="1px solid rgba(0,0,0,0.2)"
-				padding={4}
-			>
-				<Typography variant="h6">Similiar to this property</Typography>
-				<CardSimiliarProp propertyId={propertyId} />
-			</StyledBox>
 		</StyledBox>
 	);
 };
 
-export default PropertyDetail;
+export default PropertyDetailRent;

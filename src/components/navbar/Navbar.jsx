@@ -25,7 +25,7 @@ const pages = [
 	{ label: "Buy", link: "forSale" },
 	{
 		label: "Rent",
-		link: "forRent",
+		link: "toRent",
 	},
 	{ label: "House prices", link: "housePrices" },
 	{

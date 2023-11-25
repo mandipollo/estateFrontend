@@ -36,7 +36,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 		return /^\s*$/.test(input);
 	};
 
-	// autocomplete
+	// autocomplete for sale
 
 	useEffect(() => {
 		const timeout = setTimeout(async () => {
@@ -81,6 +81,16 @@ const Search = ({ propXs, propSm, title, description }) => {
 			console.log("search input empty");
 		}
 	};
+
+	const submitHandlerRent = e => {
+		e.preventDefault();
+
+		if (searchInput) {
+			navigate("/filterRent");
+		} else {
+			console.log("search input empty");
+		}
+	};
 	// destructure pathname to conditionally render elements
 	const { pathname } = useLocation();
 
@@ -115,22 +125,25 @@ const Search = ({ propXs, propSm, title, description }) => {
 				/>
 
 				<CardActions sx={{ display: "flex", justifyContent: "center" }}>
-					<Button
-						onClick={submitHandlerSale}
-						sx={{
-							margin: 1,
-							textTransform: "none",
-							color: "black",
-							backgroundColor: "#35A29F",
-						}}
-						size="large"
-						variant="contained"
-					>
-						<Typography>For Sale</Typography>
-					</Button>
+					{pathname !== "/toRent" && (
+						<Button
+							onClick={submitHandlerSale}
+							sx={{
+								margin: 1,
+								textTransform: "none",
+								color: "black",
+								backgroundColor: "#35A29F",
+							}}
+							size="large"
+							variant="contained"
+						>
+							<Typography>For Sale</Typography>
+						</Button>
+					)}
 
 					{pathname !== "/forSale" && (
 						<Button
+							onClick={submitHandlerRent}
 							sx={{
 								margin: 1,
 								textTransform: "none",

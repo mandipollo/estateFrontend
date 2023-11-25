@@ -14,7 +14,6 @@ import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import BathroomOutlinedIcon from "@mui/icons-material/BathroomOutlined";
 const CardSimiliarProp = ({ propertyId }) => {
 	const [propertyData, setPropertyData] = useState("");
-	console.log(propertyData);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -42,6 +41,7 @@ const CardSimiliarProp = ({ propertyId }) => {
 								<Link
 									style={{ textDecoration: "none", color: "black" }}
 									to={`/propertyDetail/${item.id}`}
+									target="_blank"
 								>
 									<CardActionArea>
 										<CardMedia
@@ -64,7 +64,11 @@ const CardSimiliarProp = ({ propertyId }) => {
 											<Box
 												sx={{ display: "flex", flexDirection: "row", gap: 1 }}
 											>
-												<Typography variant="body2" color="text.secondary">
+												<Typography
+													noWrap
+													variant="body2"
+													color="text.secondary"
+												>
 													{item.propertySubType}
 												</Typography>
 												<BedOutlinedIcon fontSize="small" />

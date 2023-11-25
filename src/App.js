@@ -20,7 +20,10 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import PropertyForSale from "./pages/PropertyForSale";
 import PropertyDetail from "./pages/PropertyDetail";
-
+import ToRentPage from "./pages/ToRentPage";
+import FilterRentPage from "./pages/FilterRentPage";
+import PropertyToRent from "./pages/PropertyToRent";
+import PropertyDetailRent from "./pages/PropertyDetailRent";
 let persistor = persistStore(store);
 const route = createBrowserRouter([
 	{
@@ -33,13 +36,24 @@ const route = createBrowserRouter([
 			},
 			{ path: "forSale", element: <ForSale /> },
 			{ path: "filter", element: <FilterPage /> },
+			{ path: "filterRent", element: <FilterRentPage /> },
 			{
 				path: "propertyForSale",
 				element: <PropertyForSale />,
 			},
+			{ path: "propertyToRent", element: <PropertyToRent /> },
 			{
 				path: "propertyDetail/:propertyId",
 				element: <PropertyDetail />,
+			},
+			{
+				path: "propertyDetailRent/:propertyId",
+				element: <PropertyDetailRent />,
+			},
+
+			{
+				path: "toRent",
+				element: <ToRentPage />,
 			},
 		],
 	},

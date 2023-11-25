@@ -14,14 +14,10 @@ const Root = () => {
 				<Navbar />
 			</header>
 			<main>
-				<Box
-					display="flex"
-					flex="1"
-					minHeight="60vh"
-					justifyContent="center"
-					maxWidth="100em"
-				>
-					<Outlet />
+				<Box display="flex" flex="1" minHeight="60vh" justifyContent="center">
+					<Box maxWidth="90em">
+						<Outlet />
+					</Box>
 				</Box>
 			</main>
 

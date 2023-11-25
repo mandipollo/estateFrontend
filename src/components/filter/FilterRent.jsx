@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 // redux
-import { setForSale, fetchForSale } from "../../store/forSale";
+import { fetchForRent } from "../../store/forRent";
 import { setFilterParams } from "../../store/filterParams";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -28,7 +28,8 @@ import {
 	filterPropertyType,
 	filterAddedToSite,
 } from "./filterValues/FilterValues";
-const Filter = () => {
+
+const FilterRent = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -59,9 +60,9 @@ const Filter = () => {
 	};
 
 	// fetch property sale data from backend , can pass params for filtering
-	const handleForSale = async () => {
+	const handleToRent = async () => {
 		dispatch(
-			fetchForSale({
+			fetchForRent({
 				regionIdentifier: locationIdentifier,
 				searchRadius: allValues.radius,
 				minPrice: allValues.minPrice,
@@ -74,7 +75,7 @@ const Filter = () => {
 		);
 
 		dispatch(setFilterParams(allValues));
-		navigate("/propertyForSale");
+		navigate("/propertyToRent");
 	};
 	return (
 		<Grid container spacing={2} padding="20px 0 20px 0">
@@ -240,7 +241,7 @@ const Filter = () => {
 					<Grid item xs={4}></Grid>
 					<Grid item xs>
 						<Button
-							onClick={handleForSale}
+							onClick={handleToRent}
 							fullWidth
 							sx={{
 								textTransform: "none",
@@ -259,4 +260,4 @@ const Filter = () => {
 	);
 };
 
-export default Filter;
+export default FilterRent;
