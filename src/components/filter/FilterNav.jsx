@@ -52,7 +52,7 @@ const FilterNav = ({ filterParamsState }) => {
 	}, [allValues]);
 
 	return (
-		<Grid container spacing={1} sx={{ margin: 0 }}>
+		<Grid container>
 			<Grid item xs>
 				<FormControl fullWidth>
 					<Select
@@ -165,7 +165,7 @@ const FilterNav = ({ filterParamsState }) => {
 				</FormControl>
 			</Grid>
 
-			<Grid item xs paddingRight={2}>
+			<Grid item xs>
 				<FormControl fullWidth>
 					<Select
 						name="addedToSite"

@@ -14,7 +14,10 @@ const CardLink = ({ icon, title, description, link }) => {
 				height: 350,
 				width: 350,
 				border: "none",
-				display: "flex",
+				display: {
+					xs: "none",
+					md: "flex",
+				},
 				m: 2,
 				boxShadow: "none",
 				flexDirection: "column",

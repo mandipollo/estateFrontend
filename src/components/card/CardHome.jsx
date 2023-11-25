@@ -15,7 +15,10 @@ const CardHome = ({ image, title, description, buttonText }) => {
 				height: 420,
 				width: 350,
 				borderRadius: 2,
-				display: "flex",
+				display: {
+					xs: "none",
+					md: "flex",
+				},
 				m: 2,
 				flexDirection: "column",
 				transition: "box-shadow 0.3s ease",
@@ -26,7 +29,7 @@ const CardHome = ({ image, title, description, buttonText }) => {
 		>
 			<CardMedia
 				sx={{ backgroundSize: "cover" }}
-				height="200"
+				height="150"
 				component="img"
 				image={image}
 			></CardMedia>

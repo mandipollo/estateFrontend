@@ -15,7 +15,7 @@ const Root = () => {
 			</header>
 			<main>
 				<Box display="flex" flex="1" minHeight="60vh" justifyContent="center">
-					<Box maxWidth="90em">
+					<Box>
 						<Outlet />
 					</Box>
 				</Box>

@@ -85,22 +85,22 @@ const PropertyForSale = () => {
 	};
 
 	return (
-		<Box sx={{ display: "flex", flexDirection: "column" }}>
-			<Box
+		<Box sx={{ display: "flex", flexDirection: "column", width: "100vw" }}>
+			<Grid
+				container
 				sx={{
 					display: "flex",
-
 					width: "100%",
 					flexDirection: "row",
 				}}
 			>
-				<Box flex={3}>
+				<Grid item xs>
 					<Input />
-				</Box>
-				<Box flex={9}>
+				</Grid>
+				<Grid item xs={9}>
 					<FilterNav filterParamsState={filterParamsState} />
-				</Box>
-			</Box>
+				</Grid>
+			</Grid>
 			<Box sx={{ padding: "1rem  0 0 4rem" }}>
 				<Typography variant="h6" color="text.secondary">
 					Properties For Sale in {identifierState.displayName}
@@ -158,7 +158,6 @@ const PropertyForSale = () => {
 						},
 						justifyContent: "center",
 						alignItems: "center",
-						padding: "2rem 1rem",
 					}}
 				>
 					<Grid item>
