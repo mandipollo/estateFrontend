@@ -1,5 +1,5 @@
 import { Box, Grid, Button, Typography } from "@mui/material";
-
+import { Link } from "react-router-dom";
 // components
 import CardHomeSection from "../components/sections/home/CardHomeSection";
 import CardHomeLink from "../components/sections/home/CardHomeLink";
@@ -24,7 +24,7 @@ const Homepage = () => {
 						},
 						width: "100%",
 						height: "20rem",
-						backgroundImage: `url("https://media.rightmove.co.uk/hero_image.jpeg")`,
+						backgroundImage: `url("https://www.pixel4k.com/wp-content/uploads/2023/08/night-city-long-exposure-road-horizon-4k_1691849809.jpg.webp")`,
 						backgroundRepeat: "no-repeat",
 						backgroundSize: "cover",
 					}}
@@ -61,22 +61,32 @@ const Homepage = () => {
 							</Grid>
 							<Grid item container spacing={2}>
 								<Grid item xs ml={1}>
-									<Button
-										size="large"
-										fullWidth
-										sx={{ backgroundColor: "#01DEB6" }}
+									<Link
+										to="/forSale"
+										style={{ textTransform: "none", color: "black" }}
 									>
-										For sale
-									</Button>
+										<Button
+											size="large"
+											fullWidth
+											sx={{ backgroundColor: "#01DEB6" }}
+										>
+											For sale
+										</Button>
+									</Link>
 								</Grid>
 								<Grid item xs mr={1}>
-									<Button
-										size="large"
-										fullWidth
-										sx={{ backgroundColor: "#01DEB6" }}
+									<Link
+										to="/toRent"
+										style={{ textTransform: "none", color: "black" }}
 									>
-										To rent
-									</Button>
+										<Button
+											size="large"
+											fullWidth
+											sx={{ backgroundColor: "#01DEB6" }}
+										>
+											To rent
+										</Button>
+									</Link>
 								</Grid>
 							</Grid>
 						</Grid>

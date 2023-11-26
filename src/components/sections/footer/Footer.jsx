@@ -8,7 +8,7 @@ const Footer = () => {
 	return (
 		<Box
 			sx={{
-				backgroundColor: "#EAEAEA",
+				backgroundColor: "#1C3A32",
 				width: "100vw",
 				padding: "30px 0",
 				display: "flex",
@@ -17,7 +17,7 @@ const Footer = () => {
 		>
 			<List
 				sx={{
-					color: "#6B728E",
+					color: "white",
 					fontSize: 14,
 					flex: 1,
 					maxWidth: 1400,
