@@ -28,14 +28,14 @@ const Footer = () => {
 			}}
 		>
 			<Grid container padding="0 2em">
-				<Grid container spacing={5} item sm={12} md={5} justifyContent="center">
+				<Grid container item sm={12} md={5} justifyContent="center">
 					<Grid item>
 						<Grid item>
 							<Typography variant="h6" fontFamily="Ephesis">
-								Get the update for your area
+								Get the latest updates for your area
 							</Typography>
 						</Grid>
-						<Grid item>
+						<Grid item mt={2}>
 							<TextField
 								sx={{
 									"& .MuiInputLabel-root": { color: "white" },
@@ -57,7 +57,7 @@ const Footer = () => {
 								placeholder="Enter email here"
 							></TextField>
 						</Grid>
-						<Grid item>
+						<Grid item mt={2}>
 							<FormControl>
 								<FormControlLabel
 									control={
@@ -76,7 +76,7 @@ const Footer = () => {
 								/>
 							</FormControl>
 						</Grid>
-						<Grid item container spacing={5}>
+						<Grid item mt={2} container spacing={5}>
 							<Grid item>
 								<YouTubeIcon
 									sx={{
@@ -105,7 +105,7 @@ const Footer = () => {
 								/>
 							</Grid>
 						</Grid>
-						<Grid item>
+						<Grid mt={2} item>
 							<Typography variant="body2">
 								Estate, LLC. All Rights Reserved.
 							</Typography>

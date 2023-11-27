@@ -152,10 +152,7 @@ const PropertyForSale = () => {
 					gap={2}
 					sx={{
 						width: 300,
-						display: {
-							md: "none",
-							lg: "flex",
-						},
+						display: { xs: "none", sm: "none", md: "none", lg: "flex" },
 						justifyContent: "center",
 						alignItems: "center",
 					}}

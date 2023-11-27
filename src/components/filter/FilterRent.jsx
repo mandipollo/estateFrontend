@@ -78,10 +78,10 @@ const FilterRent = () => {
 		navigate("/propertyToRent");
 	};
 	return (
-		<Grid container spacing={2} padding="20px 0 20px 0">
-			<Grid container item xs={6} spacing={2}>
+		<Grid container spacing={2} padding="20px 10px">
+			<Grid container item xs={12} md={6} spacing={2}>
 				<Grid container item spacing={2}>
-					<Grid item xs={4}>
+					<Grid item xs={12} md={4}>
 						<FormLabel>Search radius</FormLabel>
 					</Grid>
 					<Grid item xs>
@@ -104,7 +104,7 @@ const FilterRent = () => {
 					</Grid>
 				</Grid>
 				<Grid container item spacing={2}>
-					<Grid item xs={4}>
+					<Grid item xs={12} md={4}>
 						<FormLabel>Price range (£)</FormLabel>
 					</Grid>
 					<Grid container spacing={1} item xs>
@@ -147,7 +147,7 @@ const FilterRent = () => {
 					</Grid>
 				</Grid>
 				<Grid container item spacing={2}>
-					<Grid item xs={4}>
+					<Grid item xs={12} md={4}>
 						<FormLabel>No. of bedrooms</FormLabel>
 					</Grid>
 					<Grid container spacing={1} item xs>
@@ -190,9 +190,9 @@ const FilterRent = () => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<Grid container item xs={6} spacing={2}>
+			<Grid container item xs={12} md={6} spacing={2}>
 				<Grid container item spacing={2}>
-					<Grid item xs={4}>
+					<Grid item xs={12} md={6}>
 						<FormLabel>Property type</FormLabel>
 					</Grid>
 					<Grid item xs>
@@ -215,11 +215,11 @@ const FilterRent = () => {
 					</Grid>
 				</Grid>
 				<Grid container item spacing={2}>
-					<Grid item xs={4}>
+					<Grid item xs={12} md={6}>
 						<FormLabel>Added to site</FormLabel>
 					</Grid>
 					<Grid item xs>
-						<FormControl fullWidth>
+						<FormControl xs fullWidth>
 							<Select
 								name="addedToSite"
 								input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
@@ -238,7 +238,6 @@ const FilterRent = () => {
 					</Grid>
 				</Grid>
 				<Grid container item spacing={2}>
-					<Grid item xs={4}></Grid>
 					<Grid item xs>
 						<Button
 							onClick={handleToRent}

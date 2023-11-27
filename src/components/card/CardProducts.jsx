@@ -31,7 +31,17 @@ const CardProduct = ({
 	contactNo,
 }) => {
 	return (
-		<Card sx={{ width: "90%", flexDirection: "row", display: "flex" }}>
+		<Card
+			sx={{
+				width: "90%",
+				flexDirection: {
+					xs: "column",
+					sm: "row",
+					md: "row",
+				},
+				display: "flex",
+			}}
+		>
 			<Box sx={{ flex: 6 }}>
 				<Box height={220}>
 					<Carousel
@@ -104,7 +114,14 @@ const CardProduct = ({
 								</Typography>
 							</Box>
 
-							<Typography gutterBottom variant="body2" color="text.secondary">
+							<Typography
+								sx={{
+									display: { xs: "none", sm: "none", md: "none", lg: "flex" },
+								}}
+								gutterBottom
+								variant="body2"
+								color="text.secondary"
+							>
 								{summary}
 							</Typography>
 						</CardContent>
