@@ -23,6 +23,7 @@ import {
 import { useDispatch } from "react-redux";
 import { setFilterParams } from "../../store/filterParams";
 import useIsMount from "../utilities/useIsMount";
+import TemporaryDrawer from "./DrawerFilter";
 // filter nav for easy access in various pages
 const FilterNav = ({ filterParamsState }) => {
 	const isMount = useIsMount();
@@ -181,6 +182,11 @@ const FilterNav = ({ filterParamsState }) => {
 							</MenuItem>
 						))}
 					</Select>
+				</FormControl>
+			</Grid>
+			<Grid item xs>
+				<FormControl fullWidth>
+					<TemporaryDrawer handleChange={handleChange} allValues={allValues} />
 				</FormControl>
 			</Grid>
 		</Grid>

@@ -14,6 +14,7 @@ import PaginationMui from "../components/pagination/Pagination";
 import CardProduct from "../components/card/CardProducts";
 // hooks
 import useIsMount from "../components/utilities/useIsMount";
+import TemporaryDrawer from "../components/filter/DrawerFilter";
 
 const PropertyForSale = () => {
 	const dispatch = useDispatch();
@@ -94,7 +95,13 @@ const PropertyForSale = () => {
 					flexDirection: "row",
 				}}
 			>
-				<Grid item xs>
+				<Grid
+					item
+					xs
+					justifyContent="center"
+					alignItems="center"
+					display="flex"
+				>
 					<Input />
 				</Grid>
 				<Grid item xs={9}>

@@ -10,15 +10,14 @@ import BathroomOutlinedIcon from "@mui/icons-material/BathroomOutlined";
 // redux
 import { useParams } from "react-router-dom";
 // components
-
+import useNavigateBack from "../components/utilities/useNavigateBack";
 import StyledBox from "../components/styledComponents/StyledBox";
 import CarousalImage from "../components/carousal/CarousalImage";
-import CardPropertyDescription from "../components/card/CardPropertyDescription";
-import CardMortgageCalculator from "../components/card/CardMortgageCalculator";
-import CardSimiliarProp from "../components/card/CardSimiliarProp";
+
 import CardPropertyDescriptionRent from "../components/card/CardPropertyDescriptionRent";
 
 const PropertyDetailRent = () => {
+	const navigateBack = useNavigateBack();
 	const { propertyId } = useParams();
 
 	const [data, setData] = useState("");
@@ -53,6 +52,7 @@ const PropertyDetailRent = () => {
 							<StyledBox width="80%" flexDirection="column" gap={2}>
 								<Box width="100%" alignItems="flex-start" padding="1em 0">
 									<Button
+										onClick={navigateBack}
 										disableRipple
 										startIcon={<ArrowBackIcon />}
 										variant="text"
