@@ -1,8 +1,19 @@
 import React from "react";
 
-import { Box, ListItem, List } from "@mui/material";
-// components
-import FooterList, { listData } from "./FooterList";
+import {
+	Box,
+	Checkbox,
+	Grid,
+	Typography,
+	TextField,
+	InputAdornment,
+	FormControl,
+	FormControlLabel,
+} from "@mui/material";
+
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
 
 const Footer = () => {
 	return (
@@ -13,28 +24,96 @@ const Footer = () => {
 				padding: "30px 0",
 				display: "flex",
 				justifyContent: "center",
+				color: "white",
 			}}
 		>
-			<List
-				sx={{
-					color: "white",
-					fontSize: 14,
-					flex: 1,
-					maxWidth: 1400,
-				}}
-			>
-				<ListItem
-					sx={{
-						display: "flex",
-						alignItems: "flex-start",
-						justifyContent: "space-evenly",
-					}}
-				>
-					{listData.map((items, index) => {
-						return <FooterList key={index} items={items.items} />;
-					})}
-				</ListItem>
-			</List>
+			<Grid container padding="0 2em">
+				<Grid container spacing={5} item sm={12} md={5} justifyContent="center">
+					<Grid item>
+						<Grid item>
+							<Typography variant="h6" fontFamily="Ephesis">
+								Get the update for your area
+							</Typography>
+						</Grid>
+						<Grid item>
+							<TextField
+								sx={{
+									"& .MuiInputLabel-root": { color: "white" },
+									borderBottom: "1px solid white",
+								}}
+								InputProps={{
+									disableUnderline: true,
+									endAdornment: (
+										<InputAdornment position="start">
+											<Typography color="white"> Subscribe</Typography>
+										</InputAdornment>
+									),
+									style: {
+										color: "white",
+									},
+								}}
+								variant="standard"
+								fullWidth
+								placeholder="Enter email here"
+							></TextField>
+						</Grid>
+						<Grid item>
+							<FormControl>
+								<FormControlLabel
+									control={
+										<Checkbox
+											style={{ color: "white" }}
+											name="myCheckbox"
+											color="primary"
+										/>
+									}
+									label={
+										<Typography variant="body2">
+											By checking the box, you agree that you are above at least
+											18 years of age.
+										</Typography>
+									}
+								/>
+							</FormControl>
+						</Grid>
+						<Grid item container spacing={5}>
+							<Grid item>
+								<YouTubeIcon
+									sx={{
+										":hover": {
+											color: "red",
+										},
+									}}
+								/>
+							</Grid>
+							<Grid item>
+								<InstagramIcon
+									sx={{
+										":hover": {
+											color: "red",
+										},
+									}}
+								/>
+							</Grid>
+							<Grid item>
+								<FacebookIcon
+									sx={{
+										":hover": {
+											color: "skyblue",
+										},
+									}}
+								/>
+							</Grid>
+						</Grid>
+						<Grid item>
+							<Typography variant="body2">
+								Estate, LLC. All Rights Reserved.
+							</Typography>
+						</Grid>
+					</Grid>
+				</Grid>
+				<Grid item md={7} sm={12}></Grid>
+			</Grid>
 		</Box>
 	);
 };
