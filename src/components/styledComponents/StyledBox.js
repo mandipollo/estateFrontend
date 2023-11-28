@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import styled from "@emotion/styled";
-import { alignProperty } from "@mui/material/styles/cssUtils";
 
 const StyledBox = styled(Box)(
 	({

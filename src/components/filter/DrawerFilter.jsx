@@ -9,6 +9,9 @@ import {
 	FormControl,
 	MenuItem,
 	OutlinedInput,
+	Typography,
+	FormControlLabel,
+	Checkbox,
 } from "@mui/material";
 import React from "react";
 
@@ -41,143 +44,228 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 	const list = anchor => (
 		<Box
 			sx={{
-				width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
+				width: "100vw",
 				height: 450,
 			}}
 			role="presentation"
 			onClick={toggleDrawer(anchor, false)}
 			onKeyDown={toggleDrawer(anchor, false)}
 		>
-			<Grid container>
-				<Grid item xs>
-					<FormControl fullWidth>
-						<Select
-							name="radius"
-							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-							value={allValues.radius}
-							onChange={handleChange}
-							displayEmpty
-							size="small"
+			<Grid container padding="10px" gap={1}>
+				<Grid container item xs={12}>
+					<Grid
+						item
+						container
+						xs={12}
+						md={5}
+						display={{ lg: "none", md: "flex" }}
+					>
+						<Grid xs={12} item justifyContent="flex-start" display="flex">
+							<Typography variant="h6" fontWeight={100}>
+								Price:
+							</Typography>
+						</Grid>
+						<Grid
+							container
+							item
+							xs={12}
+							gap={1}
+							flexDirection="row"
+							justifyContent="space-between"
 						>
-							{filterRadius.map((options, index) => (
-								<MenuItem key={index} value={options.radiusValue}>
-									{options.radius}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
+							<Grid item xs={5.5}>
+								<FormControl fullWidth>
+									<Select
+										name="minPrice"
+										input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+										value={allValues.minPrice}
+										onChange={handleChange}
+										displayEmpty
+										size="medium"
+									>
+										{filterMinPrice.map((options, index) => (
+											<MenuItem key={index} value={options.priceValue}>
+												{options.price}
+											</MenuItem>
+										))}
+									</Select>
+								</FormControl>
+							</Grid>
+							<Grid item xs={5.5}>
+								<FormControl fullWidth>
+									<Select
+										name="maxPrice"
+										input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+										value={allValues.maxPrice}
+										onChange={handleChange}
+										displayEmpty
+										size="medium"
+									>
+										{filterMaxPrice.map((options, index) => (
+											<MenuItem key={index} value={options.priceValue}>
+												{options.price}
+											</MenuItem>
+										))}
+									</Select>
+								</FormControl>
+							</Grid>
+						</Grid>
+					</Grid>
 				</Grid>
-
-				<Grid item xs>
-					<FormControl fullWidth>
-						<Select
-							name="minPrice"
-							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-							value={allValues.minPrice}
-							onChange={handleChange}
-							displayEmpty
-							size="small"
+				<Grid container item xs={12}>
+					<Grid
+						item
+						container
+						xs={12}
+						md={5}
+						display={{ lg: "none", md: "flex" }}
+					>
+						<Grid xs={12} item justifyContent="flex-start" display="flex">
+							<Typography variant="h6" fontWeight={100}>
+								Bedrooms:
+							</Typography>
+						</Grid>
+						<Grid
+							container
+							item
+							xs={12}
+							flexDirection="row"
+							justifyContent="space-between"
+							gap={1}
 						>
-							{filterMinPrice.map((options, index) => (
-								<MenuItem key={index} value={options.priceValue}>
-									{options.price}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
+							<Grid item xs={5.5}>
+								<FormControl fullWidth>
+									<Select
+										name="minBedrooms"
+										input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+										value={allValues.minBedrooms}
+										onChange={handleChange}
+										displayEmpty
+										size="medium"
+									>
+										{filterMinBed.map((options, index) => (
+											<MenuItem key={index} value={options.bedroomValue}>
+												{options.bedroom}
+											</MenuItem>
+										))}
+									</Select>
+								</FormControl>
+							</Grid>
+							<Grid item xs={5.5}>
+								<FormControl fullWidth>
+									<Select
+										name="maxBedrooms"
+										input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+										value={allValues.maxBedrooms}
+										onChange={handleChange}
+										displayEmpty
+										size="medium"
+									>
+										{filterMaxBed.map((options, index) => (
+											<MenuItem key={index} value={options.bedroomValue}>
+												{options.bedroom}
+											</MenuItem>
+										))}
+									</Select>
+								</FormControl>
+							</Grid>
+						</Grid>
+					</Grid>
 				</Grid>
-				<Grid item xs>
-					<FormControl fullWidth>
-						<Select
-							name="maxPrice"
-							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-							value={allValues.maxPrice}
-							onChange={handleChange}
-							displayEmpty
-							size="small"
+				<Grid container item xs={12}>
+					<Grid
+						item
+						container
+						xs={12}
+						md={5}
+						gap={2}
+						display={{ lg: "none", md: "flex" }}
+					>
+						<Grid
+							item
+							justifyContent="center"
+							alignItems="center"
+							display="flex"
 						>
-							{filterMaxPrice.map((options, index) => (
-								<MenuItem key={index} value={options.priceValue}>
-									{options.price}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
+							<Typography variant="h6" fontWeight={100}>
+								Property Type:
+							</Typography>
+						</Grid>
+						<Grid item xs>
+							<FormControl fullWidth>
+								<Select
+									name="propertyType"
+									input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+									value={allValues.propertyType}
+									onChange={handleChange}
+									displayEmpty
+									size="medium"
+								>
+									{filterPropertyType.map((options, index) => (
+										<MenuItem key={index} value={options.propertyValue}>
+											{options.propertyName}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+						</Grid>
+					</Grid>
 				</Grid>
-
-				<Grid item xs>
-					<FormControl fullWidth>
-						<Select
-							name="minBedrooms"
-							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-							value={allValues.minBedrooms}
-							onChange={handleChange}
-							displayEmpty
-							size="small"
+				<Grid container item xs={12}>
+					<Grid item container xs={12} md={5} gap={2}>
+						<Grid
+							item
+							justifyContent="center"
+							alignItems="center"
+							display="flex"
 						>
-							{filterMinBed.map((options, index) => (
-								<MenuItem key={index} value={options.bedroomValue}>
-									{options.bedroom}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-				</Grid>
-				<Grid item xs>
-					<FormControl fullWidth>
-						<Select
-							name="maxBedrooms"
-							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-							value={allValues.maxBedrooms}
-							onChange={handleChange}
-							displayEmpty
-							size="small"
-						>
-							{filterMaxBed.map((options, index) => (
-								<MenuItem key={index} value={options.bedroomValue}>
-									{options.bedroom}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-				</Grid>
-
-				<Grid item xs>
-					<FormControl fullWidth>
-						<Select
-							name="propertyType"
-							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-							value={allValues.propertyType}
-							onChange={handleChange}
-							displayEmpty
-							size="small"
-						>
-							{filterPropertyType.map((options, index) => (
-								<MenuItem key={index} value={options.propertyValue}>
-									{options.propertyName}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
-				</Grid>
-
-				<Grid item xs>
-					<FormControl fullWidth>
-						<Select
-							name="addedToSite"
-							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-							value={allValues.addedToSite}
-							onChange={handleChange}
-							displayEmpty
-							size="small"
-						>
-							{filterAddedToSite.map((options, index) => (
-								<MenuItem key={index} value={options.addedToSiteValue}>
-									{options.addedToSiteName}
-								</MenuItem>
-							))}
-						</Select>
-					</FormControl>
+							<Typography variant="h6" fontWeight={100}>
+								Added to Site:
+							</Typography>
+						</Grid>
+						<Grid item xs>
+							<FormControl fullWidth>
+								<Select
+									name="addedToSite"
+									input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+									value={allValues.addedToSite}
+									onChange={handleChange}
+									displayEmpty
+									size="medium"
+								>
+									{filterAddedToSite.map((options, index) => (
+										<MenuItem key={index} value={options.addedToSiteValue}>
+											{options.addedToSiteName}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+						</Grid>
+					</Grid>
+					<Grid
+						item
+						container
+						xs={12}
+						md={5}
+						justifyContent={{ xs: "flex-start", md: "flex-end" }}
+					>
+						<FormControl>
+							<FormControlLabel
+								control={
+									<Checkbox
+										style={{ color: "black" }}
+										name="myCheckbox"
+										color="primary"
+									/>
+								}
+								label={
+									<Typography variant="body1">
+										Include Under Offer,Sold STC
+									</Typography>
+								}
+							/>
+						</FormControl>
+					</Grid>
 				</Grid>
 			</Grid>
 		</Box>

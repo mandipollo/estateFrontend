@@ -24,6 +24,7 @@ import { useDispatch } from "react-redux";
 import { setFilterParams } from "../../store/filterParams";
 import useIsMount from "../utilities/useIsMount";
 import TemporaryDrawer from "./DrawerFilter";
+import StyledGrid from "../styledComponents/StyledGrid";
 // filter nav for easy access in various pages
 const FilterNav = ({ filterParamsState }) => {
 	const isMount = useIsMount();
@@ -73,7 +74,7 @@ const FilterNav = ({ filterParamsState }) => {
 				</FormControl>
 			</Grid>
 
-			<Grid item xs>
+			<StyledGrid item xs>
 				<FormControl fullWidth>
 					<Select
 						name="minPrice"
@@ -90,8 +91,8 @@ const FilterNav = ({ filterParamsState }) => {
 						))}
 					</Select>
 				</FormControl>
-			</Grid>
-			<Grid item xs>
+			</StyledGrid>
+			<StyledGrid item xs>
 				<FormControl fullWidth>
 					<Select
 						name="maxPrice"
@@ -108,9 +109,9 @@ const FilterNav = ({ filterParamsState }) => {
 						))}
 					</Select>
 				</FormControl>
-			</Grid>
+			</StyledGrid>
 
-			<Grid item xs>
+			<StyledGrid item xs>
 				<FormControl fullWidth>
 					<Select
 						name="minBedrooms"
@@ -127,8 +128,8 @@ const FilterNav = ({ filterParamsState }) => {
 						))}
 					</Select>
 				</FormControl>
-			</Grid>
-			<Grid item xs>
+			</StyledGrid>
+			<StyledGrid item xs>
 				<FormControl fullWidth>
 					<Select
 						name="maxBedrooms"
@@ -145,9 +146,9 @@ const FilterNav = ({ filterParamsState }) => {
 						))}
 					</Select>
 				</FormControl>
-			</Grid>
+			</StyledGrid>
 
-			<Grid item xs>
+			<StyledGrid item xs>
 				<FormControl fullWidth>
 					<Select
 						name="propertyType"
@@ -164,9 +165,9 @@ const FilterNav = ({ filterParamsState }) => {
 						))}
 					</Select>
 				</FormControl>
-			</Grid>
+			</StyledGrid>
 
-			<Grid item xs>
+			<StyledGrid item xs>
 				<FormControl fullWidth>
 					<Select
 						name="addedToSite"
@@ -183,7 +184,7 @@ const FilterNav = ({ filterParamsState }) => {
 						))}
 					</Select>
 				</FormControl>
-			</Grid>
+			</StyledGrid>
 			<Grid item xs>
 				<FormControl fullWidth>
 					<TemporaryDrawer handleChange={handleChange} allValues={allValues} />
