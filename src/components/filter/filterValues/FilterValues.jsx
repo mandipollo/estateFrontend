@@ -40,7 +40,7 @@ export const filterRadius = [
 
 export const filterMinPrice = [
 	{
-		price: "No min price",
+		price: "Min price",
 		priceValue: "",
 	},
 	{
@@ -91,7 +91,7 @@ export const filterMinPrice = [
 
 export const filterMaxPrice = [
 	{
-		price: "No max price",
+		price: "Max price",
 		priceValue: "",
 	},
 	{
@@ -142,7 +142,7 @@ export const filterMaxPrice = [
 
 export const filterMinBed = [
 	{
-		bedroom: "No min bedroom",
+		bedroom: "Min beds",
 		bedroomValue: "",
 	},
 	{
@@ -169,7 +169,7 @@ export const filterMinBed = [
 
 export const filterMaxBed = [
 	{
-		bedroom: "No max bedroom",
+		bedroom: "Max beds",
 		bedroomValue: "",
 	},
 	{

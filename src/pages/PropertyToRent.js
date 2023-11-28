@@ -87,19 +87,38 @@ const PropertyToRent = () => {
 	};
 
 	return (
-		<Box sx={{ display: "flex", flexDirection: "column" }}>
+		<Box sx={{ display: "flex", flexDirection: "column", width: "100vw" }}>
 			<Grid
 				container
 				sx={{
 					display: "flex",
 					width: "100%",
 					flexDirection: "row",
+					backgroundColor: "#31304D",
 				}}
 			>
-				<Grid item xs>
+				<Grid
+					item
+					xs
+					justifyContent="center"
+					alignItems="center"
+					display="flex"
+				>
 					<Input />
 				</Grid>
-				<Grid item xs={9}>
+				<Grid
+					item
+					sx={{
+						display: "flex",
+						width: "100%",
+						flexDirection: "row",
+						backgroundColor: "#31304D",
+						position: "sticky", // Make the entire row sticky
+						top: 0, // Stick to the top of the viewport
+						zIndex: 1000,
+					}}
+					xs={9}
+				>
 					<FilterNav filterParamsState={filterParamsState} />
 				</Grid>
 			</Grid>
@@ -154,13 +173,9 @@ const PropertyToRent = () => {
 					gap={2}
 					sx={{
 						width: 300,
-						display: {
-							md: "none",
-							lg: "flex",
-						},
+						display: { xs: "none", sm: "none", md: "none", lg: "flex" },
 						justifyContent: "center",
 						alignItems: "center",
-						padding: "2rem 1rem",
 					}}
 				>
 					<Grid item>

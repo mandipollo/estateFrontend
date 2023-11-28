@@ -10,6 +10,19 @@ const theme = createTheme({
 			secondary: "#445D48",
 		},
 	},
+	breakpoints: {
+		values: {
+			xs: 0,
+			mobile: 400,
+			sm: 600,
+			tablet: 700,
+			md: 900,
+			laptop: 1024,
+			lg: 1200,
+			desktop: 1300,
+			xl: 1536,
+		},
+	},
 });
 
 export default theme;

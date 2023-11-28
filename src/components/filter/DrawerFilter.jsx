@@ -1,7 +1,7 @@
 import { useState } from "react";
-
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
+import theme from "../../theme";
 import {
 	Grid,
 	Box,
@@ -12,6 +12,7 @@ import {
 	Typography,
 	FormControlLabel,
 	Checkbox,
+	IconButton,
 } from "@mui/material";
 import React from "react";
 
@@ -24,6 +25,7 @@ import {
 	filterMinPrice,
 	filterPropertyType,
 } from "./filterValues/FilterValues";
+import StyledGrid, { StyledGridDrawer } from "../styledComponents/StyledGrid";
 
 const TemporaryDrawer = ({ handleChange, allValues }) => {
 	const [state, setState] = useState({
@@ -45,7 +47,10 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 		<Box
 			sx={{
 				width: "100vw",
-				height: 450,
+				height: {
+					xs: "90vh",
+					md: 450,
+				},
 			}}
 			role="presentation"
 			onClick={toggleDrawer(anchor, false)}
@@ -53,12 +58,12 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 		>
 			<Grid container padding="10px" gap={1}>
 				<Grid container item xs={12}>
-					<Grid
+					<StyledGridDrawer
 						item
 						container
 						xs={12}
 						md={5}
-						display={{ lg: "none", md: "flex" }}
+						points={theme.breakpoints.values.tablet}
 					>
 						<Grid xs={12} item justifyContent="flex-start" display="flex">
 							<Typography variant="h6" fontWeight={100}>
@@ -110,15 +115,15 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 								</FormControl>
 							</Grid>
 						</Grid>
-					</Grid>
+					</StyledGridDrawer>
 				</Grid>
 				<Grid container item xs={12}>
-					<Grid
+					<StyledGridDrawer
 						item
 						container
 						xs={12}
 						md={5}
-						display={{ lg: "none", md: "flex" }}
+						points={theme.breakpoints.values.md}
 					>
 						<Grid xs={12} item justifyContent="flex-start" display="flex">
 							<Typography variant="h6" fontWeight={100}>
@@ -170,16 +175,16 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 								</FormControl>
 							</Grid>
 						</Grid>
-					</Grid>
+					</StyledGridDrawer>
 				</Grid>
 				<Grid container item xs={12}>
-					<Grid
+					<StyledGridDrawer
 						item
 						container
 						xs={12}
 						md={5}
 						gap={2}
-						display={{ lg: "none", md: "flex" }}
+						points={theme.breakpoints.values.laptop}
 					>
 						<Grid
 							item
@@ -209,7 +214,7 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 								</Select>
 							</FormControl>
 						</Grid>
-					</Grid>
+					</StyledGridDrawer>
 				</Grid>
 				<Grid container item xs={12}>
 					<Grid item container xs={12} md={5} gap={2}>
@@ -275,7 +280,14 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 		<div>
 			{["top"].map(anchor => (
 				<React.Fragment key={anchor}>
-					<Button onClick={toggleDrawer(anchor, true)}>Filter</Button>
+					<IconButton
+						variant="outlined"
+						color="success"
+						onClick={toggleDrawer(anchor, true)}
+					>
+						<FilterAltIcon />
+					</IconButton>
+
 					<Drawer
 						anchor={anchor}
 						open={state[anchor]}
