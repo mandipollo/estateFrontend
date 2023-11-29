@@ -3,8 +3,9 @@ import React from "react";
 import StyledTextfield from "../styledComponents/StyledTextfield";
 import StyledAutocomplete from "../styledComponents/StyledAutocomplete";
 
-// a autcomplete componenet that sends delayed search input by 100ms and lists suggestions
+//  autcomplete componenet that sends delayed search input by 100ms and lists suggestions
 const AutocompleteSearch = ({
+	widthvalue,
 	searchInput,
 	searchInputHandler,
 	options,
@@ -12,11 +13,13 @@ const AutocompleteSearch = ({
 }) => {
 	return (
 		<StyledAutocomplete
+			fullWidth
 			onChange={autoCompleteHandler}
 			options={options}
 			getOptionLabel={options => options.displayName}
 			renderInput={params => (
 				<StyledTextfield
+					widthvalue={widthvalue}
 					{...params}
 					onChange={searchInputHandler}
 					value={searchInput}

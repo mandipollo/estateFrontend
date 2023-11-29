@@ -26,6 +26,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 	const dispatch = useDispatch();
 
 	const [searchInput, setSearchInput] = useState("");
+	const [selectedSuggestion, setSelectedSuggestion] = useState(null);
 	const [options, setOptions] = useState([]);
 
 	const searchInputHandler = e => {
@@ -36,7 +37,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 		return /^\s*$/.test(input);
 	};
 
-	// autocomplete for sale
+	// suggestion
 
 	useEffect(() => {
 		const timeout = setTimeout(async () => {
@@ -68,8 +69,15 @@ const Search = ({ propXs, propSm, title, description }) => {
 	// select value from the list
 
 	const autoCompleteHandler = (event, value) => {
-		dispatch(setIdentifierHandler(value));
+		setSelectedSuggestion(value);
 	};
+
+	// dispatch with the suggestion
+	useEffect(() => {
+		if (selectedSuggestion) {
+			dispatch(setIdentifierHandler(selectedSuggestion));
+		}
+	});
 	// submit and navigate user to the filter page
 
 	const submitHandlerSale = e => {
@@ -118,6 +126,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 				</Typography>
 
 				<AutocompleteSearch
+					widthvalue={550}
 					searchInput={searchInput}
 					searchInputHandler={searchInputHandler}
 					options={options}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import theme from "../../theme";
 
 import {
@@ -7,11 +8,11 @@ import {
 	FormControl,
 	Select,
 	OutlinedInput,
+	useMediaQuery,
 } from "@mui/material";
 
 import {
 	filterRadius,
-	filterAddedToSite,
 	filterMaxBed,
 	filterMaxPrice,
 	filterMinBed,
@@ -20,15 +21,75 @@ import {
 } from "./filterValues/FilterValues";
 
 // redux
-
+import { setIdentifierHandler } from "../../store/identifier";
 import { useDispatch } from "react-redux";
 import { setFilterParams } from "../../store/filterParams";
 import useIsMount from "../utilities/useIsMount";
 import TemporaryDrawer from "./DrawerFilter";
 import StyledGrid from "../styledComponents/StyledGrid";
 import { ArrowDropDown } from "@mui/icons-material";
+import AutocompleteSearch from "../search/AutocompleteSearch";
 // filter nav for easy access in various pages
 const FilterNav = ({ filterParamsState }) => {
+	const isxs = useMediaQuery(theme.breakpoints.down("sm"));
+
+	// autocomplete
+
+	const [searchInput, setSearchInput] = useState("");
+	const [suggestion, setSuggestion] = useState(null);
+	const [options, setOptions] = useState([]);
+
+	const searchInputHandler = e => {
+		setSearchInput(e.target.value);
+	};
+
+	const checkOnlySpace = input => {
+		return /^\s*$/.test(input);
+	};
+
+	// autocomplete for sale
+
+	useEffect(() => {
+		const timeout = setTimeout(async () => {
+			if (checkOnlySpace(searchInput)) {
+				return;
+			} else if (searchInput) {
+				try {
+					// setIdentifierHandler(searchInput);
+
+					const response = await axios.get("http://localhost:5003/identifier", {
+						params: {
+							location: searchInput,
+						},
+					});
+
+					const data = response.data.data;
+					setOptions(data);
+				} catch (error) {
+					console.log(error);
+				}
+			}
+		}, 1000);
+
+		return () => {
+			clearTimeout(timeout);
+		};
+	}, [searchInput]);
+
+	// select value from the list
+
+	const autoCompleteHandler = (event, value) => {
+		setSuggestion(value);
+	};
+
+	// dispatch suggestion when chosen
+	useEffect(() => {
+		if (suggestion) {
+			dispatch(setIdentifierHandler(suggestion));
+		}
+	}, [suggestion]);
+
+	//
 	const isMount = useIsMount();
 	const dispatch = useDispatch();
 	const [allValues, setAllValues] = useState({
@@ -57,6 +118,21 @@ const FilterNav = ({ filterParamsState }) => {
 
 	return (
 		<Grid container>
+			<Grid
+				item
+				xs={isxs ? 6 : false}
+				paddingLeft={1}
+				alignItems="center"
+				display="flex"
+			>
+				<AutocompleteSearch
+					widthvalue={300}
+					searchInput={searchInput}
+					searchInputHandler={searchInputHandler}
+					options={options}
+					autoCompleteHandler={autoCompleteHandler}
+				/>
+			</Grid>
 			<Grid item xs>
 				<FormControl fullWidth>
 					<Select
@@ -134,7 +210,7 @@ const FilterNav = ({ filterParamsState }) => {
 				</FormControl>
 			</StyledGrid>
 
-			<StyledGrid points={theme.breakpoints.values.md} item xs>
+			<StyledGrid points={theme.breakpoints.values.lg} item xs>
 				<FormControl fullWidth>
 					<Select
 						IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
@@ -159,7 +235,7 @@ const FilterNav = ({ filterParamsState }) => {
 					</Select>
 				</FormControl>
 			</StyledGrid>
-			<StyledGrid points={theme.breakpoints.values.md} item xs>
+			<StyledGrid points={theme.breakpoints.values.lg} item xs>
 				<FormControl fullWidth>
 					<Select
 						IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
@@ -185,7 +261,7 @@ const FilterNav = ({ filterParamsState }) => {
 				</FormControl>
 			</StyledGrid>
 
-			<StyledGrid points={theme.breakpoints.values.laptop} item xs>
+			<StyledGrid points={theme.breakpoints.values.lg} item xs>
 				<FormControl fullWidth>
 					<Select
 						IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
@@ -211,31 +287,6 @@ const FilterNav = ({ filterParamsState }) => {
 				</FormControl>
 			</StyledGrid>
 
-			<StyledGrid points={theme.breakpoints.values.lg} item xs>
-				<FormControl fullWidth>
-					<Select
-						IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
-						sx={{
-							fontWeight: 100,
-							color: "white",
-							boxShadow: "none",
-							".MuiOutlinedInput-notchedOutline": { border: 0 },
-						}}
-						name="addedToSite"
-						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.addedToSite}
-						onChange={handleChange}
-						displayEmpty
-						size="medium"
-					>
-						{filterAddedToSite.map((options, index) => (
-							<MenuItem key={index} value={options.addedToSiteValue}>
-								{options.addedToSiteName}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
-			</StyledGrid>
 			<Grid
 				item
 				xs

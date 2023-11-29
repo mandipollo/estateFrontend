@@ -97,28 +97,7 @@ const PropertyToRent = () => {
 					backgroundColor: "#31304D",
 				}}
 			>
-				<Grid
-					item
-					xs
-					justifyContent="center"
-					alignItems="center"
-					display="flex"
-				>
-					<Input />
-				</Grid>
-				<Grid
-					item
-					sx={{
-						display: "flex",
-						width: "100%",
-						flexDirection: "row",
-						backgroundColor: "#31304D",
-						position: "sticky", // Make the entire row sticky
-						top: 0, // Stick to the top of the viewport
-						zIndex: 1000,
-					}}
-					xs={9}
-				>
+				<Grid item xs>
 					<FilterNav filterParamsState={filterParamsState} />
 				</Grid>
 			</Grid>

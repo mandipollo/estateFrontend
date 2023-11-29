@@ -30,8 +30,9 @@ const PropertyForSale = () => {
 	console.log(forSaleStatus);
 	const forSaleError = useSelector(state => state.forSale.error);
 	const identifierState = useSelector(state => state.identifier);
+	console.log(identifierState);
 	const filterParamsState = useSelector(state => state.filter);
-
+	console.log(filterParamsState);
 	// reset page when params change
 
 	useEffect(() => {
@@ -74,7 +75,7 @@ const PropertyForSale = () => {
 				dispatch(resetStatus());
 			};
 		}
-	}, [page, filterParamsState]);
+	}, [page, filterParamsState, identifierState]);
 
 	const prevPageHandler = () => {
 		setPage(prev => prev - 1);
@@ -93,10 +94,7 @@ const PropertyForSale = () => {
 					backgroundColor: "#31304D",
 				}}
 			>
-				<Grid item xs={12} justifyContent="center" display="flex" m={2}>
-					<Input />
-				</Grid>
-				<Grid item xs={12}>
+				<Grid item xs>
 					<FilterNav filterParamsState={filterParamsState} />
 				</Grid>
 			</Grid>

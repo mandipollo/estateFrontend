@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { TextField } from "@mui/material";
 
-const StyledTextfield = styled(TextField)(({ theme }) => ({
+const StyledTextfield = styled(TextField)(({ theme, widthvalue }) => ({
 	backgroundColor: "white",
 	width: "98%",
 	[theme.breakpoints.up("sm")]: {
-		width: 550,
+		width: widthvalue,
 	},
 }));
 
