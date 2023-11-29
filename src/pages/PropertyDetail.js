@@ -84,19 +84,19 @@ const PropertyDetail = () => {
 								</StyledBox>
 
 								<StyledBox
-									width="100%"
 									borderBottom="1px solid rgba(0, 0, 0, 0.2)"
 									borderTop="1px solid rgba(0, 0, 0, 0.2)"
 									padding={ismd ? "1em" : "1em 0"}
 								>
-									<Grid container flexDirection="row">
+									<Grid container flexDirection="row" gap={1}>
 										{data.data.infoReelItems.map((item, index) => (
 											<Grid
 												key={index}
 												container
 												flexDirection="column"
 												item
-												xs={3}
+												xs={5}
+												md={3}
 											>
 												<Grid item>
 													<Typography variant="body1" fontWeight={100}>

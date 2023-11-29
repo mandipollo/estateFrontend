@@ -17,6 +17,7 @@ import BathroomOutlinedIcon from "@mui/icons-material/BathroomOutlined";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import { lazy } from "react";
 
 const CardProduct = ({
 	propertyId,
@@ -64,6 +65,7 @@ const CardProduct = ({
 						{images.map((item, index) => {
 							return (
 								<CardMedia
+									loading={lazy}
 									key={index}
 									component="img"
 									height={220}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import DrawerNavbar from "./DrawerNavbar";
 
 import {
 	AppBar,
@@ -75,49 +76,7 @@ const Navbar = () => {
 						</StyledBox>
 						{/* /*small screen */}
 						<StyledBox propsm="flex" propmd="none" propflex="1">
-							<IconButton
-								aria-label="account of current user"
-								aria-controls="menu-appbar"
-								aria-haspopup="true"
-								size="large"
-								onClick={handleOpenNavMenu}
-							>
-								<MenuIcon />
-							</IconButton>
-							{/*attach menuitem */}
-							<Menu
-								sx={{
-									display: {
-										xs: "block",
-										md: "none",
-									},
-								}}
-								anchorEl={anchorNavEl}
-								keepMounted
-								anchorOrigin={{
-									horizontal: "left",
-									vertical: "bottom",
-								}}
-								transformOrigin={{
-									vertical: "top",
-									horizontal: "left",
-								}}
-								open={Boolean(anchorNavEl)}
-								onClose={handleCloseNavMenu}
-							>
-								{pages.map((item, index) => (
-									<MenuItem key={index}>
-										<Link
-											style={{ textDecoration: "none", color: "inherit" }}
-											to={item.link}
-											key={index}
-										>
-											<StyledTypographyNav>{item.label}</StyledTypographyNav>
-										</Link>
-									</MenuItem>
-								))}
-							</Menu>
-
+							<DrawerNavbar pages={pages} />
 							<StyledBox
 								propflex="1"
 								propsm="flex"
@@ -151,11 +110,6 @@ const Navbar = () => {
 								alignItems: "center",
 							}}
 						>
-							{/* {pages.map((page, index) => (
-								<StyledButton key={index}>
-									<StyledTypographyNav>{page}</StyledTypographyNav>
-								</StyledButton>
-							))} */}
 							{pages.map((item, index) => (
 								<Link
 									style={{ textDecoration: "none", color: "inherit" }}

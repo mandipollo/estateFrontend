@@ -1,0 +1,88 @@
+import React from "react";
+import { useState } from "react";
+
+import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import {
+	Box,
+	Divider,
+	Drawer,
+	IconButton,
+	ListItem,
+	List,
+} from "@mui/material";
+
+import StyledTypographyNav from "../styledComponents/StyledTypographyNav";
+import StyledButton from "../styledComponents/StyledButton";
+
+const DrawerNavbar = ({ pages }) => {
+	const [state, setState] = useState({
+		left: false,
+	});
+
+	const toggleDrawer = (anchor, open) => event => {
+		if (
+			event.type === "keydown" &&
+			(event.key === "Tab" || event.key === "Shift")
+		) {
+			return;
+		}
+
+		setState({ ...state, [anchor]: open });
+	};
+
+	const list = anchor => (
+		<Box
+			sx={{ width: 250 }}
+			role="presentation"
+			onClick={toggleDrawer(anchor, false)}
+			onKeyDown={toggleDrawer(anchor, false)}
+		>
+			<List
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "Center",
+					alignItems: "Center",
+				}}
+			>
+				{pages.map((item, index) => (
+					<Link
+						style={{ textDecoration: "none", color: "inherit" }}
+						to={item.link}
+						key={index}
+					>
+						<ListItem key={index} disablePadding>
+							<StyledButton key={index}>
+								<StyledTypographyNav>{item.label}</StyledTypographyNav>
+							</StyledButton>
+						</ListItem>
+						<Divider sx={{ width: "80%" }} />
+					</Link>
+				))}
+			</List>
+		</Box>
+	);
+
+	return (
+		<div>
+			{["left"].map(anchor => (
+				<React.Fragment key={anchor}>
+					<IconButton onClick={toggleDrawer(anchor, true)}>
+						<MenuIcon />
+					</IconButton>
+
+					<Drawer
+						anchor={anchor}
+						open={state[anchor]}
+						onClose={toggleDrawer(anchor, false)}
+					>
+						{list(anchor)}
+					</Drawer>
+				</React.Fragment>
+			))}
+		</div>
+	);
+};
+
+export default DrawerNavbar;

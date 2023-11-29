@@ -1,12 +1,14 @@
 import React from "react";
+import theme from "../theme";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 
 // componenets
 import Search from "../components/search/Search";
 import StyledButton from "../components/styledComponents/StyledButton";
 
 const ToRentPage = () => {
+	const isMd = useMediaQuery(theme.breakpoints.down("md"));
 	return (
 		<main>
 			<Box
@@ -19,7 +21,8 @@ const ToRentPage = () => {
 			>
 				<section>
 					<Box
-						sx={{ display: "flex", justifyContent: "center", margin: "20px 0" }}
+						margin={isMd ? 0 : "1em 0"}
+						sx={{ display: "flex", justifyContent: "center" }}
 					>
 						<Search
 							title="UK properties for rent"
