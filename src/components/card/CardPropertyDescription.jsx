@@ -7,7 +7,7 @@ import CalculateOutlinedIcon from "@mui/icons-material/CalculateOutlined";
 const CardPropertyDescription = ({ data }) => {
 	return (
 		<>
-			<StyledBox width="100%">
+			<StyledBox>
 				<Grid container flexDirection="row">
 					<Grid item xs>
 						<Typography variant="h6">

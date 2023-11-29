@@ -34,9 +34,9 @@ const CardSimiliarProp = ({ propertyId }) => {
 	return (
 		<>
 			{propertyData && (
-				<Grid container gap={2}>
+				<Grid container gap={1}>
 					{propertyData.data.map((item, index) => (
-						<Grid item key={index} xs={2}>
+						<Grid item key={index} xs={5.9} sm={5.9} md={3.9} lg={2.9}>
 							<Card>
 								<Link
 									style={{ textDecoration: "none", color: "black" }}

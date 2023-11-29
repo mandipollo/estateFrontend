@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import theme from "../theme";
 
 import axios from "axios";
-import { Box, Typography, Button, Grid } from "@mui/material";
+import { Box, Typography, Button, Grid, useMediaQuery } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -19,11 +20,12 @@ import CardMortgageCalculator from "../components/card/CardMortgageCalculator";
 import CardSimiliarProp from "../components/card/CardSimiliarProp";
 
 const PropertyDetail = () => {
+	const ismd = useMediaQuery(theme.breakpoints.down("md"));
 	const navigateBack = useNavigateBack();
 	const { propertyId } = useParams();
 
 	const [data, setData] = useState("");
-
+	console.log(data);
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await axios.get("http://localhost:5003/forSaleDetail", {
@@ -38,7 +40,7 @@ const PropertyDetail = () => {
 	}, [propertyId]);
 
 	return (
-		<StyledBox display="flex" flexDirection="column" width="100%" gap={2}>
+		<StyledBox display="flex" flexDirection={"column"} width="100%" gap={2}>
 			<Grid container>
 				<Grid
 					flex={1}
@@ -50,7 +52,11 @@ const PropertyDetail = () => {
 				>
 					{data && (
 						<>
-							<StyledBox width="80%" flexDirection="column" gap={2}>
+							<StyledBox
+								width={ismd ? "100%" : "80%"}
+								flexDirection="column"
+								gap={2}
+							>
 								<Box width="100%" alignItems="flex-start" padding="1em 0">
 									<Button
 										onClick={navigateBack}
@@ -70,13 +76,18 @@ const PropertyDetail = () => {
 								<StyledBox width="100%" alignItems="flex-start">
 									<CarousalImage data={data} />
 								</StyledBox>
-								<CardPropertyDescription data={data} />
+								<StyledBox
+									flexDirection="column"
+									padding={ismd ? "0 1em" : "none"}
+								>
+									<CardPropertyDescription data={data} />
+								</StyledBox>
 
 								<StyledBox
 									width="100%"
 									borderBottom="1px solid rgba(0, 0, 0, 0.2)"
 									borderTop="1px solid rgba(0, 0, 0, 0.2)"
-									padding="1em 0"
+									padding={ismd ? "1em" : "1em 0"}
 								>
 									<Grid container flexDirection="row">
 										{data.data.infoReelItems.map((item, index) => (
@@ -106,7 +117,10 @@ const PropertyDetail = () => {
 									</Grid>
 								</StyledBox>
 
-								<StyledBox flexDirection="column">
+								<StyledBox
+									padding={ismd ? "0 1em" : "none"}
+									flexDirection="column"
+								>
 									<Typography variant="h6">Key features</Typography>
 									<Grid container gap={1}>
 										{data.data.keyFeatures.map((item, index) => (
@@ -118,7 +132,10 @@ const PropertyDetail = () => {
 										))}
 									</Grid>
 								</StyledBox>
-								<StyledBox flexDirection="column">
+								<StyledBox
+									padding={ismd ? "0 1em" : "none"}
+									flexDirection="column"
+								>
 									<Typography variant="h6">Property description</Typography>
 									<Typography
 										variant="body2"
@@ -129,39 +146,52 @@ const PropertyDetail = () => {
 										}}
 									/>
 								</StyledBox>
-								<StyledBox flexDirection="column" gap={1}>
+								<StyledBox
+									gap={1}
+									padding={ismd ? "0 1em" : "none"}
+									flexDirection="column"
+								>
 									<Typography variant="h6">
 										{data.data.address.displayAddress}
 									</Typography>
-									<Box>
+									<Box display="flex" justifyContent={ismd ? "center" : null}>
 										<img
 											src={
-												data.data.staticMapImgUrls.staticMapImgUrlDesktopLarge
+												!ismd
+													? data.data.staticMapImgUrls
+															.staticMapImgUrlDesktopLarge
+													: data.data.staticMapImgUrls.staticMapImgUrlMobile
 											}
 										></img>
 									</Box>
 								</StyledBox>
-								<CardMortgageCalculator
-									propertyPrice={data.data.mortgageCalculator.price}
-								/>
+								<StyledBox
+									flexDirection="column"
+									padding={ismd ? "0 1em" : "none"}
+								>
+									<CardMortgageCalculator
+										propertyPrice={data.data.mortgageCalculator.price}
+									/>
+								</StyledBox>
 							</StyledBox>
 						</>
 					)}
 				</Grid>
-				<Grid container item xs={2}>
-					<Grid item>
-						<Typography>side bar</Typography>
+				{!ismd && (
+					<Grid container item xs={2}>
+						<Grid item>
+							<Typography>side bar</Typography>
+						</Grid>
 					</Grid>
-				</Grid>
+				)}
 			</Grid>
 
 			<StyledBox
 				flexDirection="column"
-				marginLeft={15}
 				gap={2}
 				borderTop="1px solid rgba(0,0,0,0.2)"
 				borderBottom="1px solid rgba(0,0,0,0.2)"
-				padding={4}
+				padding={ismd ? 1 : 4}
 			>
 				<Typography variant="h6">Similiar to this property</Typography>
 				<CardSimiliarProp propertyId={propertyId} />

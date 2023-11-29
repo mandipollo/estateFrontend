@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 import { Stack, Pagination, Button } from "@mui/material";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
@@ -13,11 +14,20 @@ const PaginationMui = ({
 	prevPageHandler,
 	nextPageHandler,
 }) => {
+	const { pathname } = useLocation();
+
+	const resultsRent = useSelector(state => state.forRent);
+
 	const results = useSelector(state => state.forSale);
+
+	const numberOfPagesRent = Math.ceil(
+		resultsRent.data.totalResultCount / resultsRent.data.resultsPerPage
+	);
 	const numberOfPages = Math.ceil(
 		results.data.totalResultCount / results.data.resultsPerPage
 	);
 
+	const isRentPage = pathname ? "/propertyToRent" : false;
 	return (
 		<Stack direction="row" spacing={2}>
 			<Button
@@ -30,7 +40,7 @@ const PaginationMui = ({
 				Previous
 			</Button>
 			<Pagination
-				count={numberOfPages}
+				count={isRentPage ? numberOfPagesRent : numberOfPages}
 				page={page}
 				onChange={handlePageChange}
 			/>

@@ -76,7 +76,7 @@ const PropertyToRent = () => {
 				dispatch(resetStatus());
 			};
 		}
-	}, [page, filterParamsState]);
+	}, [page, filterParamsState, identifierState]);
 
 	const prevPageHandler = () => {
 		setPage(prev => prev - 1);
