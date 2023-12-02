@@ -18,6 +18,7 @@ import CarousalImage from "../components/carousal/CarousalImage";
 import CardPropertyDescription from "../components/card/CardPropertyDescription";
 import CardMortgageCalculator from "../components/card/CardMortgageCalculator";
 import CardSimiliarProp from "../components/card/CardSimiliarProp";
+import CardCustomer from "../components/card/CardCustomer";
 
 const PropertyDetail = () => {
 	const ismd = useMediaQuery(theme.breakpoints.down("md"));
@@ -55,7 +56,7 @@ const PropertyDetail = () => {
 							<StyledBox
 								width={ismd ? "100%" : "80%"}
 								flexDirection="column"
-								gap={2}
+								gap={1}
 							>
 								<Box width="100%" alignItems="flex-start" padding="1em 0">
 									<Button
@@ -159,7 +160,7 @@ const PropertyDetail = () => {
 											src={
 												!ismd
 													? data.data.staticMapImgUrls
-															.staticMapImgUrlDesktopLarge
+															.staticMapImgUrlDesktopSmall
 													: data.data.staticMapImgUrls.staticMapImgUrlMobile
 											}
 										></img>
@@ -177,10 +178,13 @@ const PropertyDetail = () => {
 						</>
 					)}
 				</Grid>
-				{!ismd && (
-					<Grid container item xs={2}>
+				{!ismd && data && (
+					<Grid container item xs={4}>
 						<Grid item>
-							<Typography>side bar</Typography>
+							<CardCustomer
+								customer={data.data.customer}
+								tele={data.data.contactInfo.telephoneNumbers.localNumber}
+							/>
 						</Grid>
 					</Grid>
 				)}

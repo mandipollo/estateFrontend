@@ -7,6 +7,7 @@ import {
 	Typography,
 	CardActions,
 	Button,
+	useMediaQuery,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
@@ -18,6 +19,7 @@ import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutl
 
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import { lazy } from "react";
+import theme from "../../theme";
 
 const CardProduct = ({
 	propertyId,
@@ -31,6 +33,7 @@ const CardProduct = ({
 	customerImage,
 	contactNo,
 }) => {
+	const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
 		<Card
 			sx={{
@@ -65,7 +68,6 @@ const CardProduct = ({
 						{images.map((item, index) => {
 							return (
 								<CardMedia
-									loading={lazy}
 									key={index}
 									component="img"
 									height={220}
@@ -117,9 +119,7 @@ const CardProduct = ({
 							</Box>
 
 							<Typography
-								sx={{
-									display: { xs: "none", sm: "none", md: "none", lg: "flex" },
-								}}
+								display={isSm ? "none" : "block"}
 								gutterBottom
 								variant="body2"
 								color="text.secondary"

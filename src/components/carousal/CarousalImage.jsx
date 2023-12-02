@@ -31,7 +31,6 @@ const CarousalImage = ({ data }) => {
 						component="img"
 						height="100%"
 						width="100%"
-						loading="lazy"
 						image={item.url}
 						alt="property image"
 						sx={{ objectFit: "cover" }}
