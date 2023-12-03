@@ -19,6 +19,7 @@ const CardCustomer = ({ customer, tele }) => {
 				height: 300,
 				width: 350,
 				position: "sticky",
+				top: 0,
 			}}
 		>
 			<Box sx={{ display: "flex", flexDirection: "row", gap: 1, margin: 1 }}>

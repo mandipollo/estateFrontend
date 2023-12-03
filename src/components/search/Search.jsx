@@ -118,7 +118,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 			variant="outlined"
 		>
 			<CardContent>
-				<Typography sx={{ margin: 1, color: "#35A29F" }} variant="h5">
+				<Typography sx={{ margin: 1, color: "#01DEB6" }} variant="h5">
 					{title}
 				</Typography>
 				<Typography sx={{ margin: 1 }} variant="body1" color="white">
@@ -141,7 +141,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 								margin: 1,
 								textTransform: "none",
 								color: "black",
-								backgroundColor: "#35A29F",
+								backgroundColor: "#01DEB6",
 							}}
 							size="large"
 							variant="contained"
@@ -157,7 +157,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 								margin: 1,
 								textTransform: "none",
 								color: "black",
-								backgroundColor: "#35A29F",
+								backgroundColor: "#01DEB6",
 							}}
 							size="large"
 							variant="contained"

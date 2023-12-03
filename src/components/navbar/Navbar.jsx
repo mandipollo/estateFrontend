@@ -19,6 +19,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import StyledButton from "../styledComponents/StyledButton";
 import StyledTypographyNav from "../styledComponents/StyledTypographyNav";
 import StyledBox from "../styledComponents/StyledBox";
+import UserDrawer from "../user/UserDrawer";
 
 const pages = [
 	{ label: "Buy", link: "forSale" },
@@ -61,7 +62,7 @@ const Navbar = () => {
 							>
 								Estate
 							</Typography>
-							<VillaIcon sx={{ ml: 1, color: "#35A29F" }} />
+							<VillaIcon sx={{ ml: 1, mt: 0.4, color: "#01DEB6" }} />
 						</StyledBox>
 						{/* /*small screen */}
 						<StyledBox propsm="flex" propmd="none" propflex="1">
@@ -86,7 +87,7 @@ const Navbar = () => {
 								>
 									Estate
 								</Typography>
-								<VillaIcon color="success" sx={{ ml: 1 }} />
+								<VillaIcon sx={{ ml: 1, color: "#01DEB6" }} />
 							</StyledBox>
 						</StyledBox>
 
@@ -120,11 +121,7 @@ const Navbar = () => {
 								},
 							}}
 						>
-							<StyledButton variant="outlined" color="success">
-								<Typography variant="body1" color="black">
-									Sign in
-								</Typography>
-							</StyledButton>
+							<UserDrawer />
 						</StyledBox>
 						<StyledBox
 							propsm="flex"
@@ -135,9 +132,7 @@ const Navbar = () => {
 								},
 							}}
 						>
-							<StyledButton variant="outlined" color="success">
-								<PersonIcon />
-							</StyledButton>
+							<UserDrawer />
 						</StyledBox>
 					</Toolbar>
 				</Container>
