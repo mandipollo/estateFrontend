@@ -24,11 +24,14 @@ const PropertyDetailRent = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get("http://localhost:5003/toRentDetail", {
-				params: {
-					id: propertyId,
-				},
-			});
+			const response = await axios.get(
+				"https://us-central1-estate-2aef8.cloudfunctions.net/toRentDetail",
+				{
+					params: {
+						id: propertyId,
+					},
+				}
+			);
 			const data = response.data;
 			setData(data);
 			console.log(data);
@@ -168,6 +171,7 @@ const PropertyDetailRent = () => {
 									</Typography>
 									<Box>
 										<img
+											alt="map"
 											src={
 												data.data.staticMapImgUrls.staticMapImgUrlDesktopLarge
 											}

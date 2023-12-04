@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
-import axios from "axios";
-
-import { Box, Typography, Grid, Input, Button } from "@mui/material";
+import { Box, Typography, Grid, Button } from "@mui/material";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +9,7 @@ import { fetchForRent, resetStatus } from "../store/forRent";
 // components
 import FilterNav from "../components/filter/FilterNav";
 import PaginationMui from "../components/pagination/Pagination";
-import CardProduct from "../components/card/CardProducts";
+
 // hooks
 import useIsMount from "../components/utilities/useIsMount";
 import CardProductRent from "../components/card/CardProducsRent";

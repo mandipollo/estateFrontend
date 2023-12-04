@@ -1,21 +1,14 @@
 import React from "react";
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
 import {
 	Box,
-	Divider,
 	Drawer,
 	IconButton,
-	ListItem,
-	List,
 	Typography,
 	useMediaQuery,
-	TextField,
 } from "@mui/material";
 
-import StyledTypographyNav from "../styledComponents/StyledTypographyNav";
 import StyledButton from "../styledComponents/StyledButton";
 import { PersonPinCircleOutlined } from "@mui/icons-material";
 import VillaIcon from "@mui/icons-material/Villa";

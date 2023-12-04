@@ -5,9 +5,12 @@ export const fetchForRent = createAsyncThunk(
 	"forRent/fetchForRent",
 	async params => {
 		try {
-			const response = await axios.get("http://localhost:5003/forRent", {
-				params,
-			});
+			const response = await axios.get(
+				"https://us-central1-estate-2aef8.cloudfunctions.net/forRent",
+				{
+					params,
+				}
+			);
 			return response.data;
 		} catch (error) {
 			throw error;

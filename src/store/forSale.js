@@ -5,9 +5,12 @@ export const fetchForSale = createAsyncThunk(
 	"forSale/fetchForSale",
 	async params => {
 		try {
-			const response = await axios.get("http://localhost:5003/forSale", {
-				params,
-			});
+			const response = await axios.get(
+				"https://us-central1-estate-2aef8.cloudfunctions.net/forSale",
+				{
+					params,
+				}
+			);
 			return response.data;
 		} catch (error) {
 			throw error;

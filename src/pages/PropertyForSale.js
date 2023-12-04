@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
-import axios from "axios";
-
-import { Box, Typography, Grid, Input, Button } from "@mui/material";
+import { Box, Typography, Grid, Button } from "@mui/material";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +24,7 @@ const PropertyForSale = () => {
 		setPage(value);
 	};
 	const forSaleData = useSelector(state => state.forSale.data.data);
+	console.log(forSaleData);
 	const forSaleStatus = useSelector(state => state.forSale.status);
 	console.log(forSaleStatus);
 	const forSaleError = useSelector(state => state.forSale.error);
@@ -116,7 +115,8 @@ const PropertyForSale = () => {
 				>
 					{forSaleStatus === "loading" && <p>Loading....</p>}
 					{forSaleStatus === "failed" && <p>Error:{forSaleError}</p>}
-					{forSaleStatus === "succeeded" && (
+					{forSaleStatus === "succeeded" && !forSaleData && <h1>no data</h1>}
+					{forSaleStatus === "succeeded" && forSaleData && (
 						<>
 							{forSaleData.map(item => (
 								<CardProduct

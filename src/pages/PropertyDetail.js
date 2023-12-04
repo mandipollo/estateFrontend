@@ -29,11 +29,14 @@ const PropertyDetail = () => {
 	console.log(data);
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get("http://localhost:5003/forSaleDetail", {
-				params: {
-					id: propertyId,
-				},
-			});
+			const response = await axios.get(
+				"https://us-central1-estate-2aef8.cloudfunctions.net/forSaleDetail",
+				{
+					params: {
+						id: propertyId,
+					},
+				}
+			);
 			const data = response.data;
 			setData(data);
 		};
@@ -157,6 +160,7 @@ const PropertyDetail = () => {
 									</Typography>
 									<Box display="flex" justifyContent={ismd ? "center" : null}>
 										<img
+											alt="map"
 											src={
 												!ismd
 													? data.data.staticMapImgUrls

@@ -18,7 +18,7 @@ const CardSimiliarProp = ({ propertyId }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await axios.get(
-				"http://localhost:5003/forSaleSimiliarProperty",
+				"https://us-central1-estate-2aef8.cloudfunctions.net/forSaleSimiliarProperty",
 				{
 					params: {
 						id: propertyId,

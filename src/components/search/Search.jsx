@@ -47,11 +47,14 @@ const Search = ({ propXs, propSm, title, description }) => {
 				try {
 					// setIdentifierHandler(searchInput);
 
-					const response = await axios.get("http://localhost:5003/identifier", {
-						params: {
-							location: searchInput,
-						},
-					});
+					const response = await axios.get(
+						"https://us-central1-estate-2aef8.cloudfunctions.net/identifier",
+						{
+							params: {
+								location: searchInput,
+							},
+						}
+					);
 
 					const data = response.data.data;
 					setOptions(data);

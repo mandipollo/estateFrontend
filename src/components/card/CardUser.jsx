@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Box, Typography, Button, useMediaQuery } from "@mui/material";
+import { Box, Typography, Button, useMediaQuery } from "@mui/material";
 import theme from "../../theme";
 
 const CardUser = () => {

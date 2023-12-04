@@ -31,6 +31,7 @@ import { ArrowDropDown } from "@mui/icons-material";
 import AutocompleteSearch from "../search/AutocompleteSearch";
 // filter nav for easy access in various pages
 const FilterNav = ({ filterParamsState }) => {
+	const dispatch = useDispatch();
 	const isxs = useMediaQuery(theme.breakpoints.down("sm"));
 
 	// autocomplete
@@ -57,11 +58,14 @@ const FilterNav = ({ filterParamsState }) => {
 				try {
 					// setIdentifierHandler(searchInput);
 
-					const response = await axios.get("http://localhost:5003/identifier", {
-						params: {
-							location: searchInput,
-						},
-					});
+					const response = await axios.get(
+						"https://us-central1-estate-2aef8.cloudfunctions.net/identifier",
+						{
+							params: {
+								location: searchInput,
+							},
+						}
+					);
 
 					const data = response.data.data;
 					setOptions(data);
@@ -74,7 +78,7 @@ const FilterNav = ({ filterParamsState }) => {
 		return () => {
 			clearTimeout(timeout);
 		};
-	}, [searchInput]);
+	}, [searchInput, dispatch]);
 
 	// select value from the list
 
@@ -87,11 +91,11 @@ const FilterNav = ({ filterParamsState }) => {
 		if (suggestion) {
 			dispatch(setIdentifierHandler(suggestion));
 		}
-	}, [suggestion]);
+	}, [suggestion, dispatch]);
 
 	//
 	const isMount = useIsMount();
-	const dispatch = useDispatch();
+
 	const [allValues, setAllValues] = useState({
 		radius: filterParamsState.radius || "0.0",
 		minPrice: filterParamsState.minPrice || "",
@@ -114,7 +118,7 @@ const FilterNav = ({ filterParamsState }) => {
 		} else {
 			dispatch(setFilterParams(allValues));
 		}
-	}, [allValues]);
+	}, [allValues, dispatch]);
 
 	return (
 		<Grid container>

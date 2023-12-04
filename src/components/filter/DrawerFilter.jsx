@@ -17,7 +17,6 @@ import {
 import React from "react";
 
 import {
-	filterRadius,
 	filterAddedToSite,
 	filterMaxBed,
 	filterMaxPrice,
@@ -25,7 +24,7 @@ import {
 	filterMinPrice,
 	filterPropertyType,
 } from "./filterValues/FilterValues";
-import StyledGrid, { StyledGridDrawer } from "../styledComponents/StyledGrid";
+import { StyledGridDrawer } from "../styledComponents/StyledGrid";
 
 const TemporaryDrawer = ({ handleChange, allValues }) => {
 	const [state, setState] = useState({

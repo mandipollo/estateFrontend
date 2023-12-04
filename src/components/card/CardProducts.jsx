@@ -18,7 +18,7 @@ import BathroomOutlinedIcon from "@mui/icons-material/BathroomOutlined";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
-import { lazy } from "react";
+
 import theme from "../../theme";
 
 const CardProduct = ({

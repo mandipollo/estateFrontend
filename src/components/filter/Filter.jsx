@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 import {
 	Grid,
@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 // redux
-import { setForSale, fetchForSale } from "../../store/forSale";
+import { fetchForSale } from "../../store/forSale";
 import { setFilterParams } from "../../store/filterParams";
 import { useDispatch, useSelector } from "react-redux";
 

@@ -6,11 +6,14 @@ const fetchPropertyDetailSale = createAsyncThunk(
 	"propertyDetailSale/fetchPropertyDetail",
 	async ({ id }) => {
 		try {
-			const response = await axios.get("http://localhost:5003/forSaleDetail", {
-				params: {
-					id,
-				},
-			});
+			const response = await axios.get(
+				"https://us-central1-estate-2aef8.cloudfunctions.net/forSaleDetail",
+				{
+					params: {
+						id,
+					},
+				}
+			);
 			return response.data;
 		} catch (error) {
 			throw error;
