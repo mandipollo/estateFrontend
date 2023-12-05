@@ -8,6 +8,7 @@ import {
 	FormControl,
 	Select,
 	OutlinedInput,
+	Box,
 	useMediaQuery,
 } from "@mui/material";
 
@@ -121,188 +122,193 @@ const FilterNav = ({ filterParamsState }) => {
 	}, [allValues, dispatch]);
 
 	return (
-		<Grid container>
-			<Grid
-				item
-				xs={isxs ? 6 : false}
-				paddingLeft={1}
-				alignItems="center"
-				display="flex"
-			>
-				<AutocompleteSearch
-					widthvalue={300}
-					searchInput={searchInput}
-					searchInputHandler={searchInputHandler}
-					options={options}
-					autoCompleteHandler={autoCompleteHandler}
-				/>
+		<Box sx={{ display: "flex", justifyContent: "center" }}>
+			<Grid container>
+				<Grid
+					item
+					xs={isxs ? 6 : false}
+					paddingLeft={1}
+					alignItems="center"
+					display="flex"
+				>
+					<AutocompleteSearch
+						widthvalue={300}
+						searchInput={searchInput}
+						searchInputHandler={searchInputHandler}
+						options={options}
+						autoCompleteHandler={autoCompleteHandler}
+					/>
+				</Grid>
+				<Grid item xs>
+					<FormControl fullWidth>
+						<Select
+							IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
+							sx={{
+								color: "white",
+								fontWeight: 100,
+								boxShadow: "none",
+								".MuiOutlinedInput-notchedOutline": { border: 0 },
+							}}
+							name="radius"
+							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+							value={allValues.radius}
+							onChange={handleChange}
+							displayEmpty
+							size="medium"
+						>
+							{filterRadius.map((options, index) => (
+								<MenuItem key={index} value={options.radiusValue}>
+									{options.radius}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+				</Grid>
+
+				<StyledGrid points={theme.breakpoints.values.tablet} item xs>
+					<FormControl fullWidth>
+						<Select
+							IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
+							sx={{
+								fontWeight: 100,
+								color: "white",
+								boxShadow: "none",
+								".MuiOutlinedInput-notchedOutline": { border: 0 },
+							}}
+							name="minPrice"
+							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+							value={allValues.minPrice}
+							onChange={handleChange}
+							displayEmpty
+							size="medium"
+						>
+							{filterMinPrice.map((options, index) => (
+								<MenuItem key={index} value={options.priceValue}>
+									{options.price}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+				</StyledGrid>
+				<StyledGrid points={theme.breakpoints.values.tablet} item xs>
+					<FormControl fullWidth>
+						<Select
+							IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
+							sx={{
+								fontWeight: 100,
+								color: "white",
+								boxShadow: "none",
+								".MuiOutlinedInput-notchedOutline": { border: 0 },
+							}}
+							name="maxPrice"
+							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+							value={allValues.maxPrice}
+							onChange={handleChange}
+							displayEmpty
+							size="medium"
+						>
+							{filterMaxPrice.map((options, index) => (
+								<MenuItem key={index} value={options.priceValue}>
+									{options.price}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+				</StyledGrid>
+
+				<StyledGrid points={theme.breakpoints.values.lg} item xs>
+					<FormControl fullWidth>
+						<Select
+							IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
+							sx={{
+								fontWeight: 100,
+								color: "white",
+								boxShadow: "none",
+								".MuiOutlinedInput-notchedOutline": { border: 0 },
+							}}
+							name="minBedrooms"
+							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+							value={allValues.minBedrooms}
+							onChange={handleChange}
+							displayEmpty
+							size="medium"
+						>
+							{filterMinBed.map((options, index) => (
+								<MenuItem key={index} value={options.bedroomValue}>
+									{options.bedroom}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+				</StyledGrid>
+				<StyledGrid points={theme.breakpoints.values.lg} item xs>
+					<FormControl fullWidth>
+						<Select
+							IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
+							sx={{
+								fontWeight: 100,
+								color: "white",
+								boxShadow: "none",
+								".MuiOutlinedInput-notchedOutline": { border: 0 },
+							}}
+							name="maxBedrooms"
+							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+							value={allValues.maxBedrooms}
+							onChange={handleChange}
+							displayEmpty
+							size="medium"
+						>
+							{filterMaxBed.map((options, index) => (
+								<MenuItem key={index} value={options.bedroomValue}>
+									{options.bedroom}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+				</StyledGrid>
+
+				<StyledGrid points={theme.breakpoints.values.lg} item xs>
+					<FormControl fullWidth>
+						<Select
+							IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
+							sx={{
+								fontWeight: 100,
+								color: "white",
+								boxShadow: "none",
+								".MuiOutlinedInput-notchedOutline": { border: 0 },
+							}}
+							name="propertyType"
+							input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+							value={allValues.propertyType}
+							onChange={handleChange}
+							displayEmpty
+							size="medium"
+						>
+							{filterPropertyType.map((options, index) => (
+								<MenuItem key={index} value={options.propertyValue}>
+									{options.propertyName}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+				</StyledGrid>
+
+				<Grid
+					item
+					xs
+					justifyContent={{ xs: "flex-end", md: "center" }}
+					alignItems="center"
+					display="flex"
+				>
+					<FormControl>
+						<TemporaryDrawer
+							handleChange={handleChange}
+							allValues={allValues}
+						/>
+					</FormControl>
+				</Grid>
 			</Grid>
-			<Grid item xs>
-				<FormControl fullWidth>
-					<Select
-						IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
-						sx={{
-							color: "white",
-							fontWeight: 100,
-							boxShadow: "none",
-							".MuiOutlinedInput-notchedOutline": { border: 0 },
-						}}
-						name="radius"
-						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.radius}
-						onChange={handleChange}
-						displayEmpty
-						size="medium"
-					>
-						{filterRadius.map((options, index) => (
-							<MenuItem key={index} value={options.radiusValue}>
-								{options.radius}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
-			</Grid>
-
-			<StyledGrid points={theme.breakpoints.values.tablet} item xs>
-				<FormControl fullWidth>
-					<Select
-						IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
-						sx={{
-							fontWeight: 100,
-							color: "white",
-							boxShadow: "none",
-							".MuiOutlinedInput-notchedOutline": { border: 0 },
-						}}
-						name="minPrice"
-						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.minPrice}
-						onChange={handleChange}
-						displayEmpty
-						size="medium"
-					>
-						{filterMinPrice.map((options, index) => (
-							<MenuItem key={index} value={options.priceValue}>
-								{options.price}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
-			</StyledGrid>
-			<StyledGrid points={theme.breakpoints.values.tablet} item xs>
-				<FormControl fullWidth>
-					<Select
-						IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
-						sx={{
-							fontWeight: 100,
-							color: "white",
-							boxShadow: "none",
-							".MuiOutlinedInput-notchedOutline": { border: 0 },
-						}}
-						name="maxPrice"
-						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.maxPrice}
-						onChange={handleChange}
-						displayEmpty
-						size="medium"
-					>
-						{filterMaxPrice.map((options, index) => (
-							<MenuItem key={index} value={options.priceValue}>
-								{options.price}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
-			</StyledGrid>
-
-			<StyledGrid points={theme.breakpoints.values.lg} item xs>
-				<FormControl fullWidth>
-					<Select
-						IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
-						sx={{
-							fontWeight: 100,
-							color: "white",
-							boxShadow: "none",
-							".MuiOutlinedInput-notchedOutline": { border: 0 },
-						}}
-						name="minBedrooms"
-						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.minBedrooms}
-						onChange={handleChange}
-						displayEmpty
-						size="medium"
-					>
-						{filterMinBed.map((options, index) => (
-							<MenuItem key={index} value={options.bedroomValue}>
-								{options.bedroom}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
-			</StyledGrid>
-			<StyledGrid points={theme.breakpoints.values.lg} item xs>
-				<FormControl fullWidth>
-					<Select
-						IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
-						sx={{
-							fontWeight: 100,
-							color: "white",
-							boxShadow: "none",
-							".MuiOutlinedInput-notchedOutline": { border: 0 },
-						}}
-						name="maxBedrooms"
-						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.maxBedrooms}
-						onChange={handleChange}
-						displayEmpty
-						size="medium"
-					>
-						{filterMaxBed.map((options, index) => (
-							<MenuItem key={index} value={options.bedroomValue}>
-								{options.bedroom}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
-			</StyledGrid>
-
-			<StyledGrid points={theme.breakpoints.values.lg} item xs>
-				<FormControl fullWidth>
-					<Select
-						IconComponent={() => <ArrowDropDown style={{ color: "green" }} />}
-						sx={{
-							fontWeight: 100,
-							color: "white",
-							boxShadow: "none",
-							".MuiOutlinedInput-notchedOutline": { border: 0 },
-						}}
-						name="propertyType"
-						input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
-						value={allValues.propertyType}
-						onChange={handleChange}
-						displayEmpty
-						size="medium"
-					>
-						{filterPropertyType.map((options, index) => (
-							<MenuItem key={index} value={options.propertyValue}>
-								{options.propertyName}
-							</MenuItem>
-						))}
-					</Select>
-				</FormControl>
-			</StyledGrid>
-
-			<Grid
-				item
-				xs
-				justifyContent={{ xs: "flex-end", md: "center" }}
-				alignItems="center"
-				display="flex"
-			>
-				<FormControl>
-					<TemporaryDrawer handleChange={handleChange} allValues={allValues} />
-				</FormControl>
-			</Grid>
-		</Grid>
+		</Box>
 	);
 };
 

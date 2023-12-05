@@ -62,7 +62,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 					console.log(error);
 				}
 			}
-		}, 100);
+		}, 500);
 
 		return () => {
 			clearTimeout(timeout);

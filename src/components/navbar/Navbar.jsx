@@ -38,7 +38,7 @@ const Navbar = () => {
 					height: "4rem",
 				}}
 			>
-				<Container sx={{ maxWidth: "80em" }}>
+				<Container sx={{ height: "100%", maxWidth: 1200, width: "100%" }}>
 					<Toolbar disableGutters>
 						{/* medium screen */}
 						<StyledBox propsm="none" propmd="flex" propflex="2">
