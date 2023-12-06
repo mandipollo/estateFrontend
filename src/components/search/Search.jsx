@@ -27,6 +27,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 
 	const [searchInput, setSearchInput] = useState("");
 	const [selectedSuggestion, setSelectedSuggestion] = useState(null);
+	const [error, setError] = useState(null);
 	const [options, setOptions] = useState([]);
 
 	const searchInputHandler = e => {
@@ -60,9 +61,10 @@ const Search = ({ propXs, propSm, title, description }) => {
 					setOptions(data);
 				} catch (error) {
 					console.log(error);
+					setError(error);
 				}
 			}
-		}, 500);
+		}, 100);
 
 		return () => {
 			clearTimeout(timeout);
