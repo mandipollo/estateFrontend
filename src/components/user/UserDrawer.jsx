@@ -1,6 +1,10 @@
 import React from "react";
 import { useState } from "react";
 
+// firebase
+import { auth } from "../../firebase.config";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 import { Drawer, IconButton, Typography, useMediaQuery } from "@mui/material";
 
 import StyledButton from "../styledComponents/StyledButton";
@@ -15,6 +19,8 @@ import axios from "axios";
 // components
 import UserAccount from "./UserAccount";
 import CreateUser from "./CreateUser";
+import SigninUser from "./SigninUser";
+import { json } from "react-router-dom";
 
 const UserDrawer = () => {
 	const [error, setError] = useState(null);
@@ -75,7 +81,8 @@ const UserDrawer = () => {
 			);
 
 			const data = await response.data;
-			setAccountExists(data.exist);
+			console.log(data);
+			setAccountExists(true);
 			setAccountChecked(true);
 		} catch (error) {
 			console.log(error);
@@ -101,12 +108,26 @@ const UserDrawer = () => {
 			);
 			const data = await response.data;
 			console.log(data);
+			setAccountExists(data.exists);
+			setAccountChecked(true);
 		} catch (error) {
 			console.error(error);
 			setError(error);
 		}
 	};
 
+	const signInHandler = async () => {
+		try {
+			const response = await signInWithEmailAndPassword(auth, email, password);
+
+			const data = response.user;
+
+			console.log(data);
+		} catch (error) {
+			console.error(error);
+			setError(error);
+		}
+	};
 	console.log(error);
 	return (
 		<div>
@@ -152,6 +173,14 @@ const UserDrawer = () => {
 								passwordHandler={passwordHandler}
 								isPasswordValid={isPasswordValid}
 								createUserHandler={createUserHandler}
+							/>
+						)}
+						{accountExists && accountChecked && (
+							<SigninUser
+								password={password}
+								passwordHandler={passwordHandler}
+								isValidPassword={isPasswordValid}
+								signInHandler={signInHandler}
 							/>
 						)}
 					</Drawer>

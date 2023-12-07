@@ -68,6 +68,7 @@ const CardProduct = ({
 						{images.map((item, index) => {
 							return (
 								<CardMedia
+									loading="lazy"
 									key={index}
 									component="img"
 									height={220}

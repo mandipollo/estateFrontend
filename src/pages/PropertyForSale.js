@@ -90,7 +90,7 @@ const PropertyForSale = () => {
 				sx={{
 					display: "flex",
 					flexDirection: "column",
-					width: "100vw",
+					maxWidth: 1250,
 				}}
 			>
 				<Grid
