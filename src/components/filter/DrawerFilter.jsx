@@ -53,7 +53,7 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 			}}
 			role="presentation"
 			onClick={toggleDrawer(anchor, false)}
-			onKeyDown={toggleDrawer(anchor, false)}
+			// onKeyDown={toggleDrawer(anchor, false)}
 		>
 			<Grid container padding="10px" gap={1}>
 				<Grid container item xs={12}>

@@ -8,6 +8,7 @@ import {
 	Button,
 } from "@mui/material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import StyledButton from "../styledComponents/StyledButton";
 
 const CardCustomer = ({ customer, tele }) => {
 	return (
@@ -71,19 +72,18 @@ const CardCustomer = ({ customer, tele }) => {
 					</Typography>
 				</Box>
 
-				<Button
+				<StyledButton
 					size="large"
 					sx={{
 						width: "90%",
-						backgroundColor: "#97FEED",
-						textTransform: "none",
+						backgroundColor: "#01DEB6",
 						padding: "1em",
 					}}
 					variant="outlined"
 					startIcon=<MailOutlineIcon />
 				>
 					<Typography>Request details</Typography>
-				</Button>
+				</StyledButton>
 			</Box>
 		</Card>
 	);

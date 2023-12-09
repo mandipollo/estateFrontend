@@ -18,6 +18,7 @@ import { setIdentifierHandler } from "../../store/identifier";
 // components
 
 import AutocompleteSearch from "./AutocompleteSearch";
+import StyledButton from "../styledComponents/StyledButton";
 
 // hooks
 
@@ -140,35 +141,29 @@ const Search = ({ propXs, propSm, title, description }) => {
 
 				<CardActions sx={{ display: "flex", justifyContent: "center" }}>
 					{pathname !== "/toRent" && (
-						<Button
+						<StyledButton
 							onClick={submitHandlerSale}
 							sx={{
-								margin: 1,
-								textTransform: "none",
-								color: "black",
 								backgroundColor: "#01DEB6",
 							}}
 							size="large"
 							variant="contained"
 						>
 							<Typography>For Sale</Typography>
-						</Button>
+						</StyledButton>
 					)}
 
 					{pathname !== "/forSale" && (
-						<Button
+						<StyledButton
 							onClick={submitHandlerRent}
 							sx={{
-								margin: 1,
-								textTransform: "none",
-								color: "black",
 								backgroundColor: "#01DEB6",
 							}}
 							size="large"
 							variant="contained"
 						>
 							<Typography>To Rent</Typography>
-						</Button>
+						</StyledButton>
 					)}
 				</CardActions>
 			</CardContent>

@@ -28,6 +28,7 @@ import {
 	filterPropertyType,
 	filterAddedToSite,
 } from "./filterValues/FilterValues";
+import StyledButton from "../styledComponents/StyledButton";
 const Filter = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -238,19 +239,17 @@ const Filter = () => {
 				</Grid>
 				<Grid container item spacing={2}>
 					<Grid item xs>
-						<Button
+						<StyledButton
+							sx={{
+								backgroundColor: "#01DEB6",
+							}}
 							onClick={handleForSale}
 							fullWidth
-							sx={{
-								textTransform: "none",
-								color: "black",
-								backgroundColor: "#00DFB6",
-							}}
 							size="large"
 							variant="contained"
 						>
 							<Typography>Find properties</Typography>
-						</Button>
+						</StyledButton>
 					</Grid>
 				</Grid>
 			</Grid>

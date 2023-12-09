@@ -163,7 +163,7 @@ const UserDrawer = () => {
 						</IconButton>
 					) : (
 						<StyledButton
-							style={{ backgroundColor: "#01DEB6" }}
+							sx={{ backgroundColor: "#01DEB6" }}
 							startIcon={
 								userState.status ? (
 									<PersonPinCircleOutlined sx={{ color: "black" }} />
