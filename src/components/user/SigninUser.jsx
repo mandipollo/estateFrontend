@@ -3,7 +3,7 @@ import StyledBox from "../styledComponents/StyledBox";
 import StyledTextfield from "../styledComponents/StyledTextfield";
 import StyledButton from "../styledComponents/StyledButton";
 import { Box, Typography, IconButton } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 import CloseIcon from "@mui/icons-material/Close";
 import VillaIcon from "@mui/icons-material/Villa";
 
@@ -12,6 +12,8 @@ const SigninUser = ({
 	passwordHandler,
 	isValidPassword,
 	signInHandler,
+	resetSignInHandler,
+	errorCredentials,
 }) => {
 	return (
 		<Box
@@ -43,7 +45,7 @@ const SigninUser = ({
 					</StyledButton>
 				</Box>
 				<Box display="flex" justifyContent="flex-start" alignItems="center">
-					<IconButton>
+					<IconButton onClick={resetSignInHandler}>
 						<CloseIcon />
 					</IconButton>
 				</Box>
@@ -66,7 +68,6 @@ const SigninUser = ({
 							onChange={passwordHandler}
 							color="success"
 							error={isValidPassword}
-							helperText={isValidPassword ? "We need a password,please" : null}
 						></StyledTextfield>
 					</StyledBox>
 
@@ -83,6 +84,17 @@ const SigninUser = ({
 							</Typography>
 						</StyledButton>
 					</StyledBox>
+					{errorCredentials && (
+						<StyledBox
+							padding={2}
+							sx={{ backgroundColor: "#FAE7E6", borderRadius: "1em" }}
+							alignItems="center"
+						>
+							<Typography variant="body1" color="red" fontFamily="ubuntu">
+								"Incorrect sign in details. Please try again."
+							</Typography>
+						</StyledBox>
+					)}
 				</Box>
 			</StyledBox>
 		</Box>

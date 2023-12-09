@@ -7,6 +7,7 @@ import identifierReducer from "./identifier";
 import forSaleReducer from "./forSale";
 import filterReducer from "./filterParams";
 import rentReducer from "./forRent";
+import userReducer from "./user";
 
 const rootReducer = combineReducers({
 	searchInput: searchInputReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
 	forSale: forSaleReducer,
 	filter: filterReducer,
 	forRent: rentReducer,
+	user: userReducer,
 });
 const config = {
 	key: "root",

@@ -20,9 +20,15 @@ import axios from "axios";
 import UserAccount from "./UserAccount";
 import CreateUser from "./CreateUser";
 import SigninUser from "./SigninUser";
-import { json } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setUser, resetUser } from "../../store/user";
+import UserProfile from "./UserProfile";
 
 const UserDrawer = () => {
+	const dispatch = useDispatch();
+	const userState = useSelector(state => state.user);
+
 	const [error, setError] = useState(null);
 	const [email, setEmail] = useState("");
 	const [firstName, setFirstName] = useState("");
@@ -69,6 +75,12 @@ const UserDrawer = () => {
 		setState({ ...state, [anchor]: open });
 	};
 
+	// reset signIn
+
+	const resetSignInHandler = () => {
+		setAccountChecked(false);
+		setAccountExists(false);
+	};
 	const checkEmailHandler = async () => {
 		try {
 			const response = await axios.get(
@@ -81,7 +93,7 @@ const UserDrawer = () => {
 			);
 
 			const data = await response.data;
-			console.log(data);
+
 			setAccountExists(true);
 			setAccountChecked(true);
 		} catch (error) {
@@ -107,7 +119,7 @@ const UserDrawer = () => {
 				}
 			);
 			const data = await response.data;
-			console.log(data);
+
 			setAccountExists(data.exists);
 			setAccountChecked(true);
 		} catch (error) {
@@ -119,16 +131,28 @@ const UserDrawer = () => {
 	const signInHandler = async () => {
 		try {
 			const response = await signInWithEmailAndPassword(auth, email, password);
-
 			const data = response.user;
 
-			console.log(data);
+			dispatch(
+				setUser({ name: data.displayName, uid: data.uid, email: data.email })
+			);
+			setPassword("");
+			setError(null);
 		} catch (error) {
-			console.error(error);
 			setError(error);
 		}
 	};
-	console.log(error);
+	const signOutHandler = async () => {
+		try {
+			await auth.signOut();
+			dispatch(resetUser());
+
+			setAccountChecked(false);
+			setAccountExists(false);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	return (
 		<div>
 			{["right"].map(anchor => (
@@ -139,12 +163,20 @@ const UserDrawer = () => {
 						</IconButton>
 					) : (
 						<StyledButton
-							variant="outlined"
-							color="success"
+							style={{ backgroundColor: "#01DEB6" }}
+							startIcon={
+								userState.status ? (
+									<PersonPinCircleOutlined sx={{ color: "black" }} />
+								) : (
+									""
+								)
+							}
+							size="large"
+							variant="contained"
 							onClick={toggleDrawer(anchor, true)}
 						>
 							<Typography variant="body1" color="black">
-								Sign in
+								{userState.status ? "My Estate" : "Sign in"}
 							</Typography>
 						</StyledButton>
 					)}
@@ -154,7 +186,7 @@ const UserDrawer = () => {
 						open={state[anchor]}
 						onClose={toggleDrawer(anchor, false)}
 					>
-						{!accountChecked && (
+						{!accountChecked && !userState.status && (
 							<UserAccount
 								checkEmailHandler={checkEmailHandler}
 								emailHandler={emailHandler}
@@ -162,7 +194,7 @@ const UserDrawer = () => {
 								isEmailValid={isEmailValid}
 							/>
 						)}
-						{!accountExists && accountChecked && (
+						{!accountExists && accountChecked && !userState.status && (
 							<CreateUser
 								navigateBack={navigateBack}
 								firstName={firstName}
@@ -175,12 +207,21 @@ const UserDrawer = () => {
 								createUserHandler={createUserHandler}
 							/>
 						)}
-						{accountExists && accountChecked && (
+						{accountExists && accountChecked && !userState.status && (
 							<SigninUser
+								resetSignInHandler={resetSignInHandler}
 								password={password}
 								passwordHandler={passwordHandler}
 								isValidPassword={isPasswordValid}
 								signInHandler={signInHandler}
+								errorCredentials={error}
+							/>
+						)}
+
+						{userState.status && (
+							<UserProfile
+								signOutHandler={signOutHandler}
+								userName={userState.userDetail.name}
 							/>
 						)}
 					</Drawer>

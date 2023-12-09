@@ -24,7 +24,7 @@ const Homepage = () => {
 							md: "flex",
 						},
 						width: "100%",
-						height: "20rem",
+						height: "15rem",
 						backgroundImage: `url("https://www.pixel4k.com/wp-content/uploads/2023/08/night-city-long-exposure-road-horizon-4k_1691849809.jpg.webp")`,
 						backgroundRepeat: "no-repeat",
 						backgroundSize: "cover",
