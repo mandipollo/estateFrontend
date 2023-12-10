@@ -1,11 +1,152 @@
 import React from "react";
-
-import { Box } from "@mui/material";
+import { auth } from "../firebase.config";
+import {
+	Box,
+	Grid,
+	Typography,
+	Card,
+	CardHeader,
+	CardContent,
+} from "@mui/material";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import StyledButton from "../components/styledComponents/StyledButton";
 
 const MyEstatePage = () => {
+	const userName = auth.currentUser.displayName;
 	return (
-		<Box>
-			<h1>estate page</h1>
+		<Box display="flex" justifyContent="center" sx={{ width: "100vw" }}>
+			<Grid
+				container
+				maxWidth={1250}
+				display="flex"
+				flexDirection={"column"}
+				width="100%"
+				gap={5}
+				m="0 1em 1em 1em"
+			>
+				<Grid container item sx={{ height: 100, marginTop: 3 }}>
+					<Grid item xs={6} sx={{ alignItems: "center", display: "flex" }}>
+						<Typography fontFamily="ubuntu" variant="h4">
+							Hello, {userName}
+						</Typography>
+					</Grid>
+					<Grid
+						container
+						item
+						xs={6}
+						sx={{
+							display: "flex",
+							justifyContent: "flex-end",
+							flexDirection: "row",
+							alignItems: "center",
+						}}
+					>
+						<Grid
+							item
+							xs={12}
+							sx={{
+								justifyContent: "flex-end",
+								display: "flex",
+							}}
+						>
+							<StyledButton startIcon={<SettingsOutlinedIcon />}>
+								<Typography>Account details</Typography>
+							</StyledButton>
+						</Grid>
+
+						<Grid
+							item
+							xs={12}
+							sx={{
+								justifyContent: "flex-end",
+								display: "flex",
+							}}
+						>
+							<StyledButton startIcon={<ExitToAppOutlinedIcon />}>
+								<Typography>Sign out</Typography>
+							</StyledButton>
+						</Grid>
+					</Grid>
+				</Grid>
+				<Grid item>
+					<Card elevation={7}>
+						<CardContent sx={{ margin: 2 }}>
+							<Typography variant="h6">Saved properties</Typography>
+						</CardContent>
+						<CardContent
+							sx={{
+								backgroundColor: "#F2F1EB",
+								margin: 2,
+								borderRadius: "0.5em",
+								justifyContent: "center",
+								alignItems: "center",
+								display: "flex",
+								flexDirection: "column",
+							}}
+						>
+							<img
+								src="https://www.svgrepo.com/show/500055/houses.svg"
+								width="164"
+								height="164"
+								viewBox="0 0 64 64"
+							/>
+							<Typography fontFamily="ubuntu" variant="h6">
+								Hit the ❤︎︎ to save your favourite properties and find them
+								faster next time.
+							</Typography>
+							<Typography fontFamily="ubuntu" variant="body2">
+								Your saved properties will appear here
+							</Typography>
+							<StyledButton size="large" sx={{ backgroundColor: "#01DEB6" }}>
+								<Typography fontFamily="ubuntu">
+									Find properties to save
+								</Typography>
+							</StyledButton>
+						</CardContent>
+					</Card>
+				</Grid>
+				<Grid item>
+					<Card elevation={7}>
+						<CardContent sx={{ margin: 2 }}>
+							<Typography variant="h6">Properties collection lists</Typography>
+						</CardContent>
+						<CardContent
+							sx={{
+								backgroundColor: "#F2F1EB",
+								margin: 2,
+								borderRadius: "0.5em",
+								justifyContent: "center",
+								alignItems: "center",
+								display: "flex",
+								flexDirection: "column",
+							}}
+						>
+							<img
+								src="https://www.svgrepo.com/show/489643/list-list.svg"
+								width="164"
+								height="164"
+								viewBox="0 0 64 64"
+							/>
+							<Typography fontFamily="ubuntu" variant="h6">
+								You don't have any lists yet
+							</Typography>
+							<Typography fontFamily="ubuntu" variant="h6">
+								Organise your saved properties into lists
+							</Typography>
+
+							<StyledButton
+								startIcon={<AddOutlinedIcon />}
+								size="large"
+								sx={{ backgroundColor: "#01DEB6" }}
+							>
+								<Typography fontFamily="ubuntu">Create list</Typography>
+							</StyledButton>
+						</CardContent>
+					</Card>
+				</Grid>
+			</Grid>
 		</Box>
 	);
 };
