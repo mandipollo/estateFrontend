@@ -1,5 +1,5 @@
 import React from "react";
-
+import { auth } from "./firebase.config";
 //route
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -8,6 +8,13 @@ import Homepage from "./pages/Homepage";
 import ForSale from "./pages/ForSalePage";
 import Root from "./pages/Root";
 import FilterPage from "./pages/FilterPage";
+import MyEstatePage from "./pages/MyEstatePage";
+import ToRentPage from "./pages/ToRentPage";
+import FilterRentPage from "./pages/FilterRentPage";
+import PropertyToRent from "./pages/PropertyToRent";
+import PropertyDetailRent from "./pages/PropertyDetailRent";
+import PropertyForSale from "./pages/PropertyForSale";
+import PropertyDetail from "./pages/PropertyDetail";
 
 // utilities
 import { ThemeProvider } from "@emotion/react";
@@ -18,12 +25,8 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
-import PropertyForSale from "./pages/PropertyForSale";
-import PropertyDetail from "./pages/PropertyDetail";
-import ToRentPage from "./pages/ToRentPage";
-import FilterRentPage from "./pages/FilterRentPage";
-import PropertyToRent from "./pages/PropertyToRent";
-import PropertyDetailRent from "./pages/PropertyDetailRent";
+import ProtectRoute from "./components/utilities/ProtectRoute";
+
 let persistor = persistStore(store);
 const route = createBrowserRouter([
 	{
@@ -54,6 +57,14 @@ const route = createBrowserRouter([
 			{
 				path: "toRent",
 				element: <ToRentPage />,
+			},
+			{
+				path: "myEstate",
+				element: (
+					<ProtectRoute>
+						<MyEstatePage />
+					</ProtectRoute>
+				),
 			},
 		],
 	},

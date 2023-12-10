@@ -65,7 +65,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 					setError(error);
 				}
 			}
-		}, 100);
+		}, 10);
 
 		return () => {
 			clearTimeout(timeout);

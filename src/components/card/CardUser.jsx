@@ -6,7 +6,7 @@ import StyledButton from "../styledComponents/StyledButton";
 const CardUser = () => {
 	const isMd = useMediaQuery(theme.breakpoints.down("laptop"));
 	return (
-		<Box display="flex" sx={{ justifyContent: "center" }}>
+		<Box display="flex" sx={{ justifyContent: "center", margin: "2em" }}>
 			<Box
 				sx={{
 					display: "flex",

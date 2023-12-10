@@ -112,11 +112,9 @@ const Homepage = () => {
 				</section>
 				<section>
 					<CardUser />
-					<CardHomeSection />
+					{/* <CardHomeSection /> */}
 				</section>
-				<section>
-					<CardHomeLink />
-				</section>
+				<section>{/* <CardHomeLink /> */}</section>
 			</Box>
 		</main>
 	);

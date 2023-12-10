@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 import VillaIcon from "@mui/icons-material/Villa";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -35,12 +36,40 @@ const UserProfile = ({ signOutHandler, userName }) => {
 					</Typography>
 				</StyledButton>
 			</StyledBox>
-			<StyledBox gap={4} m={2} flexDirection="column">
+			<StyledBox gap={4} margin="0 1em" flexDirection="column">
 				<Box>
 					<Typography fontFamily="ubuntu" variant="h6">
 						Hello, {userName}
 					</Typography>
 				</Box>
+
+				<StyledBox alignItems="center" justifyContent="center">
+					<Link
+						to="/myEstate"
+						style={{
+							textDecoration: "none",
+							color: "inherit",
+							width: "100%",
+						}}
+					>
+						<Button
+							fullWidth
+							size="large"
+							sx={{
+								backgroundColor: "#01DEB6",
+								m: 0,
+								textTransform: "none",
+								borderRadius: "0.5em",
+								"&:hover": {
+									backgroundColor: "#45FFCA",
+								},
+							}}
+						>
+							<Typography variant="body1">View My Estate</Typography>
+						</Button>
+					</Link>
+				</StyledBox>
+
 				<Box
 					sx={{
 						padding: "2em 0",
@@ -75,26 +104,26 @@ const UserProfile = ({ signOutHandler, userName }) => {
 					</StyledButton>
 				</Box>
 
-				<Box
+				<StyledBox
+					flexDirection="column"
+					alignItems="center"
 					component="form"
 					autoComplete="off"
 					sx={{
 						"& .MuiTextField-root": { m: "0.5em 0" },
 					}}
 				>
-					<StyledBox flexDirection="column" alignItems="center">
-						<StyledButton
-							onClick={signOutHandler}
-							size="large"
-							fullWidth
-							sx={{ backgroundColor: "#01DEB6" }}
-						>
-							<Typography variant="body1" fontFamily="ubuntu">
-								Signout
-							</Typography>
-						</StyledButton>
-					</StyledBox>
-				</Box>
+					<StyledButton
+						onClick={signOutHandler}
+						size="large"
+						fullWidth
+						sx={{ backgroundColor: "#01DEB6" }}
+					>
+						<Typography variant="body1" fontFamily="ubuntu">
+							Signout
+						</Typography>
+					</StyledButton>
+				</StyledBox>
 			</StyledBox>
 		</Box>
 	);
