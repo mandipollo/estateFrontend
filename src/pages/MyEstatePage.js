@@ -9,11 +9,13 @@ import {
 	Card,
 	CardHeader,
 	CardContent,
+	Paper,
 } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import StyledButton from "../components/styledComponents/StyledButton";
+import SavedProperties from "../components/savedProperties/SavedProperties";
 
 const MyEstatePage = () => {
 	const userName = auth.currentUser.displayName;
@@ -74,43 +76,9 @@ const MyEstatePage = () => {
 						</Grid>
 					</Grid>
 				</Grid>
-				<Grid item>
-					<Card elevation={7}>
-						<CardContent sx={{ margin: 2 }}>
-							<Typography variant="h6">Saved properties</Typography>
-						</CardContent>
-						<CardContent
-							sx={{
-								backgroundColor: "#F2F1EB",
-								margin: 2,
-								borderRadius: "0.5em",
-								justifyContent: "center",
-								alignItems: "center",
-								display: "flex",
-								flexDirection: "column",
-							}}
-						>
-							<img
-								src="https://www.svgrepo.com/show/500055/houses.svg"
-								width="164"
-								height="164"
-								viewBox="0 0 64 64"
-							/>
-							<Typography fontFamily="ubuntu" variant="h6">
-								Hit the ❤︎︎ to save your favourite properties and find them
-								faster next time.
-							</Typography>
-							<Typography fontFamily="ubuntu" variant="body2">
-								Your saved properties will appear here
-							</Typography>
-							<StyledButton size="large" sx={{ backgroundColor: "#01DEB6" }}>
-								<Typography fontFamily="ubuntu">
-									Find properties to save
-								</Typography>
-							</StyledButton>
-						</CardContent>
-					</Card>
-				</Grid>
+
+				<SavedProperties />
+
 				<Grid item>
 					<Card elevation={7}>
 						<CardContent sx={{ margin: 2 }}>

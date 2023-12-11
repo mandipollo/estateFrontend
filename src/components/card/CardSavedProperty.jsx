@@ -22,11 +22,7 @@ import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutl
 
 import theme from "../../theme";
 
-import { database, auth } from "../../firebase.config";
-import { update, ref, push, child } from "firebase/database";
-import { useState } from "react";
-
-const CardProduct = ({
+const CardSavedProperty = ({
 	images,
 	displayAddress,
 	propertySubType,
@@ -38,86 +34,46 @@ const CardProduct = ({
 	contactNo,
 	propertyId,
 }) => {
-	const [saved, setSaved] = useState(false);
-	const savePropertyHandler = () => {
-		const uid = auth.currentUser ? auth.currentUser.uid : null;
-
-		const propertyData = {
-			address: displayAddress,
-			price: displayPrice,
-			image: images[0].srcUrl,
-			propertyType: propertySubType,
-			bedrooms: bedrooms,
-			bathrooms: bathrooms,
-			summary: summary,
-			customerImage: customerImage,
-			contactNo: contactNo,
-			propertyId: propertyId,
-		};
-
-		if (uid) {
-			update(
-				ref(database, `users/${uid}/savedProperties/${propertyId}`),
-				propertyData
-			);
-			setSaved(!saved);
-		}
-	};
 	const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
 		<Card
-			key={propertyId}
 			sx={{
-				width: "90%",
 				flexDirection: {
 					xs: "column",
 					sm: "row",
 					md: "row",
 				},
+				width: "90%",
+				margin: "1em 0",
 				display: "flex",
 			}}
 		>
 			<Box sx={{ flex: 6 }}>
 				<Box height={220}>
-					<Carousel
-						animation="slide"
-						IndicatorIcon={false}
-						navButtonsAlwaysVisible={true}
-						fullHeightHover={true}
-						navButtonsProps={{
-							// Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
-							style: {
-								backgroundColor: "Transparent",
-								borderRadius: 0,
-							},
-						}}
-						NextIcon={<ArrowForwardIosOutlinedIcon />}
-						PrevIcon={<ArrowBackIosNewOutlinedIcon />}
-						autoPlay={false}
+					<CardMedia
+						loading="lazy"
+						component="img"
 						height={220}
-					>
-						{images.map((item, index) => {
-							return (
-								<CardMedia
-									loading="lazy"
-									key={index}
-									component="img"
-									height={220}
-									image={item.srcUrl}
-									alt="property image"
-									sx={{ objectFit: "cover" }}
-								/>
-							);
-						})}
-					</Carousel>
+						image={images}
+						alt="property image"
+						sx={{ objectFit: "cover" }}
+					/>
 				</Box>
 
 				<Box
 					sx={{
-						backgroundColor: "#34A29F",
+						backgroundColor: "#F2F1EB",
+						height: 50,
+						alignItems: "center",
+						display: "flex",
 					}}
 				>
-					<Typography variant="h5" color="white" paddingLeft={2}>
+					<Typography
+						variant="h5"
+						fontFamily="ubuntu"
+						fontWeight={100}
+						paddingLeft={2}
+					>
 						{displayPrice}
 					</Typography>
 				</Box>
@@ -188,14 +144,7 @@ const CardProduct = ({
 						sx={{ display: "flex", flex: 1, justifyContent: "flex-end" }}
 					>
 						<Button
-							onClick={savePropertyHandler}
-							startIcon={
-								saved ? (
-									<FavoriteIcon style={{ color: "red" }} />
-								) : (
-									<FavoriteBorderOutlinedIcon />
-								)
-							}
+							startIcon={<FavoriteBorderOutlinedIcon />}
 							size="small"
 							variant="text"
 							disableRipple
@@ -209,4 +158,4 @@ const CardProduct = ({
 	);
 };
 
-export default CardProduct;
+export default CardSavedProperty;
