@@ -21,8 +21,10 @@ import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutl
 
 import theme from "../../theme";
 
+import { database, auth } from "../../firebase.config";
+import { update, ref, push, child } from "firebase/database";
+
 const CardProduct = ({
-	propertyId,
 	images,
 	displayAddress,
 	propertySubType,
@@ -32,7 +34,24 @@ const CardProduct = ({
 	displayPrice,
 	customerImage,
 	contactNo,
+	propertyId,
 }) => {
+	const savePropertyHandler = () => {
+		const uid = auth.currentUser ? auth.currentUser.uid : null;
+
+		const propertyData = {
+			address: displayAddress,
+			price: displayPrice,
+			image: images[0].srcUrl,
+		};
+
+		if (uid) {
+			update(
+				ref(database, `users/${uid}/savedProperties/${propertyId}`),
+				propertyData
+			);
+		}
+	};
 	const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
 		<Card
@@ -157,6 +176,7 @@ const CardProduct = ({
 						sx={{ display: "flex", flex: 1, justifyContent: "flex-end" }}
 					>
 						<Button
+							onClick={savePropertyHandler}
 							startIcon={<FavoriteBorderOutlinedIcon />}
 							size="small"
 							variant="text"

@@ -127,7 +127,6 @@ const PropertyForSale = () => {
 							<>
 								{forSaleData.map(item => (
 									<CardProduct
-										key={item.id}
 										propertyId={item.id}
 										images={item.propertyImages.images}
 										displayAddress={item.displayAddress}

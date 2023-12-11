@@ -1,9 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // firebase
 import { auth } from "../../firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { set, ref } from "firebase/database";
+import { database } from "../../firebase.config";
+
+//material ui
 
 import { Drawer, IconButton, Typography, useMediaQuery } from "@mui/material";
 
@@ -26,6 +31,7 @@ import { setUser, resetUser } from "../../store/user";
 import UserProfile from "./UserProfile";
 
 const UserDrawer = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const userState = useSelector(state => state.user);
 
@@ -37,8 +43,8 @@ const UserDrawer = () => {
 
 	const { isEmailValid, isPasswordValid } = useValidateInput(email, password);
 
-	const [accountExists, setAccountExists] = useState(false);
-	const [accountChecked, setAccountChecked] = useState(false);
+	const [checkEmail, setCheckEmail] = useState(false);
+	const [createUser, setCreateUser] = useState(false);
 
 	const emailHandler = event => {
 		setEmail(event.target.value);
@@ -55,10 +61,7 @@ const UserDrawer = () => {
 		setPassword(e.target.value);
 	};
 
-	const navigateBack = () => {
-		setAccountChecked(false);
-		setAccountExists(false);
-	};
+	const navigateBack = () => {};
 	const isLaptop = useMediaQuery(theme.breakpoints.down("laptop"));
 	const [state, setState] = useState({
 		right: false,
@@ -78,8 +81,8 @@ const UserDrawer = () => {
 	// reset signIn
 
 	const resetSignInHandler = () => {
-		setAccountChecked(false);
-		setAccountExists(false);
+		setCheckEmail(false);
+		setCreateUser(false);
 	};
 	const checkEmailHandler = async () => {
 		try {
@@ -93,9 +96,11 @@ const UserDrawer = () => {
 			);
 
 			const data = await response.data;
-
-			setAccountExists(true);
-			setAccountChecked(true);
+			console.log(data);
+			setCheckEmail(data.exists);
+			if (!data.exists) {
+				setCreateUser(true);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -120,8 +125,12 @@ const UserDrawer = () => {
 			);
 			const data = await response.data;
 
-			setAccountExists(data.exists);
-			setAccountChecked(true);
+			await set(ref(database, `users/${data.uid}`), {
+				savedProperties: false,
+				propertyList: false,
+			});
+
+			setCreateUser(false);
 		} catch (error) {
 			console.error(error);
 			setError(error);
@@ -138,6 +147,7 @@ const UserDrawer = () => {
 			);
 			setPassword("");
 			setError(null);
+			setCreateUser(false);
 		} catch (error) {
 			setError(error);
 		}
@@ -146,9 +156,8 @@ const UserDrawer = () => {
 		try {
 			await auth.signOut();
 			dispatch(resetUser());
-
-			setAccountChecked(false);
-			setAccountExists(false);
+			setCheckEmail(false);
+			navigate("/");
 		} catch (error) {
 			console.log(error);
 		}
@@ -186,7 +195,7 @@ const UserDrawer = () => {
 						open={state[anchor]}
 						onClose={toggleDrawer(anchor, false)}
 					>
-						{!accountChecked && !userState.status && (
+						{!checkEmail && !auth.currentUser && !createUser && (
 							<UserAccount
 								checkEmailHandler={checkEmailHandler}
 								emailHandler={emailHandler}
@@ -194,7 +203,7 @@ const UserDrawer = () => {
 								isEmailValid={isEmailValid}
 							/>
 						)}
-						{!accountExists && accountChecked && !userState.status && (
+						{!checkEmail && !auth.currentUser && createUser && (
 							<CreateUser
 								navigateBack={navigateBack}
 								firstName={firstName}
@@ -207,7 +216,7 @@ const UserDrawer = () => {
 								createUserHandler={createUserHandler}
 							/>
 						)}
-						{accountExists && accountChecked && !userState.status && (
+						{checkEmail && !auth.currentUser && (
 							<SigninUser
 								resetSignInHandler={resetSignInHandler}
 								password={password}
@@ -218,7 +227,7 @@ const UserDrawer = () => {
 							/>
 						)}
 
-						{userState.status && (
+						{auth.currentUser && (
 							<UserProfile
 								signOutHandler={signOutHandler}
 								userName={userState.userDetail.name}
