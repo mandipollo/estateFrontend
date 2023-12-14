@@ -10,15 +10,10 @@ import {
 	useMediaQuery,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import Carousel from "react-material-ui-carousel";
 
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import BathroomOutlinedIcon from "@mui/icons-material/BathroomOutlined";
-import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
-
-import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 
 import theme from "../../theme";
 
@@ -33,8 +28,10 @@ const CardSavedProperty = ({
 	customerImage,
 	contactNo,
 	propertyId,
+	deletePropHandler,
 }) => {
 	const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+
 	return (
 		<Card
 			sx={{
@@ -144,12 +141,20 @@ const CardSavedProperty = ({
 						sx={{ display: "flex", flex: 1, justifyContent: "flex-end" }}
 					>
 						<Button
-							startIcon={<FavoriteBorderOutlinedIcon />}
-							size="small"
+							onClick={() => deletePropHandler(propertyId)}
+							sx={{
+								"&:hover": {
+									textDecoration: "underline",
+
+									textUnderlineOffset: "3px",
+								},
+							}}
+							startIcon={<DeleteOutlineOutlinedIcon />}
+							size="medium"
 							variant="text"
 							disableRipple
 						>
-							Save
+							Remove
 						</Button>
 					</CardActions>
 				</Box>

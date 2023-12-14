@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, remove } from "firebase/database";
 import { database } from "../../firebase.config";
 import { auth } from "../../firebase.config";
 
 import CardSavedProperty from "../card/CardSavedProperty";
 import EmptySavedProperties from "./EmptySavedProperties";
 import { Box, Paper, Typography } from "@mui/material";
-import { Padding } from "@mui/icons-material";
+
 const SavedProperties = () => {
-	const [savedProperties, setSavedProperties] = useState("");
-	const arraySavedProperties = Object.values(savedProperties);
+	const [savedProperties, setSavedProperties] = useState(null);
+	const arraySavedProperties = savedProperties
+		? Object.values(savedProperties)
+		: null;
 
 	console.log(arraySavedProperties);
 
@@ -24,6 +26,7 @@ const SavedProperties = () => {
 			setSavedProperties(data);
 		};
 
+		console.log("saved prop");
 		const errorHandler = error => {
 			console.error("Error fetching saved properties:", error);
 		};
@@ -36,6 +39,10 @@ const SavedProperties = () => {
 		return () => unsubscribe();
 	}, [uid]);
 
+	const deletePropHandler = propertyId => {
+		remove(ref(database, `users/${uid}/savedProperties/${propertyId}`));
+		console.log(`deleted prop${propertyId}`);
+	};
 	return (
 		<Paper
 			elevation={8}
@@ -46,24 +53,26 @@ const SavedProperties = () => {
 				alignItems: "Center",
 			}}
 		>
-			<Box
-				sx={{
-					width: "100%",
-					height: "5em",
-					display: "flex",
-					alignItems: "center",
-					marginLeft: "8em",
-				}}
-			>
-				<Typography fontFamily="ubuntu" variant="h6">
-					{arraySavedProperties.length} saved properties
-				</Typography>
-			</Box>
-
+			{arraySavedProperties && (
+				<Box
+					sx={{
+						width: "100%",
+						height: "5em",
+						display: "flex",
+						alignItems: "center",
+						marginLeft: "8em",
+					}}
+				>
+					<Typography fontFamily="ubuntu" variant="h6">
+						{arraySavedProperties.length} saved properties
+					</Typography>
+				</Box>
+			)}
 			{!savedProperties && <EmptySavedProperties />}
 			{savedProperties &&
-				arraySavedProperties.map(prop => (
+				arraySavedProperties.map((prop, index) => (
 					<CardSavedProperty
+						key={index}
 						images={prop.image}
 						displayAddress={prop.address}
 						propertySubType={prop.propertyType}
@@ -74,6 +83,7 @@ const SavedProperties = () => {
 						customerImage={prop.customerImage}
 						contactNo={prop.contactNo}
 						propertyId={prop.propertyId}
+						deletePropHandler={deletePropHandler}
 					/>
 				))}
 		</Paper>
