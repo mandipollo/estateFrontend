@@ -12,8 +12,21 @@ import PaginationMui from "../components/pagination/Pagination";
 import CardProduct from "../components/card/CardProducts";
 // hooks
 import useIsMount from "../components/utilities/useIsMount";
+import SnackbarNotify from "../components/SnackbarNotify";
 
 const PropertyForSale = () => {
+	const [open, setOpen] = useState(false);
+
+	const handleOpen = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
 	const dispatch = useDispatch();
 	const isMount = useIsMount();
 
@@ -86,6 +99,11 @@ const PropertyForSale = () => {
 
 	return (
 		<Box display="flex" justifyContent="center">
+			<SnackbarNotify
+				message="Property has been saved"
+				handleClose={handleClose}
+				open={open}
+			/>
 			<Box
 				sx={{
 					display: "flex",
@@ -127,6 +145,7 @@ const PropertyForSale = () => {
 							<>
 								{forSaleData.map(item => (
 									<CardProduct
+										handleOpen={handleOpen}
 										propertyId={item.id}
 										images={item.propertyImages.images}
 										displayAddress={item.displayAddress}

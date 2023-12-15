@@ -29,9 +29,10 @@ const CardSavedProperty = ({
 	contactNo,
 	propertyId,
 	deletePropHandler,
+	sale,
 }) => {
 	const isSm = useMediaQuery(theme.breakpoints.down("sm"));
-
+	const navigate = sale ? "propertyDetail" : "propertyDetailRent";
 	return (
 		<Card
 			sx={{
@@ -78,7 +79,7 @@ const CardSavedProperty = ({
 			<Box sx={{ display: "flex", flex: 6, flexDirection: "column", gap: 1 }}>
 				<Link
 					style={{ textDecoration: "none", color: "black" }}
-					to={`/propertyDetail/${propertyId}`}
+					to={`/${navigate}/${propertyId}`}
 				>
 					<CardActionArea disableRipple sx={{ flex: 9 }}>
 						<CardContent

@@ -72,6 +72,7 @@ const SavedProperties = () => {
 			{savedProperties &&
 				arraySavedProperties.map((prop, index) => (
 					<CardSavedProperty
+						sale={prop.sale}
 						key={index}
 						images={prop.image}
 						displayAddress={prop.address}

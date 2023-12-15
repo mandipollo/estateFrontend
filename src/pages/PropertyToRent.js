@@ -13,8 +13,19 @@ import PaginationMui from "../components/pagination/Pagination";
 // hooks
 import useIsMount from "../components/utilities/useIsMount";
 import CardProductRent from "../components/card/CardProducsRent";
+import SnackbarNotify from "../components/SnackbarNotify";
 
 const PropertyToRent = () => {
+	const [open, setOpen] = useState(false);
+	const handleOpen = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+		setOpen(true);
+	};
+	const handleClose = () => {
+		setOpen(false);
+	};
 	const dispatch = useDispatch();
 	const isMount = useIsMount();
 
@@ -86,6 +97,11 @@ const PropertyToRent = () => {
 
 	return (
 		<Box sx={{ display: "flex", flexDirection: "column", width: "100vw" }}>
+			<SnackbarNotify
+				message="Property saved successfully"
+				open={open}
+				handleClose={handleClose}
+			/>
 			<Grid
 				container
 				sx={{
@@ -132,6 +148,7 @@ const PropertyToRent = () => {
 									displayPrice={item.price.displayPrices[0].displayPrice}
 									customerImage={item.customer.brandPlusLogoUrl}
 									contactNo={item.customer.contactTelephone}
+									handleOpen={handleOpen}
 								/>
 							))}
 							<PaginationMui

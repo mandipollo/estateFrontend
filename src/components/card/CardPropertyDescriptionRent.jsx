@@ -5,7 +5,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 
 import PriorityHighOutlinedIcon from "@mui/icons-material/PriorityHighOutlined";
 
-const CardPropertyDescriptionRent = ({ data }) => {
+const CardPropertyDescriptionRent = ({ data, savePropertyHandler }) => {
 	return (
 		<>
 			<StyledBox width="100%">
@@ -17,7 +17,7 @@ const CardPropertyDescriptionRent = ({ data }) => {
 					</Grid>
 
 					<Grid item xs={1}>
-						<IconButton color="warning">
+						<IconButton onClick={savePropertyHandler} color="warning">
 							<FavoriteBorderOutlinedIcon />
 						</IconButton>
 					</Grid>

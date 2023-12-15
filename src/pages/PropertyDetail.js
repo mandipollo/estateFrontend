@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import theme from "../theme";
-
+import { auth, database } from "../firebase.config";
+import { update, ref } from "firebase/database";
 import axios from "axios";
 import { Box, Typography, Button, Grid, useMediaQuery } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -19,8 +20,23 @@ import CardPropertyDescription from "../components/card/CardPropertyDescription"
 import CardMortgageCalculator from "../components/card/CardMortgageCalculator";
 import CardSimiliarProp from "../components/card/CardSimiliarProp";
 import CardCustomer from "../components/card/CardCustomer";
+import SnackbarNotify from "../components/SnackbarNotify";
 
 const PropertyDetail = () => {
+	const [saved, setSaved] = useState(false);
+
+	const [open, setOpen] = useState(false);
+
+	const handleOpen = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
 	const ismd = useMediaQuery(theme.breakpoints.down("md"));
 	const navigateBack = useNavigateBack();
 	const { propertyId } = useParams();
@@ -43,8 +59,41 @@ const PropertyDetail = () => {
 		fetchData();
 	}, [propertyId]);
 
+	const savePropertyHandler = () => {
+		const uid = auth.currentUser ? auth.currentUser.uid : null;
+
+		const propertyData = {
+			address: data.data.address.displayAddress,
+			price: data.data.prices.primaryPrice,
+			image: data.data.images[0].url,
+			propertyType: data.data.propertySubType,
+			bedrooms: data.data.bedrooms,
+			bathrooms: data.data.bathrooms,
+			summary: data.data.text.description,
+			customerImage: data.data.customer.customerBannerAdProfileUrl,
+			contactNo: data.data.contactInfo.telephoneNumbers.localNumber,
+			propertyId: data.data.id,
+			sale: true,
+		};
+
+		console.log(propertyData);
+		if (uid) {
+			update(
+				ref(database, `users/${uid}/savedProperties/${propertyId}`),
+				propertyData
+			);
+			setSaved(!saved);
+			handleOpen(true);
+		}
+	};
+
 	return (
 		<Box display="flex" justifyContent="center">
+			<SnackbarNotify
+				open={open}
+				handleClose={handleClose}
+				message="Property saved successfully"
+			/>
 			<StyledBox
 				maxWidth={1250}
 				display="flex"
@@ -91,7 +140,10 @@ const PropertyDetail = () => {
 										flexDirection="column"
 										padding={ismd ? "0 1em" : "none"}
 									>
-										<CardPropertyDescription data={data} />
+										<CardPropertyDescription
+											savePropertyHandler={savePropertyHandler}
+											data={data}
+										/>
 									</StyledBox>
 
 									<StyledBox

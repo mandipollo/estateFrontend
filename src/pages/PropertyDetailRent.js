@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { auth, database } from "../firebase.config";
+import { update, ref } from "firebase/database";
 
 import axios from "axios";
 import { Box, Typography, Button, Grid } from "@mui/material";
@@ -15,8 +17,23 @@ import StyledBox from "../components/styledComponents/StyledBox";
 import CarousalImage from "../components/carousal/CarousalImage";
 
 import CardPropertyDescriptionRent from "../components/card/CardPropertyDescriptionRent";
+import SnackbarNotify from "../components/SnackbarNotify";
 
 const PropertyDetailRent = () => {
+	const [saved, setSaved] = useState(false);
+
+	const [open, setOpen] = useState(false);
+
+	const handleOpen = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
 	const navigateBack = useNavigateBack();
 	const { propertyId } = useParams();
 
@@ -39,8 +56,41 @@ const PropertyDetailRent = () => {
 		fetchData();
 	}, [propertyId]);
 
+	const savePropertyHandler = () => {
+		const uid = auth.currentUser ? auth.currentUser.uid : null;
+
+		const propertyData = {
+			address: data.data.address.displayAddress,
+			price: data.data.prices.primaryPrice,
+			image: data.data.images[0].url,
+			propertyType: data.data.propertySubType,
+			bedrooms: data.data.bedrooms,
+			bathrooms: data.data.bathrooms,
+			summary: data.data.text.description,
+			customerImage: data.data.customer.customerBannerAdProfileUrl,
+			contactNo: data.data.contactInfo.telephoneNumbers.localNumber,
+			propertyId: data.data.id,
+			sale: false,
+		};
+
+		console.log(propertyData);
+		if (uid) {
+			update(
+				ref(database, `users/${uid}/savedProperties/${propertyId}`),
+				propertyData
+			);
+			setSaved(!saved);
+			handleOpen(true);
+		}
+	};
+
 	return (
 		<StyledBox display="flex" flexDirection="column" width="100%" gap={2}>
+			<SnackbarNotify
+				message="Property successfully saved."
+				open={open}
+				handleClose={handleClose}
+			/>
 			<Grid container>
 				<Grid
 					flex={1}
@@ -72,7 +122,10 @@ const PropertyDetailRent = () => {
 								<StyledBox width="100%" alignItems="flex-start">
 									<CarousalImage data={data} />
 								</StyledBox>
-								<CardPropertyDescriptionRent data={data} />
+								<CardPropertyDescriptionRent
+									data={data}
+									savePropertyHandler={savePropertyHandler}
+								/>
 
 								<StyledBox
 									padding="1em 0"

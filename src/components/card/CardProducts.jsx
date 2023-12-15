@@ -23,7 +23,7 @@ import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutl
 import theme from "../../theme";
 
 import { database, auth } from "../../firebase.config";
-import { update, ref, push, child } from "firebase/database";
+import { update, ref } from "firebase/database";
 import { useState } from "react";
 
 const CardProduct = ({
@@ -37,6 +37,7 @@ const CardProduct = ({
 	customerImage,
 	contactNo,
 	propertyId,
+	handleOpen,
 }) => {
 	const [saved, setSaved] = useState(false);
 	const savePropertyHandler = () => {
@@ -53,6 +54,7 @@ const CardProduct = ({
 			customerImage: customerImage,
 			contactNo: contactNo,
 			propertyId: propertyId,
+			sale: true,
 		};
 
 		if (uid) {
@@ -61,6 +63,7 @@ const CardProduct = ({
 				propertyData
 			);
 			setSaved(!saved);
+			handleOpen(true);
 		}
 	};
 	const isSm = useMediaQuery(theme.breakpoints.down("sm"));

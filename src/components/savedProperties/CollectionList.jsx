@@ -1,15 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, CardContent, Typography, Card } from "@mui/material";
 import StyledButton from "../styledComponents/StyledButton";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import CardFormList from "../card/CardFormList";
+import { auth, database } from "../../firebase.config";
+
+import { update, ref, push, child } from "firebase/database";
 
 const CollectionList = () => {
-	const createListHandler = () => {};
+	const uid = auth ? auth.currentUser.uid : null;
+	const [open, setOpen] = useState(false);
+
+	const [list, setList] = useState();
+	console.log(list);
+	const listHandler = event => {
+		setList(event.target.value);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+	const handleOpen = () => {
+		setOpen(true);
+	};
+	const createListHandler = async () => {
+		if (uid)
+			try {
+				const newListKey = push(child(ref(database), ` ${list}`)).key;
+				await update(ref(database, `users/${uid}/propertyList/${newListKey}`), {
+					title: list,
+				});
+				console.log("property list added");
+				handleClose();
+			} catch (error) {
+				console.log(error);
+			}
+	};
 	return (
 		<Grid item>
 			<Card elevation={7}>
 				<CardContent sx={{ margin: 2 }}>
-					<Typography variant="h6">Properties collection lists</Typography>
+					<Typography variant="h6">Feature coming soon.</Typography>
 				</CardContent>
 				<CardContent
 					sx={{
@@ -36,7 +68,8 @@ const CollectionList = () => {
 					</Typography>
 
 					<StyledButton
-						onClick={createListHandler}
+						onClick={handleOpen}
+						disabled
 						startIcon={<AddOutlinedIcon />}
 						size="large"
 						sx={{ backgroundColor: "#01DEB6" }}
@@ -45,6 +78,14 @@ const CollectionList = () => {
 					</StyledButton>
 				</CardContent>
 			</Card>
+			<CardFormList
+				open={open}
+				list={list}
+				setList={setList}
+				listHandler={listHandler}
+				handleClose={handleClose}
+				createListHandler={createListHandler}
+			/>
 		</Grid>
 	);
 };

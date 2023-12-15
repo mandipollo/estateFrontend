@@ -1,3 +1,7 @@
+import { useState } from "react";
+import theme from "../../theme";
+import { auth, database } from "../../firebase.config";
+import { ref, update } from "firebase/database";
 import {
 	CardActionArea,
 	Box,
@@ -7,11 +11,13 @@ import {
 	Typography,
 	CardActions,
 	Button,
+	useMediaQuery,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
 
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import BathroomOutlinedIcon from "@mui/icons-material/BathroomOutlined";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
@@ -29,7 +35,36 @@ const CardProductRent = ({
 	displayPrice,
 	customerImage,
 	contactNo,
+	handleOpen,
 }) => {
+	const [saved, setSaved] = useState(false);
+	const savePropertyHandler = () => {
+		const uid = auth.currentUser ? auth.currentUser.uid : null;
+
+		const propertyData = {
+			address: displayAddress,
+			price: displayPrice,
+			image: images[0].srcUrl,
+			propertyType: propertySubType,
+			bedrooms: bedrooms,
+			bathrooms: bathrooms,
+			summary: summary,
+			customerImage: customerImage,
+			contactNo: contactNo,
+			propertyId: propertyId,
+			sale: false,
+		};
+
+		if (uid) {
+			update(
+				ref(database, `users/${uid}/savedProperties/${propertyId}`),
+				propertyData
+			);
+			setSaved(!saved);
+			handleOpen(true);
+		}
+	};
+	const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
 		<Card sx={{ width: "90%", flexDirection: "row", display: "flex" }}>
 			<Box sx={{ flex: 6 }}>
@@ -104,7 +139,12 @@ const CardProductRent = ({
 								</Typography>
 							</Box>
 
-							<Typography gutterBottom variant="body2" color="text.secondary">
+							<Typography
+								gutterBottom
+								variant="body2"
+								color="text.secondary"
+								display={isSm ? "none" : "block"}
+							>
 								{summary}
 							</Typography>
 						</CardContent>
@@ -137,7 +177,14 @@ const CardProductRent = ({
 						sx={{ display: "flex", flex: 1, justifyContent: "flex-end" }}
 					>
 						<Button
-							startIcon={<FavoriteBorderOutlinedIcon />}
+							onClick={savePropertyHandler}
+							startIcon={
+								saved ? (
+									<FavoriteIcon style={{ color: "red" }} />
+								) : (
+									<FavoriteBorderOutlinedIcon />
+								)
+							}
 							size="small"
 							variant="text"
 							disableRipple
