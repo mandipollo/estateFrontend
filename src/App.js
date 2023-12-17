@@ -4,7 +4,7 @@ import { auth } from "./firebase.config";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // pages
-import Homepage from "./pages/Homepage";
+import Homepage from "./pages/homepage";
 import ForSale from "./pages/ForSalePage";
 import Root from "./pages/Root";
 import FilterPage from "./pages/FilterPage";

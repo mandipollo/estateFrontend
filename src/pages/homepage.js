@@ -24,7 +24,7 @@ const Homepage = () => {
 						},
 						width: "100%",
 						height: "15rem",
-						backgroundImage: `url("https://images.unsplash.com/photo-1620245503040-e4fc17ec5368?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
+						backgroundImage: `url("https://wallpaperaccess.com/full/1128284.jpg")`,
 						backgroundRepeat: "no-repeat",
 						backgroundSize: "cover",
 					}}

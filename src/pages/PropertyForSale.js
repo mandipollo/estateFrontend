@@ -98,7 +98,27 @@ const PropertyForSale = () => {
 	};
 
 	return (
-		<Box display="flex" justifyContent="center">
+		<Box
+			display="flex"
+			justifyContent="center"
+			alignItems="center"
+			flexDirection="column"
+		>
+			<Grid
+				container
+				sx={{
+					width: "100vw",
+					backgroundColor: "#31304D",
+					position: "sticky",
+					top: 0,
+					zIndex: 900,
+					justifyContent: "center",
+				}}
+			>
+				<Grid item xs maxWidth={1250}>
+					<FilterNav filterParamsState={filterParamsState} />
+				</Grid>
+			</Grid>
 			<SnackbarNotify
 				message="Property has been saved"
 				handleClose={handleClose}
@@ -108,20 +128,9 @@ const PropertyForSale = () => {
 				sx={{
 					display: "flex",
 					flexDirection: "column",
-					maxWidth: 1250,
+					maxWidth: 1350,
 				}}
 			>
-				<Grid
-					container
-					sx={{
-						width: "100%",
-						backgroundColor: "#31304D",
-					}}
-				>
-					<Grid item xs>
-						<FilterNav filterParamsState={filterParamsState} />
-					</Grid>
-				</Grid>
 				<Box sx={{ padding: "1rem  0 0 4rem" }}>
 					<Typography variant="h6" color="text.secondary">
 						Properties For Sale in {identifierState.displayName}

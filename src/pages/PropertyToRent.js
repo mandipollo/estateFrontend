@@ -96,95 +96,111 @@ const PropertyToRent = () => {
 	};
 
 	return (
-		<Box sx={{ display: "flex", flexDirection: "column", width: "100vw" }}>
+		<Box
+			display="flex"
+			justifyContent="center"
+			alignItems="center"
+			flexDirection="column"
+		>
+			<Grid
+				container
+				sx={{
+					width: "100vw",
+					backgroundColor: "#31304D",
+					position: "sticky",
+					top: 0,
+					zIndex: 900,
+					justifyContent: "center",
+				}}
+			>
+				<Grid item xs maxWidth={1250}>
+					<FilterNav filterParamsState={filterParamsState} />
+				</Grid>
+			</Grid>
 			<SnackbarNotify
 				message="Property saved successfully"
 				open={open}
 				handleClose={handleClose}
 			/>
-			<Grid
-				container
+
+			<Box
 				sx={{
 					display: "flex",
-					width: "100%",
-					flexDirection: "row",
-					backgroundColor: "#31304D",
+					flexDirection: "column",
+					maxWidth: 1350,
 				}}
 			>
-				<Grid item xs>
-					<FilterNav filterParamsState={filterParamsState} />
-				</Grid>
-			</Grid>
-			<Box sx={{ padding: "1rem  0 0 4rem" }}>
-				<Typography variant="h6" color="text.secondary">
-					Properties to Rent in {identifierState.displayName}
-				</Typography>
-			</Box>
-			<Grid container sx={{ alignItems: "flex-start" }}>
-				<Grid
-					container
-					item
-					gap={3}
-					sx={{
-						justifyContent: "center",
-						padding: "2rem 0 2rem 0",
-					}}
-					flex={1}
-				>
-					{forRentStatus === "loading" && <p>Loading....</p>}
-					{forRentStatus === "failed" && <p>Error:{forRentError}</p>}
-					{forRentStatus === "succeeded" && (
-						<>
-							{forRentData.map(item => (
-								<CardProductRent
-									key={item.id}
-									propertyId={item.id}
-									images={item.propertyImages.images}
-									displayAddress={item.displayAddress}
-									summary={item.summary}
-									propertySubType={item.propertySubType}
-									bedrooms={item.bedrooms}
-									bathrooms={item.bathrooms}
-									displayPrice={item.price.displayPrices[0].displayPrice}
-									customerImage={item.customer.brandPlusLogoUrl}
-									contactNo={item.customer.contactTelephone}
-									handleOpen={handleOpen}
+				<Box sx={{ padding: "1rem  0 0 4rem" }}>
+					<Typography variant="h6" color="text.secondary">
+						Properties to Rent in {identifierState.displayName}
+					</Typography>
+				</Box>
+				<Grid container sx={{ alignItems: "flex-start" }}>
+					<Grid
+						container
+						item
+						gap={3}
+						sx={{
+							justifyContent: "center",
+							padding: "2rem 0 2rem 0",
+						}}
+						flex={1}
+					>
+						{forRentStatus === "loading" && <p>Loading....</p>}
+						{forRentStatus === "failed" && <p>Error:{forRentError}</p>}
+						{forRentStatus === "succeeded" && (
+							<>
+								{forRentData.map(item => (
+									<CardProductRent
+										key={item.id}
+										propertyId={item.id}
+										images={item.propertyImages.images}
+										displayAddress={item.displayAddress}
+										summary={item.summary}
+										propertySubType={item.propertySubType}
+										bedrooms={item.bedrooms}
+										bathrooms={item.bathrooms}
+										displayPrice={item.price.displayPrices[0].displayPrice}
+										customerImage={item.customer.brandPlusLogoUrl}
+										contactNo={item.customer.contactTelephone}
+										handleOpen={handleOpen}
+									/>
+								))}
+								<PaginationMui
+									prevPageHandler={prevPageHandler}
+									nextPageHandler={nextPageHandler}
+									page={page}
+									handlePageChange={handlePageChange}
 								/>
-							))}
-							<PaginationMui
-								prevPageHandler={prevPageHandler}
-								nextPageHandler={nextPageHandler}
-								page={page}
-								handlePageChange={handlePageChange}
-							/>
-						</>
-					)}
-				</Grid>
+							</>
+						)}
+					</Grid>
 
-				<Grid
-					container
-					item
-					gap={2}
-					sx={{
-						width: 300,
-						display: { xs: "none", sm: "none", md: "none", lg: "flex" },
-						justifyContent: "center",
-						alignItems: "center",
-					}}
-				>
-					<Grid item>
-						<Button
-							size="small"
-							sx={{ textTransform: "none" }}
-							variant="outlined"
-							color="success"
-							disableRipple
-						>
-							Properties for Sale in {identifierState.displayName}
-						</Button>
+					<Grid
+						container
+						item
+						gap={2}
+						sx={{
+							width: 300,
+							display: { xs: "none", sm: "none", md: "none", lg: "flex" },
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<Grid item>
+							<Button
+								size="small"
+								sx={{ textTransform: "none" }}
+								variant="outlined"
+								color="success"
+								disableRipple
+							>
+								Properties for Sale in {identifierState.displayName}
+							</Button>
+						</Grid>
 					</Grid>
 				</Grid>
-			</Grid>
+			</Box>
 		</Box>
 	);
 };
