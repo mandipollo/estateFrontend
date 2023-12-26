@@ -37,14 +37,10 @@ const PropertyForSale = () => {
 		setPage(value);
 	};
 	const forSaleData = useSelector(state => state.forSale.data.data);
-	console.log(forSaleData);
 	const forSaleStatus = useSelector(state => state.forSale.status);
-	console.log(forSaleStatus);
 	const forSaleError = useSelector(state => state.forSale.error);
 	const identifierState = useSelector(state => state.identifier);
-	console.log(identifierState);
 	const filterParamsState = useSelector(state => state.filter);
-	console.log(filterParamsState);
 	// reset page when params change
 
 	useEffect(() => {
@@ -104,21 +100,22 @@ const PropertyForSale = () => {
 			alignItems="center"
 			flexDirection="column"
 		>
-			<Grid
-				container
+			<Box
 				sx={{
+					display: "flex",
 					width: "100vw",
 					backgroundColor: "#31304D",
 					position: "sticky",
 					top: 0,
 					zIndex: 900,
 					justifyContent: "center",
+					alignItems: "center",
 				}}
 			>
-				<Grid item xs maxWidth={1250}>
+				<Grid container maxWidth={1350} sx={{ display: "flex" }}>
 					<FilterNav filterParamsState={filterParamsState} />
 				</Grid>
-			</Grid>
+			</Box>
 			<SnackbarNotify
 				message="Property has been saved"
 				handleClose={handleClose}
@@ -154,6 +151,7 @@ const PropertyForSale = () => {
 							<>
 								{forSaleData.map(item => (
 									<CardProduct
+										key={item.id}
 										handleOpen={handleOpen}
 										propertyId={item.id}
 										images={item.propertyImages.images}

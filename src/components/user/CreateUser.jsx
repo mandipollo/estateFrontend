@@ -18,15 +18,17 @@ const CreateUser = ({
 	passwordHandler,
 	isPasswordValid,
 	createUserHandler,
+	error,
 }) => {
 	return (
 		<Box
+			component="form"
+			onSubmit={e => createUserHandler(e)}
 			sx={{
 				width: 350,
 				display: "flex",
 				flexDirection: "column",
 			}}
-			role="presentation"
 		>
 			<StyledBox
 				sx={{
@@ -107,7 +109,7 @@ const CreateUser = ({
 
 					<StyledBox flexDirection="column" alignItems="center">
 						<StyledButton
-							onClick={createUserHandler}
+							onClick={e => createUserHandler(e)}
 							disabled={isPasswordValid}
 							size="large"
 							fullWidth
@@ -118,6 +120,18 @@ const CreateUser = ({
 							</Typography>
 						</StyledButton>
 					</StyledBox>
+
+					{error && (
+						<StyledBox
+							padding={2}
+							sx={{ backgroundColor: "#FAE7E6", borderRadius: "1em" }}
+							alignItems="center"
+						>
+							<Typography variant="body1" color="red" fontFamily="ubuntu">
+								{error}
+							</Typography>
+						</StyledBox>
+					)}
 				</Box>
 			</StyledBox>
 		</Box>

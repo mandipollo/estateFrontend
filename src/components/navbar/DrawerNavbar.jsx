@@ -53,7 +53,7 @@ const DrawerNavbar = ({ pages }) => {
 						key={index}
 					>
 						<ListItem key={index} disablePadding>
-							<StyledButton key={index}>
+							<StyledButton disabled={item.disable} key={index}>
 								<StyledTypographyNav>{item.label}</StyledTypographyNav>
 							</StyledButton>
 						</ListItem>

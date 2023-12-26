@@ -11,12 +11,13 @@ import StyledButton from "../styledComponents/StyledButton";
 const UserProfile = ({ signOutHandler, userName }) => {
 	return (
 		<Box
+			component="form"
+			onSubmit={e => signOutHandler(e)}
 			sx={{
 				width: 350,
 				display: "flex",
 				flexDirection: "column",
 			}}
-			role="presentation"
 		>
 			<StyledBox
 				sx={{
@@ -107,22 +108,22 @@ const UserProfile = ({ signOutHandler, userName }) => {
 				<StyledBox
 					flexDirection="column"
 					alignItems="center"
-					component="form"
 					autoComplete="off"
 					sx={{
 						"& .MuiTextField-root": { m: "0.5em 0" },
 					}}
 				>
-					<StyledButton
-						onClick={signOutHandler}
+					<Button
+						variant="contained"
+						onClick={e => signOutHandler(e)}
 						size="large"
+						color="warning"
 						fullWidth
-						sx={{ backgroundColor: "#01DEB6" }}
 					>
 						<Typography variant="body1" fontFamily="ubuntu">
 							Signout
 						</Typography>
-					</StyledButton>
+					</Button>
 				</StyledBox>
 			</StyledBox>
 		</Box>

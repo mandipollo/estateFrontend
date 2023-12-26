@@ -4,7 +4,6 @@ import StyledButton from "../styledComponents/StyledButton";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 const EmptyCollectionList = () => {
-	const createListHandler = () => {};
 	return (
 		<Grid item>
 			<Card elevation={7}>

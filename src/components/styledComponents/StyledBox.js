@@ -12,10 +12,10 @@ const StyledBox = styled(Box)(
 		alignposition,
 		gap,
 	}) => ({
-		[theme.breakpoints.up("md")]: {
+		[theme.breakpoints.up("laptop")]: {
 			display: propmd,
 		},
-		[theme.breakpoints.down("md")]: {
+		[theme.breakpoints.down("laptop")]: {
 			display: propsm,
 		},
 		flex: propflex,

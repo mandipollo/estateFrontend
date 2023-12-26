@@ -36,9 +36,7 @@ const PropertyToRent = () => {
 		setPage(value);
 	};
 	const forRentData = useSelector(state => state.forRent.data.data);
-	console.log(forRentData);
 	const forRentStatus = useSelector(state => state.forRent.status);
-	console.log(forRentStatus);
 	const forRentError = useSelector(state => state.forRent.error);
 	const identifierState = useSelector(state => state.identifier);
 	const filterParamsState = useSelector(state => state.filter);
@@ -102,21 +100,23 @@ const PropertyToRent = () => {
 			alignItems="center"
 			flexDirection="column"
 		>
-			<Grid
+			<Box
 				container
 				sx={{
+					display: "flex",
 					width: "100vw",
 					backgroundColor: "#31304D",
 					position: "sticky",
 					top: 0,
 					zIndex: 900,
 					justifyContent: "center",
+					alignItems: "center",
 				}}
 			>
-				<Grid item xs maxWidth={1250}>
+				<Grid container maxWidth={1350}>
 					<FilterNav filterParamsState={filterParamsState} />
 				</Grid>
-			</Grid>
+			</Box>
 			<SnackbarNotify
 				message="Property saved successfully"
 				open={open}

@@ -13,10 +13,12 @@ import {
 	FormControlLabel,
 	Checkbox,
 	IconButton,
+	Button,
 } from "@mui/material";
 import React from "react";
 
 import {
+	filterRadius,
 	filterAddedToSite,
 	filterMaxBed,
 	filterMaxPrice,
@@ -45,17 +47,17 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 	const list = anchor => (
 		<Box
 			sx={{
-				width: "100vw",
+				maxWidth: 1350,
+				margin: "0 auto",
 				height: {
 					xs: "90vh",
 					md: 450,
 				},
 			}}
-			role="presentation"
-			onClick={toggleDrawer(anchor, false)}
+
 			// onKeyDown={toggleDrawer(anchor, false)}
 		>
-			<Grid container padding="10px" gap={1}>
+			<Grid container padding="10px" gap={2}>
 				<Grid container item xs={12}>
 					<StyledGridDrawer
 						item
@@ -63,6 +65,39 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 						xs={12}
 						md={5}
 						points={theme.breakpoints.values.tablet}
+					>
+						<Grid item xs={12}>
+							<FormControl fullWidth>
+								<Select
+									name="minPrice"
+									input={<OutlinedInput sx={{ fontSize: "0.8rem" }} />}
+									value={allValues.radius}
+									onChange={handleChange}
+									displayEmpty
+									size="medium"
+								>
+									{filterRadius.map((options, index) => (
+										<MenuItem key={index} value={options.radiusValue}>
+											{options.radius}
+										</MenuItem>
+									))}
+								</Select>
+							</FormControl>
+						</Grid>
+					</StyledGridDrawer>
+				</Grid>
+				<Grid container item xs={12}>
+					<StyledGridDrawer
+						item
+						container
+						xs={12}
+						md={5}
+						points={theme.breakpoints.values.tablet}
+						sx={{
+							border: "1px dotted rgba(71, 78, 104, 0.5)",
+							backgroundColor: "#F4F4F5",
+							padding: "2em 0",
+						}}
 					>
 						<Grid xs={12} item justifyContent="flex-start" display="flex">
 							<Typography variant="h6" fontWeight={100}>
@@ -116,13 +151,14 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 						</Grid>
 					</StyledGridDrawer>
 				</Grid>
+
 				<Grid container item xs={12}>
 					<StyledGridDrawer
 						item
 						container
 						xs={12}
 						md={5}
-						points={theme.breakpoints.values.md}
+						points={theme.breakpoints.values.lg}
 					>
 						<Grid xs={12} item justifyContent="flex-start" display="flex">
 							<Typography variant="h6" fontWeight={100}>
@@ -183,7 +219,12 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 						xs={12}
 						md={5}
 						gap={2}
-						points={theme.breakpoints.values.laptop}
+						points={theme.breakpoints.values.lg}
+						sx={{
+							border: "1px dotted rgba(71, 78, 104, 0.5)",
+							backgroundColor: "#F4F4F5",
+							padding: "2em 0",
+						}}
 					>
 						<Grid
 							item
@@ -272,6 +313,23 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 					</Grid>
 				</Grid>
 			</Grid>
+			<Box
+				sx={{
+					width: "100%",
+					position: "absolute",
+					bottom: 0,
+				}}
+			>
+				<Button
+					onClick={toggleDrawer(anchor, false)}
+					size="medium"
+					fullWidth
+					color="success"
+					variant="contained"
+				>
+					<Typography>Done</Typography>
+				</Button>
+			</Box>
 		</Box>
 	);
 
@@ -288,9 +346,21 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 					</IconButton>
 
 					<Drawer
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
 						anchor={anchor}
 						open={state[anchor]}
 						onClose={toggleDrawer(anchor, false)}
+						PaperProps={{
+							sx: {
+								display: "block",
+								justifyContent: "center",
+								margin: "auto",
+							},
+						}}
 					>
 						{list(anchor)}
 					</Drawer>

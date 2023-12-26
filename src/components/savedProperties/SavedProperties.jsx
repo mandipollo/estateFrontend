@@ -14,10 +14,8 @@ const SavedProperties = () => {
 		? Object.values(savedProperties)
 		: null;
 
-	console.log(arraySavedProperties);
-
 	const uid = auth.currentUser ? auth.currentUser.uid : null;
-	console.log(savedProperties);
+
 	useEffect(() => {
 		const savedPropertiesRef = ref(database, `users/${uid}/savedProperties`);
 
@@ -26,7 +24,6 @@ const SavedProperties = () => {
 			setSavedProperties(data);
 		};
 
-		console.log("saved prop");
 		const errorHandler = error => {
 			console.error("Error fetching saved properties:", error);
 		};
@@ -41,7 +38,6 @@ const SavedProperties = () => {
 
 	const deletePropHandler = propertyId => {
 		remove(ref(database, `users/${uid}/savedProperties/${propertyId}`));
-		console.log(`deleted prop${propertyId}`);
 	};
 	return (
 		<Paper

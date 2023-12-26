@@ -9,15 +9,19 @@ import Navbar from "../components/navbar/Navbar";
 
 const Root = () => {
 	return (
-		<Box>
+		<Box
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				minHeight: "100vh",
+			}}
+		>
 			<header>
 				<Navbar />
 			</header>
-			<main>
-				<Box display="flex" flex="1" minHeight="60vh" justifyContent="center">
-					<Box>
-						<Outlet />
-					</Box>
+			<main style={{ display: "flex", justifyContent: "center", flex: "1" }}>
+				<Box component="div">
+					<Outlet />
 				</Box>
 			</main>
 

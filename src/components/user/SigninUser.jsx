@@ -17,12 +17,13 @@ const SigninUser = ({
 }) => {
 	return (
 		<Box
+			component="form"
+			onSubmit={e => signInHandler(e)}
 			sx={{
 				width: 350,
 				display: "flex",
 				flexDirection: "column",
 			}}
-			role="presentation"
 		>
 			<StyledBox
 				sx={{
@@ -57,7 +58,7 @@ const SigninUser = ({
 					</Typography>
 				</Box>
 
-				<Box component="form">
+				<Box>
 					<Typography fontFamily="ubuntu" variant="body2">
 						Password
 					</Typography>
@@ -73,7 +74,7 @@ const SigninUser = ({
 
 					<StyledBox flexDirection="column" alignItems="center">
 						<StyledButton
-							onClick={signInHandler}
+							onClick={e => signInHandler(e)}
 							size="large"
 							disabled={isValidPassword}
 							fullWidth

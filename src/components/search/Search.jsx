@@ -39,7 +39,7 @@ const Search = ({ propXs, propSm, title, description }) => {
 		return /^\s*$/.test(input);
 	};
 
-	// suggestion
+	// suggestion with timeout function
 
 	useEffect(() => {
 		const timeout = setTimeout(async () => {
@@ -61,11 +61,10 @@ const Search = ({ propXs, propSm, title, description }) => {
 					const data = response.data.data;
 					setOptions(data);
 				} catch (error) {
-					console.log(error);
-					setError(error);
+					setError(error.message);
 				}
 			}
-		}, 10);
+		}, 500);
 
 		return () => {
 			clearTimeout(timeout);

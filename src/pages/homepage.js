@@ -1,11 +1,53 @@
-import { Box, Grid, Button, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+
+import { Box, Grid, Button, Typography, useMediaQuery } from "@mui/material";
+
+import { database, auth } from "../firebase.config";
+import { onValue, ref } from "firebase/database";
 import { Link } from "react-router-dom";
 // components
 
 import Search from "../components/search/Search";
-import CardUser from "../components/card/CardUser";
+import CardUser from "../components/sections/home/CardUser";
+import Guide from "../components/sections/home/Guide";
+import homeWallpaper from "../assets/image/homeWallpaper.jpeg";
+import theme from "../theme";
+import SavedPropertiesHome from "../components/sections/home/SavedPropertiesHome";
+import { useSelector } from "react-redux";
 
 const Homepage = () => {
+	const isTablet = useMediaQuery(theme.breakpoints.down("tablet"));
+
+	const user = useSelector(state => state.user);
+
+	// // user saved properties
+	// const [savedProperties, setSavedProperties] = useState(null);
+	// const arraySavedProperties = savedProperties
+	// 	? Object.values(savedProperties)
+	// 	: null;
+
+	// const uid = auth.currentUser ? auth.currentUser.uid : null;
+	// console.log(savedProperties);
+	// useEffect(() => {
+	// 	const savedPropertiesRef = ref(database, `users/${uid}/savedProperties`);
+
+	// 	const handleChange = snapshot => {
+	// 		const data = snapshot.val();
+	// 		setSavedProperties(data);
+	// 	};
+
+	// 	const errorHandler = error => {
+	// 		console.error("Error fetching saved properties:", error);
+	// 	};
+	// 	//listener
+
+	// 	const unsubscribe = onValue(savedPropertiesRef, handleChange, errorHandler);
+
+	// 	// cleanup listener on component unmount
+
+	// 	return () => unsubscribe();
+	// }, [uid]);
+
 	return (
 		<main>
 			<Box
@@ -14,6 +56,7 @@ const Homepage = () => {
 					display: "flex",
 					flexDirection: "column",
 					justifyContent: "center",
+					backgroundColor: isTablet ? "#EAEAED" : "white",
 				}}
 			>
 				<Box
@@ -24,8 +67,8 @@ const Homepage = () => {
 						},
 						width: "100%",
 						height: "15rem",
-						backgroundImage: `url("https://wallpaperaccess.com/full/1128284.jpg")`,
-						backgroundRepeat: "no-repeat",
+						backgroundImage: `url(${homeWallpaper})`,
+						backgroundPosition: "center 15%",
 						backgroundSize: "cover",
 					}}
 				></Box>
@@ -109,10 +152,12 @@ const Homepage = () => {
 						/>
 					</Box>
 				</section>
+				<section> {!user.status && <CardUser />}</section>
+
+				<section>{user.status && <SavedPropertiesHome user={user} />}</section>
 				<section>
-					<CardUser />
+					<Guide />
 				</section>
-				<section>{/* <CardHomeLink /> */}</section>
 			</Box>
 		</main>
 	);

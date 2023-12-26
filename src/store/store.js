@@ -8,6 +8,8 @@ import forSaleReducer from "./forSale";
 import filterReducer from "./filterParams";
 import rentReducer from "./forRent";
 import userReducer from "./user";
+import drawerReducer from "./drawer";
+import savedPropertyReducer from "./savedPropSlice";
 
 const rootReducer = combineReducers({
 	searchInput: searchInputReducer,
@@ -16,6 +18,8 @@ const rootReducer = combineReducers({
 	filter: filterReducer,
 	forRent: rentReducer,
 	user: userReducer,
+	drawer: drawerReducer,
+	savedUserProperty: savedPropertyReducer,
 });
 const config = {
 	key: "root",

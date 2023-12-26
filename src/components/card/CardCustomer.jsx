@@ -16,7 +16,7 @@ const CardCustomer = ({ customer, tele }) => {
 			sx={{
 				display: "flex",
 				flexDirection: "column",
-				margin: "2em 1em",
+				margin: "2em 0",
 				height: 300,
 				width: 350,
 				position: "sticky",

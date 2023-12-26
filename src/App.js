@@ -1,5 +1,5 @@
 import React from "react";
-import { auth } from "./firebase.config";
+
 //route
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 

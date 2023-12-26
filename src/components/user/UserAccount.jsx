@@ -5,15 +5,19 @@ import VillaIcon from "@mui/icons-material/Villa";
 import StyledBox from "../styledComponents/StyledBox";
 import StyledButton from "../styledComponents/StyledButton";
 import StyledTextfield from "../styledComponents/StyledTextfield";
+import doggo from "../../assets/svg/siberian-husky-svgrepo-com.svg";
 
 const UserAccount = ({
 	checkEmailHandler,
 	emailHandler,
 	isEmailValid,
 	email,
+	error,
 }) => {
 	return (
 		<Box
+			component="form"
+			onSubmit={e => checkEmailHandler(e)}
 			sx={{
 				width: 350,
 				display: "flex",
@@ -47,7 +51,6 @@ const UserAccount = ({
 				</Box>
 
 				<Box
-					component="form"
 					autoComplete="off"
 					sx={{
 						"& .MuiTextField-root": { m: "0.5em 0" },
@@ -66,7 +69,7 @@ const UserAccount = ({
 						></StyledTextfield>
 						<StyledButton
 							disabled={!isEmailValid}
-							onClick={checkEmailHandler}
+							onClick={e => checkEmailHandler(e)}
 							size="large"
 							fullWidth
 							sx={{ backgroundColor: "#01DEB6" }}
@@ -77,6 +80,20 @@ const UserAccount = ({
 						</StyledButton>
 					</StyledBox>
 				</Box>
+				{error && (
+					<StyledBox
+						padding={2}
+						sx={{ backgroundColor: "#FAE7E6", borderRadius: "1em" }}
+						alignItems="center"
+					>
+						<Typography variant="body1" color="red" fontFamily="ubuntu">
+							{error}
+						</Typography>
+					</StyledBox>
+				)}
+			</StyledBox>
+			<StyledBox position="absolute" bottom={2} width="100%" height={250}>
+				<img src={doggo} width="100%" height="100%" viewBox="0 0 100 100"></img>
 			</StyledBox>
 		</Box>
 	);

@@ -1,16 +1,6 @@
 import React from "react";
 import { auth } from "../firebase.config";
-import { set, ref } from "firebase/database";
-import { database } from "../firebase.config";
-import {
-	Box,
-	Grid,
-	Typography,
-	Card,
-	CardHeader,
-	CardContent,
-	Paper,
-} from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 

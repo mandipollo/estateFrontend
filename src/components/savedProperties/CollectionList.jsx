@@ -10,9 +10,8 @@ import { update, ref, push, child } from "firebase/database";
 const CollectionList = () => {
 	const uid = auth ? auth.currentUser.uid : null;
 	const [open, setOpen] = useState(false);
-
 	const [list, setList] = useState();
-	console.log(list);
+
 	const listHandler = event => {
 		setList(event.target.value);
 	};
@@ -31,7 +30,6 @@ const CollectionList = () => {
 				await update(ref(database, `users/${uid}/propertyList/${newListKey}`), {
 					title: list,
 				});
-				console.log("property list added");
 				handleClose();
 			} catch (error) {
 				console.log(error);

@@ -51,7 +51,6 @@ const PropertyDetailRent = () => {
 			);
 			const data = response.data;
 			setData(data);
-			console.log(data);
 		};
 		fetchData();
 	}, [propertyId]);
@@ -73,7 +72,6 @@ const PropertyDetailRent = () => {
 			sale: false,
 		};
 
-		console.log(propertyData);
 		if (uid) {
 			update(
 				ref(database, `users/${uid}/savedProperties/${propertyId}`),
@@ -102,7 +100,7 @@ const PropertyDetailRent = () => {
 				>
 					{data && (
 						<>
-							<StyledBox width="80%" flexDirection="column" gap={2}>
+							<StyledBox width="80%" flexDirection="column" gap={1}>
 								<Box width="100%" alignItems="flex-start" padding="1em 0">
 									<Button
 										onClick={navigateBack}

@@ -5,6 +5,9 @@ const theme = createTheme({
 		primary: {
 			main: "#FFFFF",
 		},
+		highLightColor: {
+			main: "#01DEB6",
+		},
 		hover: {
 			main: "#F2F3F4",
 			secondary: "#445D48",

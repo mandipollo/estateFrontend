@@ -86,31 +86,13 @@ const Footer = () => {
 							</Grid>
 							<Grid item mt={2} container spacing={5}>
 								<Grid item>
-									<YouTubeIcon
-										sx={{
-											":hover": {
-												color: "red",
-											},
-										}}
-									/>
+									<YouTubeIcon />
 								</Grid>
 								<Grid item>
-									<InstagramIcon
-										sx={{
-											":hover": {
-												color: "red",
-											},
-										}}
-									/>
+									<InstagramIcon />
 								</Grid>
 								<Grid item>
-									<FacebookIcon
-										sx={{
-											":hover": {
-												color: "skyblue",
-											},
-										}}
-									/>
+									<FacebookIcon />
 								</Grid>
 							</Grid>
 							<Grid mt={2} item>

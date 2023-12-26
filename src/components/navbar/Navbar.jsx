@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DrawerNavbar from "../carousal/DrawerNavbar";
+import DrawerNavbar from "./DrawerNavbar";
 
 import { AppBar, Container, Toolbar, Typography } from "@mui/material";
 
@@ -14,20 +14,24 @@ import StyledBox from "../styledComponents/StyledBox";
 import UserDrawer from "../user/UserDrawer";
 
 const pages = [
-	{ label: "Buy", link: "forSale" },
+	{ label: "Buy", link: "forSale", disable: false },
 	{
 		label: "Rent",
 		link: "toRent",
+		disable: false,
 	},
-	{ label: "House prices", link: "housePrices" },
+	{ label: "House prices", disable: true },
 	{
 		label: "Find agents",
-		link: "findAgents",
+
+		disable: true,
 	},
 	{
 		label: "Commercial",
-		link: "commercial",
+
+		disable: true,
 	},
+	{ label: "Guide", disable: true },
 ];
 const Navbar = () => {
 	return (
@@ -81,6 +85,9 @@ const Navbar = () => {
 								</Typography>
 								<VillaIcon sx={{ ml: 1, color: "#01DEB6" }} />
 							</StyledBox>
+							<StyledBox propsm="flex" propmd="none">
+								<UserDrawer />
+							</StyledBox>
 						</StyledBox>
 
 						{/*medium screen navitems */}
@@ -98,7 +105,7 @@ const Navbar = () => {
 									to={item.link}
 									key={index}
 								>
-									<StyledButton key={index}>
+									<StyledButton disabled={item.disable} key={index}>
 										<StyledTypographyNav>{item.label}</StyledTypographyNav>
 									</StyledButton>
 								</Link>
@@ -107,17 +114,6 @@ const Navbar = () => {
 						<StyledBox
 							propsm="none"
 							propmd="flex"
-							sx={{
-								flex: {
-									md: 2,
-								},
-							}}
-						>
-							<UserDrawer />
-						</StyledBox>
-						<StyledBox
-							propsm="flex"
-							propmd="none"
 							sx={{
 								flex: {
 									md: 2,

@@ -71,6 +71,7 @@ const CardProduct = ({
 		<Card
 			key={propertyId}
 			sx={{
+				height: 250,
 				width: "90%",
 				flexDirection: {
 					xs: "column",
@@ -80,7 +81,7 @@ const CardProduct = ({
 				display: "flex",
 			}}
 		>
-			<Box sx={{ flex: 6 }}>
+			<Box key={propertyId} sx={{ flex: 6 }}>
 				<Box height={220}>
 					<Carousel
 						animation="slide"
@@ -130,7 +131,7 @@ const CardProduct = ({
 					style={{ textDecoration: "none", color: "black" }}
 					to={`/propertyDetail/${propertyId}`}
 				>
-					<CardActionArea disableRipple sx={{ flex: 9 }}>
+					<CardActionArea disableRipple sx={{ display: "flex", flex: 9 }}>
 						<CardContent
 							sx={{
 								display: "flex",
@@ -152,15 +153,26 @@ const CardProduct = ({
 									{bathrooms}
 								</Typography>
 							</Box>
-
-							<Typography
-								display={isSm ? "none" : "block"}
-								gutterBottom
-								variant="body2"
-								color="text.secondary"
+							<Box
+								sx={{
+									overflow: "hidden",
+									textOverflow: "ellipsis",
+									height: 100,
+								}}
 							>
-								{summary}
-							</Typography>
+								<Typography
+									display={isSm ? "none" : "block"}
+									gutterBottom
+									variant="body2"
+									color="text.secondary"
+									sx={{
+										overflow: "hidden",
+										textOverflow: "ellipsis",
+									}}
+								>
+									{summary}
+								</Typography>
+							</Box>
 						</CardContent>
 					</CardActionArea>
 				</Link>
