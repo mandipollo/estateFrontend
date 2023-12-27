@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import { ref, onValue, remove } from "firebase/database";
-import { database } from "../../firebase.config";
-import { auth } from "../../firebase.config";
+import { ref, remove, onValue } from "firebase/database";
+import { database, auth } from "../../firebase.config";
 
+import { useSelector, useDispatch } from "react-redux";
 import CardSavedProperty from "../card/CardSavedProperty";
 import EmptySavedProperties from "./EmptySavedProperties";
 import { Box, Paper, Typography } from "@mui/material";
-
+import { setSavedUserProperty } from "../../store/savedPropSlice";
 const SavedProperties = () => {
-	const [savedProperties, setSavedProperties] = useState(null);
-	const arraySavedProperties = savedProperties
-		? Object.values(savedProperties)
-		: null;
-
+	const dispatch = useDispatch();
+	const userPropSaved = useSelector(state => state.savedUserProperty);
+	const arrayOfPropSaved = userPropSaved ? Object.values(userPropSaved) : null;
 	const uid = auth.currentUser ? auth.currentUser.uid : null;
 
+	// setup listener for firebase database
 	useEffect(() => {
 		const savedPropertiesRef = ref(database, `users/${uid}/savedProperties`);
 
 		const handleChange = snapshot => {
 			const data = snapshot.val();
-			setSavedProperties(data);
+
+			dispatch(setSavedUserProperty(data));
 		};
 
 		const errorHandler = error => {
@@ -49,7 +49,7 @@ const SavedProperties = () => {
 				alignItems: "Center",
 			}}
 		>
-			{arraySavedProperties && (
+			{arrayOfPropSaved && (
 				<Box
 					sx={{
 						width: "100%",
@@ -60,13 +60,13 @@ const SavedProperties = () => {
 					}}
 				>
 					<Typography fontFamily="ubuntu" variant="h6">
-						{arraySavedProperties.length} saved properties
+						{arrayOfPropSaved.length} saved properties
 					</Typography>
 				</Box>
 			)}
-			{!savedProperties && <EmptySavedProperties />}
-			{savedProperties &&
-				arraySavedProperties.map((prop, index) => (
+			{!userPropSaved && <EmptySavedProperties />}
+			{userPropSaved &&
+				arrayOfPropSaved.map((prop, index) => (
 					<CardSavedProperty
 						sale={prop.sale}
 						key={index}

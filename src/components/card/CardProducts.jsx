@@ -17,7 +17,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import BathroomOutlinedIcon from "@mui/icons-material/BathroomOutlined";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
-
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 
 import theme from "../../theme";
