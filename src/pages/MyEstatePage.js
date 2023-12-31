@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { auth } from "../firebase.config";
 import { Box, Grid, Typography } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
@@ -7,12 +7,26 @@ import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import StyledButton from "../components/styledComponents/StyledButton";
 import SavedProperties from "../components/savedProperties/SavedProperties";
 import CollectionList from "../components/savedProperties/CollectionList";
+import SnackbarNotify from "../components/SnackbarNotify";
 
 const MyEstatePage = () => {
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
 	const userName = auth.currentUser.displayName;
 
 	return (
 		<Box display="flex" justifyContent="center" sx={{ width: "100vw" }}>
+			<SnackbarNotify
+				message="Property has been removed"
+				open={open}
+				handleClose={handleClose}
+			/>
 			<Grid
 				container
 				maxWidth={1250}
@@ -67,7 +81,7 @@ const MyEstatePage = () => {
 					</Grid>
 				</Grid>
 
-				<SavedProperties />
+				<SavedProperties handleOpen={handleOpen} />
 				<CollectionList />
 			</Grid>
 		</Box>

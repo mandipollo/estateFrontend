@@ -45,7 +45,8 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 	};
 
 	const list = anchor => (
-		<Box
+		<Grid
+			container
 			sx={{
 				maxWidth: 1350,
 				margin: "0 auto",
@@ -57,7 +58,7 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 
 			// onKeyDown={toggleDrawer(anchor, false)}
 		>
-			<Grid container padding="10px" gap={2}>
+			<Grid item container padding="10px" gap={2}>
 				<Grid container item xs={12}>
 					<StyledGridDrawer
 						item
@@ -313,24 +314,44 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<Box
-				sx={{
-					width: "100%",
-					position: "absolute",
-					bottom: 0,
-				}}
+			<Grid
+				container
+				xs={12}
+				item
+				display="flex"
+				flexDirection="row"
+				justifyContent="space-between"
 			>
-				<Button
-					onClick={toggleDrawer(anchor, false)}
-					size="medium"
-					fullWidth
-					color="success"
-					variant="contained"
+				<Grid
+					sx={{ margin: "0 0 1em 4em", width: "10rem" }}
+					item
+					xs={5}
+					alignItems="flex-end"
+					display="flex"
 				>
-					<Typography>Done</Typography>
-				</Button>
-			</Box>
-		</Box>
+					<Button sx={{ width: "10rem" }} size="medium" variant="contained">
+						<Typography>Clear</Typography>
+					</Button>
+				</Grid>
+				<Grid
+					item
+					xs={5}
+					justifyContent="flex-end"
+					alignItems="flex-end"
+					display="flex"
+				>
+					<Button
+						sx={{ margin: "0 4em 1em 0", width: "10rem" }}
+						onClick={toggleDrawer(anchor, false)}
+						size="medium"
+						color="success"
+						variant="contained"
+					>
+						<Typography>Done</Typography>
+					</Button>
+				</Grid>
+			</Grid>
+		</Grid>
 	);
 
 	return (

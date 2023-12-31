@@ -4,11 +4,11 @@ import { ref, remove, onValue } from "firebase/database";
 import { database, auth } from "../../firebase.config";
 
 import { useSelector, useDispatch } from "react-redux";
-import CardSavedProperty from "../card/CardSavedProperty";
+import CardSavedProperty from "./CardSavedProperty";
 import EmptySavedProperties from "./EmptySavedProperties";
 import { Box, Paper, Typography } from "@mui/material";
 import { setSavedUserProperty } from "../../store/savedPropSlice";
-const SavedProperties = () => {
+const SavedProperties = ({ handleOpen }) => {
 	const dispatch = useDispatch();
 	const userPropSaved = useSelector(state => state.savedUserProperty);
 	const arrayOfPropSaved = userPropSaved ? Object.values(userPropSaved) : null;
@@ -38,6 +38,7 @@ const SavedProperties = () => {
 
 	const deletePropHandler = propertyId => {
 		remove(ref(database, `users/${uid}/savedProperties/${propertyId}`));
+		handleOpen();
 	};
 	return (
 		<Paper

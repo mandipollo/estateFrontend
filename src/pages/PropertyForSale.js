@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { Box, Typography, Grid, Button } from "@mui/material";
+import { Box, Typography, Grid, Button, useMediaQuery } from "@mui/material";
 
 // redux
 import { useDispatch, useSelector } from "react-redux";
@@ -13,8 +13,10 @@ import CardProduct from "../components/card/CardProducts";
 // hooks
 import useIsMount from "../components/utilities/useIsMount";
 import SnackbarNotify from "../components/SnackbarNotify";
+import theme from "../theme";
 
 const PropertyForSale = () => {
+	const isLaptop = useMediaQuery(theme.breakpoints.up("laptop"));
 	const [open, setOpen] = useState(false);
 
 	const handleOpen = (event, reason) => {
@@ -40,6 +42,7 @@ const PropertyForSale = () => {
 	const forSaleStatus = useSelector(state => state.forSale.status);
 	const forSaleError = useSelector(state => state.forSale.error);
 	const identifierState = useSelector(state => state.identifier);
+	console.log(identifierState);
 	const filterParamsState = useSelector(state => state.filter);
 	// reset page when params change
 
@@ -133,72 +136,74 @@ const PropertyForSale = () => {
 						Properties For Sale in {identifierState.displayName}
 					</Typography>
 				</Box>
-				<Grid container sx={{ alignItems: "flex-start" }}>
-					<Grid
-						container
-						item
-						gap={3}
-						sx={{
-							justifyContent: "center",
-							padding: "2rem 0 2rem 0",
-						}}
-						flex={1}
-					>
-						{forSaleStatus === "loading" && <p>Loading....</p>}
-						{forSaleStatus === "failed" && <p>Error:{forSaleError}</p>}
-						{forSaleStatus === "succeeded" && !forSaleData && <h1>no data</h1>}
-						{forSaleStatus === "succeeded" && forSaleData && (
-							<>
-								{forSaleData.map(item => (
-									<CardProduct
-										key={item.id}
-										handleOpen={handleOpen}
-										propertyId={item.id}
-										images={item.propertyImages.images}
-										displayAddress={item.displayAddress}
-										summary={item.summary}
-										propertySubType={item.propertySubType}
-										bedrooms={item.bedrooms}
-										bathrooms={item.bathrooms}
-										displayPrice={item.price.displayPrices[0].displayPrice}
-										customerImage={item.customer.brandPlusLogoUrl}
-										contactNo={item.customer.contactTelephone}
-									/>
-								))}
-								<PaginationMui
-									prevPageHandler={prevPageHandler}
-									nextPageHandler={nextPageHandler}
-									page={page}
-									handlePageChange={handlePageChange}
+				{forSaleStatus === "loading" && <p>Loading....</p>}
+				{forSaleStatus === "failed" && <p>Error:{forSaleError}</p>}
+				{forSaleStatus === "succeeded" && !forSaleData && <h1>no data</h1>}
+				{forSaleStatus === "succeeded" && forSaleData && (
+					<Grid container sx={{ alignItems: "flex-start" }}>
+						<Grid
+							container
+							item
+							gap={3}
+							sx={{
+								justifyContent: "center",
+								padding: "2rem 0 2rem 0",
+							}}
+							flex={1}
+						>
+							{forSaleData.map(item => (
+								<CardProduct
+									key={item.id}
+									handleOpen={handleOpen}
+									propertyId={item.id}
+									images={item.propertyImages.images}
+									displayAddress={item.displayAddress}
+									summary={item.summary}
+									propertySubType={item.propertySubType}
+									bedrooms={item.bedrooms}
+									bathrooms={item.bathrooms}
+									displayPrice={item.price.displayPrices[0].displayPrice}
+									customerImage={item.customer.brandPlusLogoUrl}
+									contactNo={item.customer.contactTelephone}
 								/>
-							</>
-						)}
-					</Grid>
+							))}
+							<PaginationMui
+								prevPageHandler={prevPageHandler}
+								nextPageHandler={nextPageHandler}
+								page={page}
+								handlePageChange={handlePageChange}
+							/>
+						</Grid>
 
-					<Grid
-						container
-						item
-						gap={2}
-						sx={{
-							width: 300,
-							display: { xs: "none", sm: "none", md: "none", lg: "flex" },
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-					>
-						<Grid item>
-							<Button
-								size="small"
-								sx={{ textTransform: "none" }}
-								variant="outlined"
-								color="success"
-								disableRipple
-							>
-								Properties to rent in {identifierState.displayName}
-							</Button>
+						<Grid
+							container
+							item
+							gap={2}
+							sx={{
+								width: 300,
+								display: isLaptop ? "flex" : "none",
+								justifyContent: "center",
+								alignItems: "center",
+								position: "sticky",
+								top: 100,
+								backgroundColor: "gray",
+								height: "100%",
+							}}
+						>
+							<Grid item>
+								<Button
+									size="small"
+									sx={{ textTransform: "none" }}
+									variant="outlined"
+									color="success"
+									disableRipple
+								>
+									Properties to rent in {identifierState.displayName}
+								</Button>
+							</Grid>
 						</Grid>
 					</Grid>
-				</Grid>
+				)}
 			</Box>
 		</Box>
 	);

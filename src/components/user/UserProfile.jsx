@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import VillaIcon from "@mui/icons-material/Villa";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import StyledBox from "../styledComponents/StyledBox";
 import StyledButton from "../styledComponents/StyledButton";
 
@@ -56,17 +57,20 @@ const UserProfile = ({ signOutHandler, userName }) => {
 						<Button
 							fullWidth
 							size="large"
+							startIcon={<HomeOutlinedIcon sx={{ color: "green" }} />}
 							sx={{
-								backgroundColor: "#01DEB6",
 								m: 0,
 								textTransform: "none",
 								borderRadius: "0.5em",
+								textDecoration: "underline",
 								"&:hover": {
-									backgroundColor: "#45FFCA",
+									textDecoration: "underline",
 								},
 							}}
 						>
-							<Typography variant="body1">View My Estate</Typography>
+							<Typography color="green" variant="body1">
+								View My Estate
+							</Typography>
 						</Button>
 					</Link>
 				</StyledBox>

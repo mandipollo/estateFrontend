@@ -9,6 +9,7 @@ import {
 	FormControl,
 	Select,
 	OutlinedInput,
+	Button,
 } from "@mui/material";
 
 // redux
@@ -238,7 +239,7 @@ const Filter = () => {
 				</Grid>
 				<Grid container item spacing={2}>
 					<Grid item xs>
-						<StyledButton
+						<Button
 							sx={{
 								backgroundColor: "#01DEB6",
 							}}
@@ -248,7 +249,7 @@ const Filter = () => {
 							variant="contained"
 						>
 							<Typography>Find properties</Typography>
-						</StyledButton>
+						</Button>
 					</Grid>
 				</Grid>
 			</Grid>

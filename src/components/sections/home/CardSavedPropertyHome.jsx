@@ -13,7 +13,7 @@ import {
 import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import BathroomOutlinedIcon from "@mui/icons-material/BathroomOutlined";
 
-const SavedPropertiesCard = ({
+const CardSavedPropertyHome = ({
 	images,
 	displayAddress,
 	propertySubType,
@@ -74,4 +74,4 @@ const SavedPropertiesCard = ({
 	);
 };
 
-export default SavedPropertiesCard;
+export default CardSavedPropertyHome;

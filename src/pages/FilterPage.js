@@ -22,7 +22,7 @@ const FilterPage = () => {
 				},
 			}}
 		>
-			<Typography variant="h6">
+			<Typography ml={2} variant="h6">
 				Property for sale in {identifier.displayName}
 			</Typography>
 

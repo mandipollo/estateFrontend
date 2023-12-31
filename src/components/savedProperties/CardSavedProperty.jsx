@@ -163,3 +163,5 @@ const CardSavedProperty = ({
 		</Card>
 	);
 };
+
+export default CardSavedProperty;

@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-
 import { Box, Grid, Button, Typography, useMediaQuery } from "@mui/material";
 
-import { database, auth } from "../firebase.config";
-import { onValue, ref } from "firebase/database";
 import { Link } from "react-router-dom";
 // components
 
@@ -19,34 +15,6 @@ const Homepage = () => {
 	const isTablet = useMediaQuery(theme.breakpoints.down("tablet"));
 
 	const user = useSelector(state => state.user);
-
-	// // user saved properties
-	// const [savedProperties, setSavedProperties] = useState(null);
-	// const arraySavedProperties = savedProperties
-	// 	? Object.values(savedProperties)
-	// 	: null;
-
-	// const uid = auth.currentUser ? auth.currentUser.uid : null;
-	// console.log(savedProperties);
-	// useEffect(() => {
-	// 	const savedPropertiesRef = ref(database, `users/${uid}/savedProperties`);
-
-	// 	const handleChange = snapshot => {
-	// 		const data = snapshot.val();
-	// 		setSavedProperties(data);
-	// 	};
-
-	// 	const errorHandler = error => {
-	// 		console.error("Error fetching saved properties:", error);
-	// 	};
-	// 	//listener
-
-	// 	const unsubscribe = onValue(savedPropertiesRef, handleChange, errorHandler);
-
-	// 	// cleanup listener on component unmount
-
-	// 	return () => unsubscribe();
-	// }, [uid]);
 
 	return (
 		<main>

@@ -4,8 +4,7 @@ import { Box, Grid, Typography, Button } from "@mui/material";
 import theme from "../../../theme";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
-import SavedPropertiesCard from "./SavedPropCard";
-
+import CardSavedPropertyHome from "./CardSavedPropertyHome";
 import { useSelector, useDispatch } from "react-redux";
 
 import { ref, onValue } from "firebase/database";
@@ -72,6 +71,8 @@ const SavedPropertiesHome = () => {
 							sx={{
 								display: "flex",
 								justifyContent: "space-between",
+								borderBottom: "0.1px solid rgba(71, 78, 104, 0.5)",
+								paddingBottom: "1em",
 							}}
 						>
 							<Typography variant="h5" fontFamily="ubuntu">
@@ -95,7 +96,7 @@ const SavedPropertiesHome = () => {
 								<Grid container flexWrap="nowrap" gap={1} paddingBottom="1em">
 									{arrayOfPropSaved &&
 										arrayOfPropSaved.map(prop => (
-											<SavedPropertiesCard
+											<CardSavedPropertyHome
 												sale={prop.sale}
 												key={prop.propertyId}
 												images={prop.image}

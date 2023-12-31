@@ -2,6 +2,7 @@ import React from "react";
 // components
 import StyledTextfield from "../styledComponents/StyledTextfield";
 import StyledAutocomplete from "../styledComponents/StyledAutocomplete";
+import { Box } from "@mui/material";
 
 //  autcomplete componenet that sends delayed search input by 100ms and lists suggestions
 const AutocompleteSearch = ({

@@ -14,6 +14,8 @@ import {
 
 import StyledTypographyNav from "../styledComponents/StyledTypographyNav";
 import StyledButton from "../styledComponents/StyledButton";
+import rocket from "../../assets/svg/rocket-svgrepo-com.svg";
+import StyledBox from "../styledComponents/StyledBox";
 
 const DrawerNavbar = ({ pages }) => {
 	const [state, setState] = useState({
@@ -48,19 +50,27 @@ const DrawerNavbar = ({ pages }) => {
 			>
 				{pages.map((item, index) => (
 					<Link
-						style={{ textDecoration: "none", color: "inherit" }}
+						style={{ textDecoration: "none", color: "inherit", width: "100%" }}
 						to={item.link}
 						key={index}
 					>
 						<ListItem key={index} disablePadding>
-							<StyledButton disabled={item.disable} key={index}>
+							<StyledButton fullWidth disabled={item.disable} key={index}>
 								<StyledTypographyNav>{item.label}</StyledTypographyNav>
 							</StyledButton>
 						</ListItem>
-						<Divider sx={{ width: "80%" }} />
+						<Divider />
 					</Link>
 				))}
 			</List>
+			<StyledBox position="absolute" bottom={2} width="100%" height={150}>
+				<img
+					src={rocket}
+					width="100%"
+					height="100%"
+					viewBox="0 0 100 100"
+				></img>
+			</StyledBox>
 		</Box>
 	);
 
