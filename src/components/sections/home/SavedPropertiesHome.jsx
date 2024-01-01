@@ -8,39 +8,44 @@ import CardSavedPropertyHome from "./CardSavedPropertyHome";
 import { useSelector, useDispatch } from "react-redux";
 
 import { ref, onValue } from "firebase/database";
-import { auth, database } from "../../../firebase.config";
+import { database } from "../../../firebase.config";
 import { setSavedUserProperty } from "../../../store/savedPropSlice";
 
-const SavedPropertiesHome = () => {
+const SavedPropertiesHome = ({ user }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const dispatch = useDispatch();
 	const userPropSaved = useSelector(state => state.savedUserProperty);
 	const arrayOfPropSaved = userPropSaved ? Object.values(userPropSaved) : null;
-	const uid = auth.currentUser ? auth.currentUser.uid : null;
 
+	const uid = user.userDetail.uid;
 	// setup listener for saved prop database
 	useEffect(() => {
-		const savedPropertiesRef = ref(database, `users/${uid}/savedProperties`);
+		if (uid) {
+			const savedPropertiesRef = ref(database, `users/${uid}/savedProperties`);
 
-		const handleChange = snapshot => {
-			const data = snapshot.val();
-			dispatch(setSavedUserProperty(data));
-			setIsLoading(false);
-		};
+			const handleChange = snapshot => {
+				const data = snapshot.val();
+				dispatch(setSavedUserProperty(data));
+				setIsLoading(false);
+			};
 
-		const errorHandler = error => {
-			console.error("Error fetching saved properties:", error);
-			setError(error);
-			setIsLoading(false);
-		};
-		//listener
+			const errorHandler = error => {
+				console.error("Error fetching saved properties:", error);
+				setError(error);
+				setIsLoading(false);
+			};
+			//listener
 
-		const unsubscribe = onValue(savedPropertiesRef, handleChange, errorHandler);
+			const unsubscribe = onValue(
+				savedPropertiesRef,
+				handleChange,
+				errorHandler
+			);
+			// cleanup listener on component unmount
 
-		// cleanup listener on component unmount
-
-		return () => unsubscribe();
+			return () => unsubscribe();
+		}
 	}, [uid]);
 
 	return (

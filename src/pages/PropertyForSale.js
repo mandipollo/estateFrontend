@@ -14,10 +14,14 @@ import CardProduct from "../components/card/CardProducts";
 import useIsMount from "../components/utilities/useIsMount";
 import SnackbarNotify from "../components/SnackbarNotify";
 import theme from "../theme";
+import CircularIndeterminate from "../components/loading/CircularProgress";
+import TownMap from "../components/map/Map";
+import GeoCoding from "../components/map/GeoCoding";
 
 const PropertyForSale = () => {
 	const isLaptop = useMediaQuery(theme.breakpoints.up("laptop"));
 	const [open, setOpen] = useState(false);
+	const [latLng, setLatLng] = useState("");
 
 	const handleOpen = (event, reason) => {
 		if (reason === "clickaway") {
@@ -42,8 +46,21 @@ const PropertyForSale = () => {
 	const forSaleStatus = useSelector(state => state.forSale.status);
 	const forSaleError = useSelector(state => state.forSale.error);
 	const identifierState = useSelector(state => state.identifier);
-	console.log(identifierState);
+
 	const filterParamsState = useSelector(state => state.filter);
+
+	// geocoding
+
+	useEffect(() => {
+		const getCodes = async () => {
+			if (identifierState) {
+				const geo = await GeoCoding(identifierState.displayName);
+				console.log(geo);
+				setLatLng(geo);
+			}
+		};
+		return () => getCodes();
+	}, []);
 	// reset page when params change
 
 	useEffect(() => {
@@ -136,7 +153,7 @@ const PropertyForSale = () => {
 						Properties For Sale in {identifierState.displayName}
 					</Typography>
 				</Box>
-				{forSaleStatus === "loading" && <p>Loading....</p>}
+				{forSaleStatus === "loading" && <CircularIndeterminate />}
 				{forSaleStatus === "failed" && <p>Error:{forSaleError}</p>}
 				{forSaleStatus === "succeeded" && !forSaleData && <h1>no data</h1>}
 				{forSaleStatus === "succeeded" && forSaleData && (
@@ -191,15 +208,7 @@ const PropertyForSale = () => {
 							}}
 						>
 							<Grid item>
-								<Button
-									size="small"
-									sx={{ textTransform: "none" }}
-									variant="outlined"
-									color="success"
-									disableRipple
-								>
-									Properties to rent in {identifierState.displayName}
-								</Button>
+								<TownMap center={latLng} />
 							</Grid>
 						</Grid>
 					</Grid>
