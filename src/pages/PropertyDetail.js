@@ -20,6 +20,7 @@ import CardPropertyDescription from "../components/card/CardPropertyDescription"
 import CardMortgageCalculator from "../components/card/CardMortgageCalculator";
 import CardCustomer from "../components/card/CardCustomer";
 import SnackbarNotify from "../components/SnackbarNotify";
+import CircularIndeterminate from "../components/loading/CircularProgress";
 
 const PropertyDetail = () => {
 	const [saved, setSaved] = useState(false);
@@ -38,7 +39,7 @@ const PropertyDetail = () => {
 	const handleClose = () => {
 		setOpen(false);
 	};
-	const ismd = useMediaQuery(theme.breakpoints.down("md"));
+	const isLaptop = useMediaQuery(theme.breakpoints.down("laptop"));
 	const navigateBack = useNavigateBack();
 	const { propertyId } = useParams();
 
@@ -95,7 +96,7 @@ const PropertyDetail = () => {
 	return (
 		<>
 			{loading ? (
-				<p>loading...</p>
+				<CircularIndeterminate />
 			) : (
 				<Box>
 					<SnackbarNotify
@@ -104,8 +105,13 @@ const PropertyDetail = () => {
 						message="Property saved successfully"
 					/>
 					{data && (
-						<StyledBox maxWidth={1250} display="flex" flexDirection={"column"}>
-							<Grid container>
+						<StyledBox
+							paddingBottom="2em"
+							maxWidth={1350}
+							display="flex"
+							flexDirection={"column"}
+						>
+							<Grid container gap={2}>
 								<Grid
 									item
 									flex={1}
@@ -137,7 +143,7 @@ const PropertyDetail = () => {
 										</StyledBox>
 										<StyledBox
 											flexDirection="column"
-											padding={ismd ? "0 1em" : "none"}
+											padding={isLaptop ? "0 1em" : "none"}
 										>
 											<CardPropertyDescription
 												savePropertyHandler={savePropertyHandler}
@@ -148,7 +154,7 @@ const PropertyDetail = () => {
 										<StyledBox
 											borderBottom="1px solid rgba(0, 0, 0, 0.2)"
 											borderTop="1px solid rgba(0, 0, 0, 0.2)"
-											padding={ismd ? "1em" : "1em 0"}
+											padding={isLaptop ? "1em" : "1em 0"}
 										>
 											<Grid container flexDirection="row" gap={1}>
 												{data.data.infoReelItems.map((item, index) => (
@@ -180,7 +186,7 @@ const PropertyDetail = () => {
 										</StyledBox>
 
 										<StyledBox
-											padding={ismd ? "0 1em" : "none"}
+											padding={isLaptop ? "0 1em" : "none"}
 											flexDirection="column"
 										>
 											<Typography variant="h6">Key features</Typography>
@@ -195,7 +201,7 @@ const PropertyDetail = () => {
 											</Grid>
 										</StyledBox>
 										<StyledBox
-											padding={ismd ? "0 1em" : "none"}
+											padding={isLaptop ? "0 1em" : "none"}
 											flexDirection="column"
 										>
 											<Typography variant="h6">Property description</Typography>
@@ -210,7 +216,7 @@ const PropertyDetail = () => {
 										</StyledBox>
 										<StyledBox
 											gap={1}
-											padding={ismd ? "0 1em" : "none"}
+											padding={isLaptop ? "0 1em" : "none"}
 											flexDirection="column"
 										>
 											<Typography variant="h6">
@@ -218,12 +224,12 @@ const PropertyDetail = () => {
 											</Typography>
 											<Box
 												display="flex"
-												justifyContent={ismd ? "center" : null}
+												justifyContent={isLaptop ? "center" : null}
 											>
 												<img
 													alt="map"
 													src={
-														!ismd
+														!isLaptop
 															? data.data.staticMapImgUrls
 																	.staticMapImgUrlDesktopSmall
 															: data.data.staticMapImgUrls.staticMapImgUrlMobile
@@ -233,7 +239,7 @@ const PropertyDetail = () => {
 										</StyledBox>
 										<StyledBox
 											flexDirection="column"
-											padding={ismd ? "0 1em" : "none"}
+											padding={isLaptop ? "0 1em" : "none"}
 										>
 											<CardMortgageCalculator
 												propertyPrice={data.data.mortgageCalculator.price}
@@ -242,7 +248,7 @@ const PropertyDetail = () => {
 									</StyledBox>
 								</Grid>
 
-								<Grid display={ismd ? "none" : "block"} item xs={4}>
+								<Grid display={isLaptop ? "none" : "block"} item xs={4}>
 									<CardCustomer
 										customer={data.data.customer}
 										tele={data.data.contactInfo.telephoneNumbers.localNumber}

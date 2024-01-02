@@ -55,7 +55,7 @@ const PropertyForSale = () => {
 		const getCodes = async () => {
 			if (identifierState) {
 				const geo = await GeoCoding(identifierState.displayName);
-				console.log(geo);
+
 				setLatLng(geo);
 			}
 		};
@@ -98,8 +98,6 @@ const PropertyForSale = () => {
 			);
 			window.scrollTo({ top: 0, behavior: "smooth" });
 			return () => {
-				console.log("component unmounts");
-
 				dispatch(resetStatus());
 			};
 		}
@@ -202,7 +200,7 @@ const PropertyForSale = () => {
 								justifyContent: "center",
 								alignItems: "center",
 								position: "sticky",
-								top: 100,
+								top: 50,
 								backgroundColor: "gray",
 								height: "100%",
 							}}

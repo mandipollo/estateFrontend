@@ -189,7 +189,6 @@ const CardMortgageCalculator = ({ propertyPrice }) => {
 				display="flex"
 				padding="1rem 0"
 				gap={1}
-				sx={{ backgroundColor: "#F4F4F5" }}
 			>
 				<Typography variant="body1" fontWeight={100}>
 					Monthly repayments:
@@ -205,7 +204,6 @@ const CardMortgageCalculator = ({ propertyPrice }) => {
 				display="flex"
 				padding="1rem 0"
 				gap={1}
-				sx={{ backgroundColor: "#F4F4F5" }}
 			>
 				<Typography variant="body2" fontWeight={100}>
 					These results are for a repayment mortgage and are only intended as a
