@@ -12,7 +12,8 @@ import PaginationMui from "../components/pagination/Pagination";
 
 // hooks
 import useIsMount from "../components/utilities/useIsMount";
-import CardProductRent from "../components/card/CardProducsRent";
+
+import Property from "../components/forRentProperty/Property";
 import SnackbarNotify from "../components/SnackbarNotify";
 import CircularIndeterminate from "../components/loading/CircularProgress";
 import TownMap from "../components/map/Map";
@@ -116,101 +117,104 @@ const PropertyToRent = () => {
 			alignItems="center"
 			flexDirection="column"
 		>
-			<Box
-				sx={{
-					display: "flex",
-					width: "100vw",
-					backgroundColor: "#31304D",
-					position: "sticky",
-					top: 0,
-					zIndex: 900,
-					justifyContent: "center",
-					alignItems: "center",
-				}}
-			>
-				<Grid container maxWidth={1350} sx={{ display: "flex" }}>
-					<FilterNav filterParamsState={filterParamsState} />
-				</Grid>
-			</Box>
-			<SnackbarNotify
-				message="Property has been saved"
-				open={open}
-				handleClose={handleClose}
-			/>
-
-			<Box
-				sx={{
-					display: "flex",
-					flexDirection: "column",
-					maxWidth: 1350,
-				}}
-			>
-				<Box sx={{ padding: "1rem  0 0 4rem" }}>
-					<Typography variant="h6" color="text.secondary">
-						Properties For Sale in {identifierState.displayName}
-					</Typography>
-				</Box>
-				{forRentStatus === "loading" && <CircularIndeterminate />}
-				{forRentStatus === "failed" && <p>Error:{forRentError}</p>}
-				{forRentStatus === "succeeded" && !forRentData && <h1>no data</h1>}
-				{forRentStatus === "succeeded" && (
-					<Grid container sx={{ alignItems: "flex-start" }}>
-						<Grid
-							container
-							item
-							gap={3}
-							sx={{
-								justifyContent: "center",
-								padding: "2rem 0 2rem 0",
-							}}
-							flex={1}
-						>
-							{forRentData.map(item => (
-								<CardProductRent
-									key={item.id}
-									propertyId={item.id}
-									images={item.propertyImages.images}
-									displayAddress={item.displayAddress}
-									summary={item.summary}
-									propertySubType={item.propertySubType}
-									bedrooms={item.bedrooms}
-									bathrooms={item.bathrooms}
-									displayPrice={item.price.displayPrices[0].displayPrice}
-									customerImage={item.customer.brandPlusLogoUrl}
-									contactNo={item.customer.contactTelephone}
-									handleOpen={handleOpen}
-								/>
-							))}
-							<PaginationMui
-								prevPageHandler={prevPageHandler}
-								nextPageHandler={nextPageHandler}
-								page={page}
-								handlePageChange={handlePageChange}
-							/>
+			{forRentStatus === "loading" && <CircularIndeterminate />}
+			{forRentStatus === "failed" && <p>Error:{forRentError}</p>}
+			{forRentStatus === "succeeded" && !forRentData && <h1>no data</h1>}
+			{forRentStatus === "succeeded" && (
+				<>
+					<Box
+						sx={{
+							display: "flex",
+							width: "100vw",
+							backgroundColor: "#31304D",
+							position: "sticky",
+							top: 0,
+							zIndex: 900,
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<Grid container maxWidth={1350} sx={{ display: "flex" }}>
+							<FilterNav filterParamsState={filterParamsState} />
 						</Grid>
+					</Box>
+					<SnackbarNotify
+						message="Property has been saved"
+						open={open}
+						handleClose={handleClose}
+					/>
 
-						<Grid
-							container
-							item
-							gap={2}
-							sx={{
-								width: 300,
-								display: isLaptop ? "flex" : "none",
-								justifyContent: "center",
-								alignItems: "center",
-								position: "sticky",
-								top: 50,
-								backgroundColor: "gray",
-								height: "100%",
-							}}
-						>
-							<Grid item>
-								<TownMap center={latLng} />
+					<Box
+						sx={{
+							display: "flex",
+							flexDirection: "column",
+							maxWidth: 1350,
+						}}
+					>
+						<Box sx={{ padding: "1rem  0 0 4rem" }}>
+							<Typography variant="h6" color="text.secondary">
+								Properties For Sale in {identifierState.displayName}
+							</Typography>
+						</Box>
+
+						<Grid container sx={{ alignItems: "flex-start" }}>
+							<Grid
+								container
+								item
+								gap={3}
+								sx={{
+									justifyContent: "center",
+									padding: "2rem 0 2rem 0",
+								}}
+								flex={1}
+							>
+								{forRentData.map(item => (
+									<Property
+										key={item.id}
+										propertyId={item.id}
+										images={item.propertyImages.images}
+										displayAddress={item.displayAddress}
+										summary={item.summary}
+										propertySubType={item.propertySubType}
+										bedrooms={item.bedrooms}
+										bathrooms={item.bathrooms}
+										displayPrice={item.price.displayPrices[0].displayPrice}
+										customerImage={item.customer.brandPlusLogoUrl}
+										contactNo={item.customer.contactTelephone}
+										handleOpen={handleOpen}
+									/>
+								))}
+								<PaginationMui
+									prevPageHandler={prevPageHandler}
+									nextPageHandler={nextPageHandler}
+									page={page}
+									handlePageChange={handlePageChange}
+								/>
+							</Grid>
+
+							<Grid
+								container
+								item
+								gap={2}
+								sx={{
+									width: 300,
+									display: isLaptop ? "flex" : "none",
+									justifyContent: "center",
+									alignItems: "center",
+									position: "sticky",
+									top: 50,
+									backgroundColor: "gray",
+									height: "100%",
+								}}
+							>
+								<Grid item>
+									<TownMap center={latLng} />
+								</Grid>
 							</Grid>
 						</Grid>
-					</Grid>
-				)}
-			</Box>
+					</Box>
+				</>
+			)}
 		</Box>
 	);
 };

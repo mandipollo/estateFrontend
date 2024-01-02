@@ -81,7 +81,16 @@ const CardSavedProperty = ({
 					style={{ textDecoration: "none", color: "black" }}
 					to={`/${navigate}/${propertyId}`}
 				>
-					<CardActionArea disableRipple sx={{ flex: 9 }}>
+					<CardActionArea
+						disableRipple
+						sx={{
+							flex: 9,
+							height: "201px",
+							overflow: "hidden",
+							textOverflow: "ellipsis",
+							height: 201,
+						}}
+					>
 						<CardContent
 							sx={{
 								display: "flex",
@@ -109,6 +118,10 @@ const CardSavedProperty = ({
 								gutterBottom
 								variant="body2"
 								color="text.secondary"
+								sx={{
+									overflow: "hidden",
+									textOverflow: "ellipsis",
+								}}
 							>
 								{summary}
 							</Typography>

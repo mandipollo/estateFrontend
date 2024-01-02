@@ -8,9 +8,15 @@ import StyledButton from "../components/styledComponents/StyledButton";
 import SavedProperties from "../components/savedProperties/SavedProperties";
 import CollectionList from "../components/savedProperties/CollectionList";
 import SnackbarNotify from "../components/SnackbarNotify";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { resetUser } from "../store/user";
 
 const MyEstatePage = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
+	const [error, setError] = useState(null);
 	const handleOpen = () => {
 		setOpen(true);
 	};
@@ -19,6 +25,20 @@ const MyEstatePage = () => {
 		setOpen(false);
 	};
 	const userName = auth.currentUser.displayName;
+
+	const signOutHandler = async e => {
+		e.preventDefault();
+		try {
+			await auth.signOut();
+			dispatch(resetUser());
+
+			navigate("/");
+			setError(null);
+		} catch (error) {
+			console.log(error);
+			setError(error.message);
+		}
+	};
 
 	return (
 		<Box display="flex" justifyContent="center" sx={{ width: "100vw" }}>
@@ -74,7 +94,10 @@ const MyEstatePage = () => {
 								display: "flex",
 							}}
 						>
-							<StyledButton startIcon={<ExitToAppOutlinedIcon />}>
+							<StyledButton
+								onClick={signOutHandler}
+								startIcon={<ExitToAppOutlinedIcon />}
+							>
 								<Typography>Sign out</Typography>
 							</StyledButton>
 						</Grid>

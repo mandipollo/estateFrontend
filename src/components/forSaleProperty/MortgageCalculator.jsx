@@ -4,7 +4,7 @@ import { Grid, Typography, TextField, InputAdornment } from "@mui/material";
 import CircularPercentage from "../CircularWithLabel";
 import NumberAnimation from "../utilities/NumberAnimation";
 
-const CardMortgageCalculator = ({ propertyPrice }) => {
+const MortgageCalculator = ({ propertyPrice }) => {
 	const [deposit, setDeposit] = useState(propertyPrice * 0.1);
 	const [annualInterest, setAnnualInterest] = useState(6.1);
 	const [repaymentYears, setRepaymentYears] = useState(25);
@@ -219,4 +219,4 @@ const CardMortgageCalculator = ({ propertyPrice }) => {
 	);
 };
 
-export default CardMortgageCalculator;
+export default MortgageCalculator;

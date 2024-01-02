@@ -24,7 +24,7 @@ import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutl
 
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 
-const CardProductRent = ({
+const Property = ({
 	propertyId,
 	images,
 	displayAddress,
@@ -198,4 +198,4 @@ const CardProductRent = ({
 	);
 };
 
-export default CardProductRent;
+export default Property;

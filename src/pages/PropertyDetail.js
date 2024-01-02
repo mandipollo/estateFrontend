@@ -16,8 +16,8 @@ import useNavigateBack from "../components/utilities/useNavigateBack";
 
 import StyledBox from "../components/styledComponents/StyledBox";
 import CarousalImage from "../components/carousal/CarousalImage";
-import CardPropertyDescription from "../components/card/CardPropertyDescription";
-import CardMortgageCalculator from "../components/card/CardMortgageCalculator";
+import PropertyDetailSale from "../components/forSaleProperty/PropertyDetailSale";
+import MortgageCalculator from "../components/forSaleProperty/MortgageCalculator";
 import CardCustomer from "../components/card/CardCustomer";
 import SnackbarNotify from "../components/SnackbarNotify";
 import CircularIndeterminate from "../components/loading/CircularProgress";
@@ -104,7 +104,9 @@ const PropertyDetail = () => {
 						handleClose={handleClose}
 						message="Property saved successfully"
 					/>
-					{data && (
+
+					{error && <p>{error}</p>}
+					{data && !error && (
 						<StyledBox
 							paddingBottom="2em"
 							maxWidth={1350}
@@ -145,7 +147,7 @@ const PropertyDetail = () => {
 											flexDirection="column"
 											padding={isLaptop ? "0 1em" : "none"}
 										>
-											<CardPropertyDescription
+											<PropertyDetailSale
 												savePropertyHandler={savePropertyHandler}
 												data={data}
 											/>
@@ -241,7 +243,7 @@ const PropertyDetail = () => {
 											flexDirection="column"
 											padding={isLaptop ? "0 1em" : "none"}
 										>
-											<CardMortgageCalculator
+											<MortgageCalculator
 												propertyPrice={data.data.mortgageCalculator.price}
 											/>
 										</StyledBox>

@@ -16,7 +16,7 @@ import useNavigateBack from "../components/utilities/useNavigateBack";
 import StyledBox from "../components/styledComponents/StyledBox";
 import CarousalImage from "../components/carousal/CarousalImage";
 
-import CardPropertyDescriptionRent from "../components/card/CardPropertyDescriptionRent";
+import PropertyForRent from "../components/forRentProperty/PropertyDetailRent";
 import SnackbarNotify from "../components/SnackbarNotify";
 import CircularIndeterminate from "../components/loading/CircularProgress";
 import CardCustomer from "../components/card/CardCustomer";
@@ -107,7 +107,8 @@ const PropertyDetailRent = () => {
 						handleClose={handleClose}
 					/>
 
-					{data && (
+					{error && <p>{error}</p>}
+					{data && !error && (
 						<StyledBox
 							paddingBottom="2em"
 							maxWidth={1350}
@@ -145,7 +146,7 @@ const PropertyDetailRent = () => {
 											<CarousalImage data={data} />
 										</StyledBox>
 
-										<CardPropertyDescriptionRent
+										<PropertyForRent
 											data={data}
 											savePropertyHandler={savePropertyHandler}
 										/>

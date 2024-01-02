@@ -5,7 +5,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 
 import PriorityHighOutlinedIcon from "@mui/icons-material/PriorityHighOutlined";
 
-const CardPropertyDescriptionRent = ({ data, savePropertyHandler }) => {
+const PropertyForRent = ({ data, savePropertyHandler }) => {
 	return (
 		<>
 			<StyledBox width="100%">
@@ -52,4 +52,4 @@ const CardPropertyDescriptionRent = ({ data, savePropertyHandler }) => {
 	);
 };
 
-export default CardPropertyDescriptionRent;
+export default PropertyForRent;

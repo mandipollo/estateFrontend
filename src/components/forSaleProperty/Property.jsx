@@ -25,7 +25,7 @@ import { database, auth } from "../../firebase.config";
 import { update, ref } from "firebase/database";
 import { useState } from "react";
 
-const CardProduct = ({
+const Property = ({
 	images,
 	displayAddress,
 	propertySubType,
@@ -223,4 +223,4 @@ const CardProduct = ({
 	);
 };
 
-export default CardProduct;
+export default Property;
