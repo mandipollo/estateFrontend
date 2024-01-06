@@ -66,6 +66,7 @@ const Property = ({
 		}
 	};
 	const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+
 	return (
 		<Card
 			key={propertyId}
@@ -117,12 +118,28 @@ const Property = ({
 
 				<Box
 					sx={{
+						display: "flex",
+						flexDirection: "row",
 						backgroundColor: "#34A29F",
 					}}
 				>
 					<Typography variant="h5" color="white" paddingLeft={2}>
 						{displayPrice}
 					</Typography>
+					<Link
+						style={{
+							textDecoration: "none",
+							color: "black",
+							display: isSm ? "block" : "none",
+						}}
+						to={`/propertyDetail/${propertyId}`}
+					>
+						<Button>
+							<Typography variant="body2" color="white" paddingLeft={2}>
+								View the property
+							</Typography>
+						</Button>
+					</Link>
 				</Box>
 			</Box>
 			<Box sx={{ display: "flex", flex: 6, flexDirection: "column", gap: 1 }}>

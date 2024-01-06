@@ -67,7 +67,7 @@ const Guide = () => {
 							textTransform: "none",
 						}}
 					>
-						<Typography fontWeight={100} variant="h6">
+						<Typography fontWeight={100} variant={isLaptop ? "body2" : "h6"}>
 							Property guide
 						</Typography>
 					</Button>

@@ -95,8 +95,6 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 						md={5}
 						points={theme.breakpoints.values.tablet}
 						sx={{
-							border: "1px dotted rgba(71, 78, 104, 0.5)",
-							backgroundColor: "#F4F4F5",
 							padding: "2em 0",
 						}}
 					>
@@ -215,6 +213,9 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 				</Grid>
 				<Grid container item xs={12}>
 					<StyledGridDrawer
+						justifyContent="center"
+						alignItems="center"
+						display="flex"
 						item
 						container
 						xs={12}
@@ -222,17 +223,10 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 						gap={2}
 						points={theme.breakpoints.values.lg}
 						sx={{
-							border: "1px dotted rgba(71, 78, 104, 0.5)",
-							backgroundColor: "#F4F4F5",
 							padding: "2em 0",
 						}}
 					>
-						<Grid
-							item
-							justifyContent="center"
-							alignItems="center"
-							display="flex"
-						>
+						<Grid item>
 							<Typography variant="h6" fontWeight={100}>
 								Property Type:
 							</Typography>
@@ -258,13 +252,17 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 					</StyledGridDrawer>
 				</Grid>
 				<Grid container item xs={12}>
-					<Grid item container xs={12} md={5} gap={2}>
-						<Grid
-							item
-							justifyContent="center"
-							alignItems="center"
-							display="flex"
-						>
+					<Grid
+						justifyContent="center"
+						alignItems="center"
+						display="flex"
+						item
+						container
+						xs={12}
+						md={5}
+						gap={2}
+					>
+						<Grid item>
 							<Typography variant="h6" fontWeight={100}>
 								Added to Site:
 							</Typography>
@@ -297,13 +295,7 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 					>
 						<FormControl>
 							<FormControlLabel
-								control={
-									<Checkbox
-										style={{ color: "black" }}
-										name="myCheckbox"
-										color="primary"
-									/>
-								}
+								control={<Checkbox name="myCheckbox" color="primary" />}
 								label={
 									<Typography variant="body1">
 										Include Under Offer,Sold STC
@@ -314,34 +306,16 @@ const TemporaryDrawer = ({ handleChange, allValues }) => {
 					</Grid>
 				</Grid>
 			</Grid>
-			<Grid
-				container
-				xs={12}
-				item
-				display="flex"
-				flexDirection="row"
-				justifyContent="space-between"
-			>
-				<Grid
-					sx={{ margin: "0 0 1em 4em", width: "10rem" }}
-					item
-					xs={5}
-					alignItems="flex-end"
-					display="flex"
-				>
-					<Button sx={{ width: "10rem" }} size="medium" variant="contained">
-						<Typography>Clear</Typography>
-					</Button>
-				</Grid>
+			<Grid container xs={12} item display="flex">
 				<Grid
 					item
 					xs={5}
-					justifyContent="flex-end"
-					alignItems="flex-end"
+					justifyContent="center"
+					alignItems="center"
 					display="flex"
 				>
 					<Button
-						sx={{ margin: "0 4em 1em 0", width: "10rem" }}
+						sx={{ width: "10rem" }}
 						onClick={toggleDrawer(anchor, false)}
 						size="medium"
 						color="success"

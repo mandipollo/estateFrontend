@@ -14,8 +14,6 @@ import {
 
 import StyledTypographyNav from "../styledComponents/StyledTypographyNav";
 import StyledButton from "../styledComponents/StyledButton";
-import rocket from "../../assets/svg/rocket-svgrepo-com.svg";
-import StyledBox from "../styledComponents/StyledBox";
 
 const DrawerNavbar = ({ pages }) => {
 	const [state, setState] = useState({
@@ -63,14 +61,6 @@ const DrawerNavbar = ({ pages }) => {
 					</Link>
 				))}
 			</List>
-			<StyledBox position="absolute" bottom={2} width="100%" height={150}>
-				<img
-					src={rocket}
-					width="100%"
-					height="100%"
-					viewBox="0 0 100 100"
-				></img>
-			</StyledBox>
 		</Box>
 	);
 

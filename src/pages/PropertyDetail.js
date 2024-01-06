@@ -123,7 +123,11 @@ const PropertyDetail = () => {
 										alignItems: "center",
 									}}
 								>
-									<StyledBox flexDirection="column" gap={1}>
+									<StyledBox
+										padding={isLaptop ? "0 1em" : "none"}
+										flexDirection="column"
+										gap={1}
+									>
 										<Box width="100%" alignItems="flex-start" padding="1em 0">
 											<Button
 												onClick={navigateBack}
@@ -145,7 +149,7 @@ const PropertyDetail = () => {
 										</StyledBox>
 										<StyledBox
 											flexDirection="column"
-											padding={isLaptop ? "0 1em" : "none"}
+											// padding={isLaptop ? "0 1em" : "none"}
 										>
 											<PropertyDetailSale
 												savePropertyHandler={savePropertyHandler}
@@ -156,7 +160,7 @@ const PropertyDetail = () => {
 										<StyledBox
 											borderBottom="1px solid rgba(0, 0, 0, 0.2)"
 											borderTop="1px solid rgba(0, 0, 0, 0.2)"
-											padding={isLaptop ? "1em" : "1em 0"}
+											// padding={isLaptop ? "1em 0" : "1em 0"}
 										>
 											<Grid container flexDirection="row" gap={1}>
 												{data.data.infoReelItems.map((item, index) => (
@@ -188,7 +192,7 @@ const PropertyDetail = () => {
 										</StyledBox>
 
 										<StyledBox
-											padding={isLaptop ? "0 1em" : "none"}
+											// padding={isLaptop ? "0 1em" : "none"}
 											flexDirection="column"
 										>
 											<Typography variant="h6">Key features</Typography>
@@ -203,7 +207,7 @@ const PropertyDetail = () => {
 											</Grid>
 										</StyledBox>
 										<StyledBox
-											padding={isLaptop ? "0 1em" : "none"}
+											// padding={isLaptop ? "0 1em" : "none"}
 											flexDirection="column"
 										>
 											<Typography variant="h6">Property description</Typography>
@@ -218,7 +222,7 @@ const PropertyDetail = () => {
 										</StyledBox>
 										<StyledBox
 											gap={1}
-											padding={isLaptop ? "0 1em" : "none"}
+											// padding={isLaptop ? "0 1em" : "none"}
 											flexDirection="column"
 										>
 											<Typography variant="h6">
@@ -241,7 +245,7 @@ const PropertyDetail = () => {
 										</StyledBox>
 										<StyledBox
 											flexDirection="column"
-											padding={isLaptop ? "0 1em" : "none"}
+											// padding={isLaptop ? "0 1em" : "none"}
 										>
 											<MortgageCalculator
 												propertyPrice={data.data.mortgageCalculator.price}

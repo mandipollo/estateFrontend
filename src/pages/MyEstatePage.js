@@ -2,19 +2,13 @@ import React, { useState } from "react";
 import { auth } from "../firebase.config";
 import { Box, Grid, Typography } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 import StyledButton from "../components/styledComponents/StyledButton";
 import SavedProperties from "../components/savedProperties/SavedProperties";
 import CollectionList from "../components/savedProperties/CollectionList";
 import SnackbarNotify from "../components/SnackbarNotify";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { resetUser } from "../store/user";
 
 const MyEstatePage = () => {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [error, setError] = useState(null);
 	const handleOpen = () => {
@@ -25,20 +19,6 @@ const MyEstatePage = () => {
 		setOpen(false);
 	};
 	const userName = auth.currentUser.displayName;
-
-	const signOutHandler = async e => {
-		e.preventDefault();
-		try {
-			await auth.signOut();
-			dispatch(resetUser());
-
-			navigate("/");
-			setError(null);
-		} catch (error) {
-			console.log(error);
-			setError(error.message);
-		}
-	};
 
 	return (
 		<Box display="flex" justifyContent="center" sx={{ width: "100vw" }}>
@@ -83,22 +63,6 @@ const MyEstatePage = () => {
 						>
 							<StyledButton startIcon={<SettingsOutlinedIcon />}>
 								<Typography>Account details</Typography>
-							</StyledButton>
-						</Grid>
-
-						<Grid
-							item
-							xs={12}
-							sx={{
-								justifyContent: "flex-end",
-								display: "flex",
-							}}
-						>
-							<StyledButton
-								onClick={signOutHandler}
-								startIcon={<ExitToAppOutlinedIcon />}
-							>
-								<Typography>Sign out</Typography>
 							</StyledButton>
 						</Grid>
 					</Grid>

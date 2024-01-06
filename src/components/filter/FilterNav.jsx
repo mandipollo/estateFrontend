@@ -8,8 +8,6 @@ import {
 	FormControl,
 	Select,
 	OutlinedInput,
-	Box,
-	useMediaQuery,
 } from "@mui/material";
 
 import {
