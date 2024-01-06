@@ -125,7 +125,11 @@ const PropertyDetailRent = () => {
 										alignItems: "center",
 									}}
 								>
-									<StyledBox flexDirection="column" gap={1}>
+									<StyledBox
+										flexDirection="column"
+										gap={1}
+										padding={isLaptop ? "0 1em" : "none"}
+									>
 										<Box width="100%" alignItems="flex-start" padding="1em 0">
 											<Button
 												onClick={navigateBack}
@@ -145,11 +149,15 @@ const PropertyDetailRent = () => {
 										<StyledBox width="100%" alignItems="flex-start">
 											<CarousalImage data={data} />
 										</StyledBox>
-
-										<PropertyForRent
-											data={data}
-											savePropertyHandler={savePropertyHandler}
-										/>
+										<StyledBox
+											flexDirection="column"
+											// padding={isLaptop ? "0 1em" : "none"}
+										>
+											<PropertyForRent
+												data={data}
+												savePropertyHandler={savePropertyHandler}
+											/>
+										</StyledBox>
 
 										<StyledBox
 											padding="1em 0"
@@ -259,6 +267,8 @@ const PropertyDetailRent = () => {
 											<Box>
 												<img
 													alt="map"
+													width="100%"
+													height="100%"
 													src={
 														!isLaptop
 															? data.data.staticMapImgUrls

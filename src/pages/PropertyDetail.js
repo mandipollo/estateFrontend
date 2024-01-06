@@ -40,6 +40,7 @@ const PropertyDetail = () => {
 		setOpen(false);
 	};
 	const isLaptop = useMediaQuery(theme.breakpoints.down("laptop"));
+
 	const navigateBack = useNavigateBack();
 	const { propertyId } = useParams();
 
@@ -233,6 +234,8 @@ const PropertyDetail = () => {
 												justifyContent={isLaptop ? "center" : null}
 											>
 												<img
+													width="100%"
+													height="100%"
 													alt="map"
 													src={
 														!isLaptop

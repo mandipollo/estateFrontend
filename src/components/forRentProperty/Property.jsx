@@ -66,7 +66,18 @@ const Property = ({
 	};
 	const isSm = useMediaQuery(theme.breakpoints.down("sm"));
 	return (
-		<Card sx={{ width: "90%", flexDirection: "row", display: "flex" }}>
+		<Card
+			sx={{
+				height: 250,
+				width: "90%",
+				flexDirection: {
+					xs: "column",
+					sm: "row",
+					md: "row",
+				},
+				display: "flex",
+			}}
+		>
 			<Box sx={{ flex: 6 }}>
 				<Box height={220}>
 					<Carousel
@@ -103,12 +114,28 @@ const Property = ({
 
 				<Box
 					sx={{
+						display: "flex",
+						flexDirection: "row",
 						backgroundColor: "#34A29F",
 					}}
 				>
 					<Typography variant="h5" color="white" paddingLeft={2}>
 						{displayPrice}
 					</Typography>
+					<Link
+						style={{
+							textDecoration: "none",
+							color: "black",
+							display: isSm ? "block" : "none",
+						}}
+						to={`/propertyDetailRent/${propertyId}`}
+					>
+						<Button>
+							<Typography variant="body2" color="white" paddingLeft={2}>
+								View the property
+							</Typography>
+						</Button>
+					</Link>
 				</Box>
 			</Box>
 			<Box sx={{ display: "flex", flex: 6, flexDirection: "column", gap: 1 }}>
@@ -138,15 +165,22 @@ const Property = ({
 									{bathrooms}
 								</Typography>
 							</Box>
-
-							<Typography
-								gutterBottom
-								variant="body2"
-								color="text.secondary"
-								display={isSm ? "none" : "block"}
+							<Box
+								sx={{
+									overflow: "hidden",
+									textOverflow: "ellipsis",
+									height: 100,
+								}}
 							>
-								{summary}
-							</Typography>
+								<Typography
+									gutterBottom
+									variant="body2"
+									color="text.secondary"
+									display={isSm ? "none" : "block"}
+								>
+									{summary}
+								</Typography>
+							</Box>
 						</CardContent>
 					</CardActionArea>
 				</Link>

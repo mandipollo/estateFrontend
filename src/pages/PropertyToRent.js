@@ -153,7 +153,7 @@ const PropertyToRent = () => {
 					>
 						<Box sx={{ padding: "1rem  0 0 4rem" }}>
 							<Typography variant="h6" color="text.secondary">
-								Properties For Sale in {identifierState.displayName}
+								{identifierState.displayName}
 							</Typography>
 						</Box>
 
