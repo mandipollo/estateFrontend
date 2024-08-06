@@ -99,7 +99,7 @@ const PropertyDetail = () => {
 			{loading ? (
 				<CircularIndeterminate />
 			) : (
-				<Box>
+				<Box padding="2em">
 					<SnackbarNotify
 						open={open}
 						handleClose={handleClose}

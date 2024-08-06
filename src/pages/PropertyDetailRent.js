@@ -100,7 +100,7 @@ const PropertyDetailRent = () => {
 			{isLoading ? (
 				<CircularIndeterminate />
 			) : (
-				<Box>
+				<Box padding="2em">
 					<SnackbarNotify
 						message="Property successfully saved."
 						open={open}
